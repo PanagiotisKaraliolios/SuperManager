@@ -61,6 +61,11 @@ public class LoginScreen extends JFrame {
 
 				
 				LoginButton.setText("Login");
+				LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
 
 				
 				label1.setText("Welcome to Super Manager");
@@ -134,4 +139,7 @@ public class LoginScreen extends JFrame {
 		
 	}
 	
+	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+    }
 }
