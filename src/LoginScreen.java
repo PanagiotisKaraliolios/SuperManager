@@ -20,7 +20,7 @@ public class LoginScreen extends JFrame {
 	
 	public LoginScreen() {
 		initComponents();
-		this.setLocation(300,100);
+		this.setLocation(300,100);  
 	}
 	
 	private JPanel dialogPane;
