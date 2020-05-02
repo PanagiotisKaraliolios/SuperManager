@@ -10,6 +10,7 @@ import com.jgoodies.forms.factories.*;
 
 public class LoginScreen extends JFrame {
 	
+	
 	public static void main(String[] args)
 	{
 		new LoginScreen().setVisible(true);
@@ -20,10 +21,20 @@ public class LoginScreen extends JFrame {
 		initComponents();
 		this.setLocation(300,100);
 	}
+	
+	private JPanel dialogPane;
+	private JPanel contentPanel;
+	private JButton LoginButton;
+	private JPasswordField passwordField1;
+	private JLabel label1;
+	private JTextField textField1;
+	private JLabel label2;
+	private JLabel label3;
+	private JLabel label4;
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
+		
 		dialogPane = new JPanel();
 		contentPanel = new JPanel();
 		LoginButton = new JButton();
@@ -34,47 +45,39 @@ public class LoginScreen extends JFrame {
 		label3 = new JLabel();
 		label4 = new JLabel();
 
-		//======== this ========
+		
 		setTitle("Login");
 		var contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		//======== dialogPane ========
+		
 		{
 			dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
 			dialogPane.setBackground(new Color(0, 102, 204));
-			//dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-			//swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border
-			//. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
-			//,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,dialogPane. getBorder
-			//( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-			//.beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
-			//( ); }} );
 			dialogPane.setLayout(new BorderLayout());
 
-			//======== contentPanel ========
 			{
 				contentPanel.setBackground(new Color(51, 153, 255));
 
-				//---- LoginButton ----
+				
 				LoginButton.setText("Login");
 
-				//---- label1 ----
+				
 				label1.setText("Welcome to Super Manager");
 				label1.setFont(new Font("Showcard Gothic", Font.PLAIN, 20));
 				label1.setAlignmentY(0.0F);
 				label1.setBorder(Borders.DLU2);
 				label1.setHorizontalAlignment(SwingConstants.CENTER);
 
-				//---- label2 ----
+				
 				label2.setText("Username/ID");
 				label2.setLabelFor(textField1);
 
-				//---- label3 ----
+				
 				label3.setText("Password");
 				label3.setLabelFor(passwordField1);
 
-				//---- label4 ----
+				
 				label4.setIcon(null);
 
 				GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
@@ -128,19 +131,7 @@ public class LoginScreen extends JFrame {
 		contentPane.add(dialogPane, BorderLayout.CENTER);
 		pack();
 		setLocationRelativeTo(null);
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 	}
-
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
-	private JPanel dialogPane;
-	private JPanel contentPanel;
-	private JButton LoginButton;
-	private JPasswordField passwordField1;
-	private JLabel label1;
-	private JTextField textField1;
-	private JLabel label2;
-	private JLabel label3;
-	private JLabel label4;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 }
