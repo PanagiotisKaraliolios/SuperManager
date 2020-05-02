@@ -36,6 +36,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/jgoodies-common-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/iraklis/Documents/SuperManager/lib/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
