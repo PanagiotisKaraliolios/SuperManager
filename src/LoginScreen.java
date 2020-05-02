@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
+import javax.swing.plaf.*;
 import com.jgoodies.forms.factories.*;
 
 
@@ -31,9 +32,11 @@ public class LoginScreen extends JFrame {
 	private JLabel label2;
 	private JLabel label3;
 	private JLabel label4;
+	
+
+
 
 	private void initComponents() {
-		
 		
 		dialogPane = new JPanel();
 		contentPanel = new JPanel();
@@ -50,22 +53,23 @@ public class LoginScreen extends JFrame {
 		var contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		
+	
 		{
 			dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
 			dialogPane.setBackground(new Color(0, 102, 204));
 			dialogPane.setLayout(new BorderLayout());
 
+		
 			{
-				contentPanel.setBackground(new Color(51, 153, 255));
+				contentPanel.setBackground(new Color(52, 140, 238));
 
 				
 				LoginButton.setText("Login");
 				LoginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
-            }
-        });
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						LoginButtonActionPerformed(evt);
+					}
+				});
 
 				
 				label1.setText("Welcome to Super Manager");
@@ -83,7 +87,7 @@ public class LoginScreen extends JFrame {
 				label3.setLabelFor(passwordField1);
 
 				
-				label4.setIcon(null);
+				label4.setIcon(new ImageIcon(getClass().getResource("/logo.png")));
 
 				GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
 				contentPanel.setLayout(contentPanelLayout);
@@ -96,8 +100,9 @@ public class LoginScreen extends JFrame {
 									.addComponent(label1)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE))
 								.addGroup(contentPanelLayout.createSequentialGroup()
-									.addComponent(label4, GroupLayout.PREFERRED_SIZE, 380, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+									.addContainerGap()
+									.addComponent(label4, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
 									.addGroup(contentPanelLayout.createParallelGroup()
 										.addComponent(label2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
 										.addComponent(label3, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
@@ -126,9 +131,9 @@ public class LoginScreen extends JFrame {
 									.addComponent(LoginButton)
 									.addGap(141, 141, 141))
 								.addGroup(contentPanelLayout.createSequentialGroup()
-									.addGap(50, 50, 50)
-									.addComponent(label4, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-									.addContainerGap(87, Short.MAX_VALUE))))
+									.addGap(37, 37, 37)
+									.addComponent(label4, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap(102, Short.MAX_VALUE))))
 				);
 			}
 			dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -136,10 +141,11 @@ public class LoginScreen extends JFrame {
 		contentPane.add(dialogPane, BorderLayout.CENTER);
 		pack();
 		setLocationRelativeTo(null);
-		
 	}
 	
+	
 	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-       this.dispose();
-    }
+	       this.dispose();
+	    }
+
 }
