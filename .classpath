@@ -7,5 +7,35 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="/org.eclipse.swt"/>
+	<classpathentry kind="lib" path="lib/miglayout-swing.jar" sourcepath="lib/miglayout-swing-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/miglayout-swing-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/miglayout-core.jar" sourcepath="lib/miglayout-core-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/miglayout-core-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/beansbinding.jar" sourcepath="lib/beansbinding-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/beansbinding-doc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/swing-layout.jar" sourcepath="lib/swing-layout-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/swing-layout-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jgoodies-forms.jar" sourcepath="lib/jgoodies-forms-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/jgoodies-forms-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jgoodies-common.jar" sourcepath="lib/jgoodies-common-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SuperManager/lib/jgoodies-common-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

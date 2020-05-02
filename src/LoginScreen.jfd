@@ -1,0 +1,63 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "14" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"$locationPolicy": 1
+			"title": "Login"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				"background": new java.awt.Color( 0, 102, 204, 255 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {par t {seq {space :p:184:p, comp label1:::::p, space ::102:x}, seq {comp label4:::p:380:p, space ::85:x, par l {comp label2::t:p:110:p, comp label3::t:p:110:p}, space u:::p}}, par l {comp passwordField1:::p:140:p, comp LoginButton:::p:81:p, comp textField1::l:p:140:p}, space :p:17:p}}"
+					"$verticalGroup": "par l {seq t {comp label1:::p:48:p, par l {seq {space ::109:x, par b {comp textField1::b:p::p, comp label2::b:p:20:p}, space s:::p, par b {comp passwordField1::b:p::p, comp label3::b:p:20:p}, space :p:14:p, comp LoginButton:::p::p, space :p:141:p}, seq l {space :p:50:p, comp label4:::p:229:p, space ::87:x}}}}"
+				} ) {
+					name: "contentPanel"
+					"background": new java.awt.Color( 51, 153, 255, 255 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "LoginButton"
+						"text": "Login"
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "passwordField1"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "Welcome to Super Manager"
+						"font": new java.awt.Font( "Showcard Gothic", 0, 20 )
+						"alignmentY": 0.0f
+						"border": sfield com.jgoodies.forms.factories.Borders DLU2_BORDER
+						"horizontalAlignment": 0
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textField1"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "Username/ID"
+						"labelFor": new FormReference( "textField1" )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Password"
+						"labelFor": new FormReference( "passwordField1" )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 125, 5 )
+			"size": new java.awt.Dimension( 770, 470 )
+		} )
+	}
+}
