@@ -139,7 +139,7 @@ public class LoginScreen extends JFrame {
 		
 	}
 	
-	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
        this.dispose();
     }
 }
