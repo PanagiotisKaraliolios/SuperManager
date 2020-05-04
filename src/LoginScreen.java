@@ -5,9 +5,8 @@ import javax.swing.border.*;
 import javax.swing.plaf.*;
 import com.jgoodies.forms.factories.*;
 import java.sql.*;
-
-
-
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class LoginScreen extends JFrame {
@@ -33,6 +32,12 @@ public class LoginScreen extends JFrame {
 	private JLabel label2;
 	private JLabel label3;
 	private JLabel label4;
+	
+	private static Connection con = null ;
+	private static Statement  stm = null ;
+	
+	private ArrayList<Cashier> listOfcashiers;
+	
 	
 
 
@@ -68,7 +73,12 @@ public class LoginScreen extends JFrame {
 				LoginButton.setText("Login");
 				LoginButton.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						LoginButtonActionPerformed(evt);
+						try {
+							LoginButtonActionPerformed(evt);
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}
 					}
 				});
 
@@ -143,11 +153,40 @@ public class LoginScreen extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 	}
-	
-	
-	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-	       this.dispose();
 	       
+	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {
+		
+		listOfcashiers = new ArrayList<Cashier>();
+		char[] comparepasswordfield = passwordField1.getPassword();
+		String compareusernamefield = textField1.getText();
+		Cashier cashier ;
+		
+		
+		Class.forName ("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection ("jdbc:mysql://localhost/qb", "root", "");
+		stm = con.createStatement () ;
+		
+		ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
+		while (rs.next()) {
+			cashier=new Cashier(rs.getString("username"), rs.getString("password"),rs.getString("name"),rs.getString("email"),rs.getString("phoneNumber"),rs.getString("address"));
+	        listOfcashiers.add(cashier);
 	    }
+		
+		for(Cashier c : listOfcashiers) {
+			char[] pass = new char[c.getPassword().length()];
+			for (int i = 0; i < c.getPassword().length(); i++){
+		        pass[i] = c.getPassword().charAt(i);
+		    }
+			if(Arrays.equals(pass, comparepasswordfield) && c.getUsername().equals(compareusernamefield)){
+				this.dispose();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "not found");
+			}
+		}	
+		
+		stm.close () ;
+		con.close () ;
+	 }
 
 }
