@@ -19,8 +19,8 @@ public class LoginScreen extends JFrame {
 	}
 	
 	public LoginScreen() {
-		initComponents();
-		this.setLocation(300,100);  
+		initComponents(); 
+		this.setLocationRelativeTo(null);
 	}
 	
 	private JPanel dialogPane;
