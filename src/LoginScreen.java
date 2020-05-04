@@ -94,7 +94,7 @@ public class LoginScreen extends JFrame {
 				contentPanel.setLayout(contentPanelLayout);
 				contentPanelLayout.setHorizontalGroup(
 					contentPanelLayout.createParallelGroup()
-						.addGroup(contentPanelLayout.createSequentialGroup()
+					.addGroup(contentPanelLayout.createSequentialGroup()
 							.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addGroup(contentPanelLayout.createSequentialGroup()
 									.addGap(184, 184, 184)
@@ -147,6 +147,7 @@ public class LoginScreen extends JFrame {
 	
 	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
 	       this.dispose();
+	       
 	    }
 
 }
