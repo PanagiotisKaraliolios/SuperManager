@@ -19,8 +19,8 @@ public class LoginScreen extends JFrame {
 	}
 	
 	public LoginScreen() {
-		initComponents();
-		this.setLocation(300,100);  
+		initComponents(); 
+		this.setLocationRelativeTo(null);
 	}
 	
 	private JPanel dialogPane;
@@ -102,7 +102,7 @@ public class LoginScreen extends JFrame {
 				contentPanel.setLayout(contentPanelLayout);
 				contentPanelLayout.setHorizontalGroup(
 					contentPanelLayout.createParallelGroup()
-						.addGroup(contentPanelLayout.createSequentialGroup()
+					.addGroup(contentPanelLayout.createSequentialGroup()
 							.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addGroup(contentPanelLayout.createSequentialGroup()
 									.addGap(184, 184, 184)
@@ -151,8 +151,7 @@ public class LoginScreen extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 	}
-	
-	
+	       
 	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {
 		
 		listOfcashiers = new ArrayList<Cashier>();
