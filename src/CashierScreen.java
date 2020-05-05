@@ -25,30 +25,22 @@ public class CashierScreen extends JFrame {
 		button1 = new JButton();
 		hSpacer1 = new JPanel(null);
 
-		//======== this ========
-		setAlwaysOnTop(true);
 		var contentPane = getContentPane();
 		contentPane.setLayout(new MigLayout(
 			"insets 0,hidemode 3",
-			// columns
 			"[grow,fill]",
-			// rows
 			"[grow,fill]"));
 
-		//======== desktopPane1 ========
 		{
 			desktopPane1.setBackground(new Color(52, 140 , 238));
 
-			//======== menuBar1 ========
 			{
 				menuBar1.add(hSpacer2);
 
-				//---- button2 ----
 				button2.setText("CREATE MEMBER CARD");
 				menuBar1.add(button2);
 				menuBar1.add(separator1);
 
-				//---- button1 ----
 				button1.setText("SCAN PRODUCTS");
 				menuBar1.add(button1);
 				menuBar1.add(hSpacer1);
@@ -61,7 +53,6 @@ public class CashierScreen extends JFrame {
 		setLocationRelativeTo(getOwner());
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		setVisible(true);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
