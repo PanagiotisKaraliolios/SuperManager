@@ -37,10 +37,8 @@ public class LoginScreen extends JFrame {
 	private static Statement  stm = null ;
 	
 	private ArrayList<Cashier> listOfcashiers;
+	private ArrayList<Manager> listOfmanagers;
 	
-	
-
-
 
 	private void initComponents() {
 		
@@ -158,9 +156,13 @@ public class LoginScreen extends JFrame {
 	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {
 		
 		listOfcashiers = new ArrayList<Cashier>();
+		listOfmanagers = new ArrayList<Manager>();
+		
 		char[] comparepasswordfield = passwordField1.getPassword();
 		String compareusernamefield = textField1.getText();
 		Cashier cashier ;
+		Manager manager;
+		boolean found=false;
 		
 		
 		Class.forName ("com.mysql.cj.jdbc.Driver");
@@ -173,21 +175,43 @@ public class LoginScreen extends JFrame {
 	        listOfcashiers.add(cashier);
 	    }
 		
+		rs=stm.executeQuery("SELECT * FROM manager");
+		while(rs.next()) {
+			manager=new Manager(rs.getString("username"), rs.getString("password"));
+			listOfmanagers.add(manager);
+		}
+		
+		
+		manager=listOfmanagers.get(0);
+		
+		char[] managerPass = new char[manager.getPassword().length()];
+		for (int i = 0; i < manager.getPassword().length(); i++){
+	        managerPass[i] = manager.getPassword().charAt(i);
+	    }
+		
 		for(Cashier c : listOfcashiers) {
-			char[] pass = new char[c.getPassword().length()];
+			
+			char[] cashierPass = new char[c.getPassword().length()];
 			for (int i = 0; i < c.getPassword().length(); i++){
-		        pass[i] = c.getPassword().charAt(i);
+		        cashierPass[i] = c.getPassword().charAt(i);
 		    }
-			if(Arrays.equals(pass, comparepasswordfield) && c.getUsername().equals(compareusernamefield)){
+			
+			if(Arrays.equals(cashierPass, comparepasswordfield) && c.getUsername().equals(compareusernamefield)){
 				this.dispose();
+				found=true;
 			}
-			else {
-				JOptionPane.showMessageDialog(null, "not found");
+			else if(Arrays.equals(managerPass, comparepasswordfield) && manager.getUsername().equals(compareusernamefield)) {
+				this.dispose();
+				found=true;
 			}
-		}	
+			
+		}
+		
+		if(found==false) JOptionPane.showMessageDialog(null, "not found");
 		
 		stm.close () ;
 		con.close () ;
+		
 	 }
 
 }
