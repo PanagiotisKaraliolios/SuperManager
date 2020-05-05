@@ -53,7 +53,7 @@ public class LoginScreen extends JFrame {
 		label4 = new JLabel();
 
 		
-		setTitle("Login");
+		setTitle("Super Manager");
 		var contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.1.0.272" Java: "13" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.1.0.272" Java: "14" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -20,14 +20,14 @@ new FormModel {
 						name: "hSpacer2"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button2"
+						name: "button1"
 						"text": "CREATE MEMBER CARD"
 					} )
 					add( new FormComponent( "javax.swing.JToolBar$Separator" ) {
 						name: "separator1"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
+						name: "button2"
 						"text": "SCAN PRODUCTS"
 					} )
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
