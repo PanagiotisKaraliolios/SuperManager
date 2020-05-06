@@ -13,11 +13,6 @@ import java.awt.event.*;
  * @author ioslas00
  */
 public class ManagerScreen extends JFrame {
-	public static void main(String[] args)
-	{
-		new ManagerScreen().setVisible(true);
-		
-	}
 	public ManagerScreen() {
 		initComponents();
 		this.setLocationRelativeTo(null);
