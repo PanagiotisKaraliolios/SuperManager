@@ -165,7 +165,7 @@ public class LoginScreen extends JFrame {
 		
 		
 		Class.forName ("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection ("jdbc:mysql://localhost/qb", "root", "");
+		con = DriverManager.getConnection ("jdbc:mysql://localhost/sm", "root", "");
 		stm = con.createStatement () ;
 		
 		ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
