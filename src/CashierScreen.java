@@ -36,7 +36,7 @@ public class CashierScreen extends JFrame {
 			"[grow,fill]"));
 
 		desktopPane1.setBorder(BorderFactory.createLineBorder(Color.BLUE, 3));
-		desktopPane1.setBackground(new Color(52, 140 , 238));
+		//desktopPane1.setBackground(new Color(52, 140 , 238));
 
 		hSpacer1.setBackground(Color.BLUE);
 		hSpacer2.setBackground(Color.BLUE);
@@ -61,7 +61,7 @@ public class CashierScreen extends JFrame {
 		menuBar1.add(hSpacer1);
 			
 		desktopPane1.add(menuBar1, JLayeredPane.DEFAULT_LAYER);
-		menuBar1.setBounds(0, 0, 1600, 45);
+		menuBar1.setBounds(0, 0, 1280, 45);
 		menuBar1.setBackground(Color.BLUE);
 		menuBar1.setBorder(null);
 		
@@ -71,7 +71,7 @@ public class CashierScreen extends JFrame {
 		setLocationRelativeTo(getOwner());
 		
 		setTitle("Super Manager");
-		setSize(1600, 900);
+		setSize(1280, 720);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
