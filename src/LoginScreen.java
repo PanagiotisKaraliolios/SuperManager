@@ -21,6 +21,7 @@ public class LoginScreen extends JFrame {
 	public LoginScreen() {
 		initComponents(); 
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 	}
 	
 	private JPanel dialogPane;
@@ -83,7 +84,8 @@ public class LoginScreen extends JFrame {
 				
 				label1.setText("Welcome to Super Manager");
 				label1.setFont(new Font("Showcard Gothic", Font.PLAIN, 20));
-				label1.setAlignmentY(0.0F);
+				label1.setAlignmentY(TOP_ALIGNMENT);
+				label1.setAlignmentX(CENTER_ALIGNMENT);
 				label1.setBorder(Borders.DLU2);
 				label1.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -207,8 +209,7 @@ public class LoginScreen extends JFrame {
 			
 		}
 		
-		if(found==false) JOptionPane.showMessageDialog(null, "not found");
-		
+		if(found==false) JOptionPane.showMessageDialog(null, "User not found", "ERROR", 2);
 		stm.close () ;
 		con.close () ;
 		
