@@ -3,15 +3,8 @@ import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import net.miginfocom.swing.*;
 import java.awt.event.*;
-/*
- * Created by JFormDesigner on Wed May 06 17:42:42 EEST 2020
- */
 
 
-
-/**
- * @author ioslas00
- */
 public class ManagerScreen extends JFrame {
 	public ManagerScreen() {
 		initComponents();
