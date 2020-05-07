@@ -23,8 +23,7 @@ public class ManagerScreen extends JFrame {
 	private JLabel label5;
 	
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - ioslas00
+		
 		desktopPane1 = new JDesktopPane();
 		button1 = new JButton();
 		label1 = new JLabel();
