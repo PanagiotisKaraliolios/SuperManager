@@ -107,7 +107,7 @@ public class LoginScreen extends JFrame {
 					.addGroup(contentPanelLayout.createSequentialGroup()
 							.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addGroup(contentPanelLayout.createSequentialGroup()
-									.addGap(184, 184, 184)
+									.addGap(250, 250, 250)
 									.addComponent(label1)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE))
 								.addGroup(contentPanelLayout.createSequentialGroup()
