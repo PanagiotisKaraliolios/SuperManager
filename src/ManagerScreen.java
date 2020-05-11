@@ -64,7 +64,11 @@ public class ManagerScreen extends JFrame {
 
 				
 				button1.setText("RUD Cashiers List");
-				button1.setSelectedIcon(null);
+				button1.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						//ManagerScreenActionPerformed(evt);
+					}
+				});
 				menuBar1.add(button1);
 
 				
@@ -73,6 +77,11 @@ public class ManagerScreen extends JFrame {
 
 				
 				button2.setText("RUD Products List");
+				button2.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						//ManagerScreenActionPerformed(evt);
+					}
+				});
 				menuBar1.add(button2);
 
 				
@@ -114,5 +123,14 @@ public class ManagerScreen extends JFrame {
 		setLocationRelativeTo(getOwner());
 		
 	}
+	
+	
+	private void ManagerScreenActionPerformed(java.awt.event.ActionEvent evt){
+		//if(evt.getSource().equals(button1)) new RUDCashierListScreen();
+		//else if(evt.getSource().equals(button2)) new RUDProductListScreen();
+		//else if(evt.getSource().equals(button3)) new ViewStatisticsScreen();
+		//else if(evt.getSource().equals(button4)) new ViewStockScreen();
+	}
+	
 	
 }

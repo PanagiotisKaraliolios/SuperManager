@@ -45,7 +45,7 @@ public class CashierScreen extends JFrame {
 		button1.setText("CREATE MEMBER CARD");
 		button1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				
+				//CashierScreenActionPerformed(evt);
 			}
 		});
 		menuBar1.add(button1);
@@ -54,7 +54,7 @@ public class CashierScreen extends JFrame {
 		button2.setText("SCAN PRODUCTS");
 		button2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				
+				//CashierScreenActionPerformed(evt);
 			}
 		});
 		menuBar1.add(button2);
@@ -77,6 +77,11 @@ public class CashierScreen extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+	}
+	
+	private void CashierScreenActionPerformed(java.awt.event.ActionEvent evt){
+		//if(evt.getSource().equals(button1)) new CreateMemberCardScreen();
+		//else if(evt.getSource().equals(button2)) new ScanProductsScreen();
 	}
 	
 	
