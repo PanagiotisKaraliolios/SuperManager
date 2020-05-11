@@ -1,109 +1,67 @@
-JFDML JFormDesigner: "7.0.1.0.272" Java: "1.8.0_241" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.1.0.272" Java: "14" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp desktopPane1::t::1264:x}"
-			"$verticalGroup": "par l {comp desktopPane1::t::681:x}"
+			"$horizontalGroup": "par l {comp desktopPane1::l::1278:x}"
+			"$verticalGroup": "par l {comp desktopPane1::l::688:x}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 1280, 720 )
+			"title": "Super Manager"
+			"resizable": false
 			add( new FormContainer( "javax.swing.JDesktopPane", new FormLayoutManager( class javax.swing.JDesktopPane ) ) {
 				name: "desktopPane1"
-				"background": sfield java.awt.Color blue
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "RUD Product List"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
+				"border": new javax.swing.border.LineBorder( sfield java.awt.Color blue, 3, false )
+				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+					name: "menuBar1"
+					"background": new java.awt.Color( 0, 0, 255, 255 )
+					"borderPainted": false
+					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+						name: "hSpacer2"
+						"background": new java.awt.Color( 0, 0, 255, 255 )
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button1"
+						"text": "RUD Cashiers List"
+						"selectedIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					} )
+					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+						name: "hSpacer3"
+						"background": new java.awt.Color( 0, 0, 255, 255 )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "RUD Products List"
+					} )
+					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+						name: "hSpacer4"
+						"background": new java.awt.Color( 0, 0, 255, 255 )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button3"
+						"text": "View Statistics"
+					} )
+					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+						name: "hSpacer5"
+						"background": new java.awt.Color( 0, 0, 255, 255 )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button4"
+						"text": "View Stock"
+					} )
+					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+						name: "hSpacer1"
+						"preferredSize": new java.awt.Dimension( 10, 0 )
+						"background": new java.awt.Color( 0, 0, 255, 255 )
+					} )
 				}, new FormLayoutConstraints( null ) {
-					"x": 755
-					"y": 140
-					"width": 345
-					"height": 55
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "Welcome  Manager"
-					"font": new java.awt.Font( "Showcard Gothic", 0, 48 )
-					"alignmentY": 0.0f
-					"border": sfield com.jgoodies.forms.factories.Borders DLU2_BORDER
-					"horizontalAlignment": 0
-				}, new FormLayoutConstraints( null ) {
-					"width": 505
-					"height": 75
-					"x": 470
-					"y": 10
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "Company's Product List -->"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"x": 210
-					"y": 150
-					"width": 395
-					"height": 30
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label3"
-					"text": "Company's Statistics  -->"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"width": 390
-					"height": 55
-					"x": 230
-					"y": 280
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "View Statistics"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"x": 760
-					"y": 280
-					"width": 325
-					"height": 55
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
-					"text": "View Stock"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"x": 785
-					"y": 420
-					"width": 275
-					"height": 60
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label4"
-					"text": "Company's Stock  -->"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"width": 300
-					"height": 50
-					"x": 270
-					"y": 425
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button4"
-					"text": "RUD Cashier List"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"x": 780
-					"y": 570
-					"width": 270
-					"height": 65
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label5"
-					"text": "Company's Cashier List -->"
-					"font": new java.awt.Font( "Tahoma", 0, 30 )
-				}, new FormLayoutConstraints( null ) {
-					"width": 380
-					"height": 65
-					"x": 240
-					"y": 565
+					"x": 0
+					"y": 0
+					"width": 1280
+					"height": 45
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

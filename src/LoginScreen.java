@@ -204,6 +204,7 @@ public class LoginScreen extends JFrame {
 			}
 			else if(Arrays.equals(managerPass, comparepasswordfield) && manager.getUsername().equals(compareusernamefield)) {
 				this.dispose();
+				new ManagerScreen();
 				found=true;
 			}
 			

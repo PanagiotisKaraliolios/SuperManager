@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import com.jgoodies.forms.factories.*;
 import net.miginfocom.swing.*;
 import java.awt.event.*;
@@ -11,127 +12,107 @@ public class ManagerScreen extends JFrame {
 		initComponents();
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
+		this.setVisible(true);
 	}
 	
 	private JDesktopPane desktopPane1;
+	private JMenuBar menuBar1;
+	private JPanel hSpacer2;
 	private JButton button1;
-	private JLabel label1;
-	private JLabel label2;
-	private JLabel label3;
+	private JPanel hSpacer3;
 	private JButton button2;
+	private JPanel hSpacer4;
 	private JButton button3;
-	private JLabel label4;
+	private JPanel hSpacer5;
 	private JButton button4;
-	private JLabel label5;
+	private JPanel hSpacer1;
 	
+
 	private void initComponents() {
 		
 		desktopPane1 = new JDesktopPane();
+		menuBar1 = new JMenuBar();
+		hSpacer2 = new JPanel(null);
 		button1 = new JButton();
-		label1 = new JLabel();
-		label2 = new JLabel();
-		label3 = new JLabel();
+		hSpacer3 = new JPanel(null);
 		button2 = new JButton();
+		hSpacer4 = new JPanel(null);
 		button3 = new JButton();
-		label4 = new JLabel();
+		hSpacer5 = new JPanel(null);
 		button4 = new JButton();
-		label5 = new JLabel();
+		hSpacer1 = new JPanel(null);
 
+		//======== this ========
 		setMinimumSize(new Dimension(1280, 720));
-		Container contentPane = getContentPane();
+		setTitle("Super Manager");
+		setResizable(false);
+		var contentPane = getContentPane();
 
+		
 		{
-			desktopPane1.setBackground(Color.blue);
+			desktopPane1.setBorder(new LineBorder(Color.blue, 3));
 
-			button1.setText("RUD Product List");
-			button1.addActionListener(new ActionListener() {
-				  public void actionPerformed(ActionEvent evt) {
-					
-				  }
-			});
-			button1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(button1, JLayeredPane.DEFAULT_LAYER);
-			button1.setBounds(755, 140, 345, 55);
+			
+			{
+				menuBar1.setBackground(Color.blue);
+				menuBar1.setBorderPainted(false);
 
-			label1.setText("Welcome  Manager");
-			label1.setFont(new Font("Showcard Gothic", Font.PLAIN, 48));
-			label1.setAlignmentY(0.0F);
-			label1.setBorder(Borders.DLU2);
-			label1.setHorizontalAlignment(SwingConstants.CENTER);
-			desktopPane1.add(label1, JLayeredPane.DEFAULT_LAYER);
-			label1.setBounds(470, 10, 505, 75);
+				
+				hSpacer2.setBackground(Color.blue);
+				hSpacer2.setBorder(null);
+				menuBar1.add(hSpacer2);
 
-			label2.setText("Company's Product List -->");
-			label2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(label2, JLayeredPane.DEFAULT_LAYER);
-			label2.setBounds(210, 150, 395, 30);
+				
+				button1.setText("RUD Cashiers List");
+				button1.setSelectedIcon(null);
+				menuBar1.add(button1);
 
-			label3.setText("Company's Statistics  -->");
-			label3.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(label3, JLayeredPane.DEFAULT_LAYER);
-			label3.setBounds(230, 280, 390, 55);
+				
+				hSpacer3.setBackground(Color.blue);
+				menuBar1.add(hSpacer3);
 
-			button2.setText("View Statistics");
-			button2.addActionListener(new ActionListener() {
-				  public void actionPerformed(ActionEvent evt) {
-					
-				  }
-			});
-			button2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(button2, JLayeredPane.DEFAULT_LAYER);
-			button2.setBounds(760, 280, 325, 55);
+				
+				button2.setText("RUD Products List");
+				menuBar1.add(button2);
 
-			button3.setText("View Stock");
-			button3.addActionListener(new ActionListener() {
-				  public void actionPerformed(ActionEvent evt) {
-					
-				  }
-			});
-			button3.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(button3, JLayeredPane.DEFAULT_LAYER);
-			button3.setBounds(785, 420, 275, 60);
+				
+				hSpacer4.setBackground(Color.blue);
+				menuBar1.add(hSpacer4);
 
-			label4.setText("Company's Stock  -->");
-			label4.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(label4, JLayeredPane.DEFAULT_LAYER);
-			label4.setBounds(270, 425, 300, 50);
+				
+				button3.setText("View Statistics");
+				menuBar1.add(button3);
 
-			button4.setText("RUD Cashier List");
-			button4.addActionListener(new ActionListener() {
-				  public void actionPerformed(ActionEvent evt) {
-					
-				  }
-			});
-			button4.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(button4, JLayeredPane.DEFAULT_LAYER);
-			button4.setBounds(780, 570, 270, 65);
+				
+				hSpacer5.setBackground(Color.blue);
+				menuBar1.add(hSpacer5);
 
-			label5.setText("Company's Cashier List -->");
-			label5.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			desktopPane1.add(label5, JLayeredPane.DEFAULT_LAYER);
-			label5.setBounds(240, 565, 380, 65);
+				
+				button4.setText("View Stock");
+				menuBar1.add(button4);
+
+				
+				hSpacer1.setPreferredSize(new Dimension(10, 0));
+				hSpacer1.setBackground(Color.blue);
+				menuBar1.add(hSpacer1);
+			}
+			desktopPane1.add(menuBar1, JLayeredPane.DEFAULT_LAYER);
+			menuBar1.setBounds(0, 0, 1280, 45);
 		}
 
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
 			contentPaneLayout.createParallelGroup()
-				.addComponent(desktopPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE)
+				.addComponent(desktopPane1, GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
 		);
 		contentPaneLayout.setVerticalGroup(
 			contentPaneLayout.createParallelGroup()
-				.addComponent(desktopPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+				.addComponent(desktopPane1, GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
 		
-		setTitle("Super Manager");
-		setSize(1280, 720);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		
 	}
+	
 }
