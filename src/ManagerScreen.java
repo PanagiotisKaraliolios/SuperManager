@@ -6,9 +6,11 @@ import java.awt.event.*;
 
 
 public class ManagerScreen extends JFrame {
+	
 	public ManagerScreen() {
 		initComponents();
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 	}
 	
 	private JDesktopPane desktopPane1;
