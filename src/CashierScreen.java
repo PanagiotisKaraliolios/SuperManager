@@ -10,81 +10,114 @@ import net.miginfocom.swing.*;
 
 public class CashierScreen extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JDesktopPane desktopPane1;
-	private JMenuBar menuBar1;
-	private JPanel hSpacer2;
-	private JButton button1;
-	private JToolBar.Separator separator1;
-	private JButton button2;
-	private JPanel hSpacer1;
+	
 	
 
 	public CashierScreen() {
-		desktopPane1 = new JDesktopPane();
-		menuBar1 = new JMenuBar();
-		hSpacer2 = new JPanel(null);
-		button1 = new JButton();
-		separator1 = new JToolBar.Separator();
-		button2 = new JButton();
-		hSpacer1 = new JPanel(null);
-
-		var contentPane = getContentPane();
-		contentPane.setLayout(new MigLayout(
-			"insets 0,hidemode 3",
-			"[grow,fill]",
-			"[grow,fill]"));
-
-		desktopPane1.setBorder(BorderFactory.createLineBorder(Color.BLUE, 3));
-		//desktopPane1.setBackground(new Color(52, 140 , 238));
-
-		hSpacer1.setBackground(Color.BLUE);
-		hSpacer2.setBackground(Color.BLUE);
-		menuBar1.add(hSpacer2);
-
-		button1.setText("CREATE MEMBER CARD");
-		button1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				//CashierScreenActionPerformed(evt);
-			}
-		});
-		menuBar1.add(button1);
-		menuBar1.add(separator1);
-
-		button2.setText("SCAN PRODUCTS");
-		button2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				//CashierScreenActionPerformed(evt);
-			}
-		});
-		menuBar1.add(button2);
-		menuBar1.add(hSpacer1);
-			
-		desktopPane1.add(menuBar1, JLayeredPane.DEFAULT_LAYER);
-		menuBar1.setBounds(0, 0, 1280, 45);
-		menuBar1.setBackground(Color.BLUE);
-		menuBar1.setBorder(null);
-		
-		
-		contentPane.add(desktopPane1, "cell 0 0");
-		pack();
-		setLocationRelativeTo(getOwner());
-		
-		setTitle("Super Manager");
-		setSize(1280, 720);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+		initComponents();
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setVisible(true);
 	}
 	
 	private void CashierScreenActionPerformed(java.awt.event.ActionEvent evt){
-		//if(evt.getSource().equals(button1)) new CreateMemberCardScreen();
+		if(evt.getSource().equals(button1)) {
+			CreateMemberCardScreen mcs = new CreateMemberCardScreen();
+			this.desktopPane1.add(mcs);
+			mcs.setVisible(true);
+		}
 		//else if(evt.getSource().equals(button2)) new ScanProductsScreen();
 	}
 	
 	
+	
+	
+
+	private void initComponents() {
+		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		panel1 = new JPanel();
+		desktopPane1 = new JDesktopPane();
+		button1 = new JButton();
+		button2 = new JButton();
+
+		//======== this ========
+		setMinimumSize(new Dimension(1280, 720));
+		setTitle("Super Manager");
+		setResizable(false);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		var contentPane = getContentPane();
+
+		//======== panel1 ========
+		{
+			panel1.setBorder(null);
+			
+			panel1.setLayout(null);
+
+			//======== desktopPane1 ========
+			{
+				desktopPane1.setBorder(null);
+			}
+			panel1.add(desktopPane1);
+			desktopPane1.setBounds(0, 65, 1280, 623);
+
+			//---- button1 ----
+			button1.setText("Create Member Card");
+			button1.setSelectedIcon(null);
+			button1.setIcon(new ImageIcon(getClass().getResource("/memberCard2.png")));
+			panel1.add(button1);
+			button1.setBounds(400, 15, 180, 40);
+			button1.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					CashierScreenActionPerformed(evt);
+				}
+			});
+
+			//---- button2 ----
+			button2.setText("Add Bill");
+			button2.setIcon(new ImageIcon(getClass().getResource("/transaction.png")));
+			panel1.add(button2);
+			button2.setBounds(700, 15, 160, 40);
+
+			{
+				// compute preferred size
+				Dimension preferredSize = new Dimension();
+				for(int i = 0; i < panel1.getComponentCount(); i++) {
+					Rectangle bounds = panel1.getComponent(i).getBounds();
+					preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+					preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+				}
+				Insets insets = panel1.getInsets();
+				preferredSize.width += insets.right;
+				preferredSize.height += insets.bottom;
+				panel1.setMinimumSize(preferredSize);
+				panel1.setPreferredSize(preferredSize);
+			}
+		}
+
+		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
+		contentPaneLayout.setHonorsVisibility(false);
+		contentPane.setLayout(contentPaneLayout);
+		contentPaneLayout.setHorizontalGroup(
+			contentPaneLayout.createParallelGroup()
+				.addComponent(panel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		contentPaneLayout.setVerticalGroup(
+			contentPaneLayout.createParallelGroup()
+				.addComponent(panel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		pack();
+		setLocationRelativeTo(getOwner());
+		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+	}
+
+	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	private JPanel panel1;
+	private JDesktopPane desktopPane1;
+	private JButton button1;
+	private JButton button2;
+	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }	
 
 

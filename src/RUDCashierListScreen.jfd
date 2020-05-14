@@ -1,0 +1,196 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "14" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "panel1"
+			add( new FormContainer( "javax.swing.JInternalFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+				"autoSize": false
+			} ) {
+				name: "this"
+				"visible": true
+				"closable": true
+				"iconifiable": true
+				"maximizable": true
+				"title": "RUD Cashiers"
+				"doubleBuffered": true
+				"minimumSize": new java.awt.Dimension( 800, 500 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "Name"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 20
+					"y": 120
+					"width": 70
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField2"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 28
+					"x": 145
+					"y": 115
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField3"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 28
+					"x": 145
+					"y": 165
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField4"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 28
+					"x": 145
+					"y": 215
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField5"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 28
+					"x": 145
+					"y": 265
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "Email"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 16
+					"x": 20
+					"y": 170
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "Phone Number"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 100
+					"height": 16
+					"x": 20
+					"y": 220
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "Address"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 16
+					"x": 20
+					"y": 270
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Add Cashier"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/plusSign1.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 15
+					"y": 315
+					"width": 145
+					"height": 40
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button2"
+					"text": "Delete Cashier"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/delete.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 145
+					"height": 40
+					"x": 15
+					"y": 375
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "table1"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+							add( "NAME" )
+							add( "EMAIL" )
+							add( "PHONE" )
+							add( "ADDRESS" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( false )
+							add( false )
+							add( false )
+							add( false )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+						"selectionMode": 0
+						"autoCreateRowSorter": true
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 340
+					"y": 10
+					"width": 506
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button3"
+					"text": "Update Cashier"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/update.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 145
+					"height": 40
+					"x": 170
+					"y": 315
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+					"text": "Username"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 16
+					"x": 20
+					"y": 20
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label7"
+					"text": "Password"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 16
+					"x": 20
+					"y": 70
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField6"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 28
+					"x": 145
+					"y": 15
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField7"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 28
+					"x": 145
+					"y": 65
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 865
+				"height": 475
+				"x": 0
+				"y": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 865, 475 )
+		} )
+	}
+}

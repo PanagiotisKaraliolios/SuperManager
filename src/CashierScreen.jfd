@@ -3,48 +3,53 @@ JFDML JFormDesigner: "7.0.1.0.272" Java: "14" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
-			"$layoutConstraints": "insets 0,hidemode 3"
-			"$columnConstraints": "[grow,fill]"
-			"$rowConstraints": "[grow,fill]"
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel1::t:::x}"
+			"$verticalGroup": "par l {comp panel1::t:::x}"
+			"honorsVisibility": false
 		} ) {
 			name: "this"
+			"minimumSize": new java.awt.Dimension( 1280, 720 )
+			"title": "Super Manager"
 			"resizable": false
-			"alwaysOnTop": true
-			add( new FormContainer( "javax.swing.JDesktopPane", new FormLayoutManager( class javax.swing.JDesktopPane ) ) {
-				name: "desktopPane1"
-				"background": new java.awt.Color( 102, 102, 255, 255 )
-				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
-					name: "menuBar1"
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer2"
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
-						"text": "CREATE MEMBER CARD"
-					} )
-					add( new FormComponent( "javax.swing.JToolBar$Separator" ) {
-						name: "separator1"
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button2"
-						"text": "SCAN PRODUCTS"
-					} )
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer1"
-					} )
-				}, new FormLayoutConstraints( null ) {
+			"defaultCloseOperation": 2
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				add( new FormContainer( "javax.swing.JDesktopPane", new FormLayoutManager( class javax.swing.JDesktopPane ) ) {
+					name: "desktopPane1"
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 1280
+					"height": 623
 					"x": 0
-					"y": 0
-					"width": 1295
-					"height": 45
+					"y": 65
 				} )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 0"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Create Member Card"
+					"selectedIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/memberCard2.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 400
+					"y": 15
+					"width": 180
+					"height": 40
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button2"
+					"text": "Add Bill"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/transaction.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 160
+					"height": 40
+					"x": 700
+					"y": 15
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 165, 310 )
 			"size": new java.awt.Dimension( 1280, 720 )
+			"location": new java.awt.Point( 0, 0 )
 		} )
 	}
 }

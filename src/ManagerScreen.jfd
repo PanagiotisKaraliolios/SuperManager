@@ -4,68 +4,71 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp desktopPane1::l::1278:x}"
-			"$verticalGroup": "par l {comp desktopPane1::l::688:x}"
+			"$horizontalGroup": "par l {comp panel1::t:::x}"
+			"$verticalGroup": "par l {comp panel1::t:::x}"
+			"honorsVisibility": false
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 1280, 720 )
 			"title": "Super Manager"
 			"resizable": false
-			add( new FormContainer( "javax.swing.JDesktopPane", new FormLayoutManager( class javax.swing.JDesktopPane ) ) {
-				name: "desktopPane1"
-				"border": new javax.swing.border.LineBorder( sfield java.awt.Color blue, 3, false )
-				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
-					name: "menuBar1"
-					"background": new java.awt.Color( 0, 0, 255, 255 )
-					"borderPainted": false
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer2"
-						"background": new java.awt.Color( 0, 0, 255, 255 )
-						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
-						"text": "RUD Cashiers List"
-						"selectedIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					} )
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer3"
-						"background": new java.awt.Color( 0, 0, 255, 255 )
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button2"
-						"text": "RUD Products List"
-					} )
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer4"
-						"background": new java.awt.Color( 0, 0, 255, 255 )
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button3"
-						"text": "View Statistics"
-					} )
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer5"
-						"background": new java.awt.Color( 0, 0, 255, 255 )
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button4"
-						"text": "View Stock"
-					} )
-					add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
-						name: "hSpacer1"
-						"preferredSize": new java.awt.Dimension( 10, 0 )
-						"background": new java.awt.Color( 0, 0, 255, 255 )
-					} )
-				}, new FormLayoutConstraints( null ) {
-					"x": 0
-					"y": 0
+			"defaultCloseOperation": 2
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				add( new FormContainer( "javax.swing.JDesktopPane", new FormLayoutManager( class javax.swing.JDesktopPane ) ) {
+					name: "desktopPane1"
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 1280
-					"height": 45
+					"height": 623
+					"x": 0
+					"y": 65
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "RUD Cashiers List"
+					"selectedIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/addCashier.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 200
+					"y": 15
+					"width": 160
+					"height": 40
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button2"
+					"text": "RUD Products List"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/package.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 420
+					"y": 15
+					"width": 160
+					"height": 40
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button3"
+					"text": "View Statistics"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/stats.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 640
+					"y": 15
+					"width": 160
+					"height": 40
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button4"
+					"text": "View Stock"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/stock.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 860
+					"y": 15
+					"width": 160
+					"height": 40
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
+			"location": new java.awt.Point( 1300, 0 )
 			"size": new java.awt.Dimension( 1280, 720 )
 		} )
 	}
