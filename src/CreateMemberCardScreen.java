@@ -37,7 +37,13 @@ public class CreateMemberCardScreen extends JInternalFrame {
 
 		//======== panel1 ========
 		{
-			
+			panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+			. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder
+			. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
+			awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
+			; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+			) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+			;
 			panel1.setLayout(null);
 
 			//======== this ========
@@ -49,6 +55,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 				this.setTitle("Members");
 				this.setDoubleBuffered(true);
 				this.setMinimumSize(new Dimension(800, 500));
+				this.setResizable(true);
 				var contentPane = this.getContentPane();
 				contentPane.setLayout(null);
 
@@ -126,12 +133,12 @@ public class CreateMemberCardScreen extends JInternalFrame {
 					scrollPane1.setViewportView(table1);
 				}
 				contentPane.add(scrollPane1);
-				scrollPane1.setBounds(new Rectangle(new Point(390, 10), scrollPane1.getPreferredSize()));
+				scrollPane1.setBounds(370, 5, 510, 455);
 			}
 			panel1.add(this);
-			this.setBounds(0, 0, 865, 475);
+			this.setBounds(0, 0, 900, 500);
 
-			panel1.setPreferredSize(new Dimension(865, 475));
+			panel1.setPreferredSize(new Dimension(900, 500));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}

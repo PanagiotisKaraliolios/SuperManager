@@ -38,7 +38,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button2"
-					"text": "Add Bill"
+					"text": "      Add Bill"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/transaction.png" )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 160

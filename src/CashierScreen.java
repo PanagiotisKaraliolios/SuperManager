@@ -26,7 +26,11 @@ public class CashierScreen extends JFrame {
 			this.desktopPane1.add(mcs);
 			mcs.setVisible(true);
 		}
-		//else if(evt.getSource().equals(button2)) new ScanProductsScreen();
+		else if(evt.getSource().equals(button2)) {
+			ScanProductsScreen sps = new ScanProductsScreen();
+			this.desktopPane1.add(sps);
+			sps.setVisible(true);
+		}
 	}
 	
 	
@@ -74,10 +78,15 @@ public class CashierScreen extends JFrame {
 			});
 
 			//---- button2 ----
-			button2.setText("Add Bill");
+			button2.setText("      Add Bill");
 			button2.setIcon(new ImageIcon(getClass().getResource("/transaction.png")));
 			panel1.add(button2);
 			button2.setBounds(700, 15, 160, 40);
+			button2.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					CashierScreenActionPerformed(evt);
+				}
+			});
 
 			{
 				// compute preferred size
