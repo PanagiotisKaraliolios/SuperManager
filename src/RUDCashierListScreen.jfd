@@ -15,7 +15,7 @@ new FormModel {
 				"closable": true
 				"iconifiable": true
 				"maximizable": true
-				"title": "RUD Cashiers"
+				"title": "Cashiers"
 				"doubleBuffered": true
 				"minimumSize": new java.awt.Dimension( 800, 500 )
 				add( new FormComponent( "javax.swing.JLabel" ) {

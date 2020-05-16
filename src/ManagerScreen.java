@@ -24,7 +24,11 @@ public class ManagerScreen extends JFrame {
 			this.desktopPane1.add(cls);
 			cls.setVisible(true);
 		}
-		//else if(evt.getSource().equals(button2)) new RUDProductListScreen();
+		else if(evt.getSource().equals(button2)) {
+			RUDProductListScreen pls = new RUDProductListScreen();
+			this.desktopPane1.add(pls);
+			pls.setVisible(true);
+		}
 		//else if(evt.getSource().equals(button3)) new ViewStatisticsScreen();
 		//else if(evt.getSource().equals(button4)) new ViewStockScreen();
 	}
@@ -78,6 +82,11 @@ public class ManagerScreen extends JFrame {
 			button2.setIcon(new ImageIcon(getClass().getResource("/package.png")));
 			panel1.add(button2);
 			button2.setBounds(420, 15, 160, 40);
+			button2.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					ManagerScreenActionPerformed(evt);
+				}
+			});
 
 			//---- button3 ----
 			button3.setText("View Statistics");

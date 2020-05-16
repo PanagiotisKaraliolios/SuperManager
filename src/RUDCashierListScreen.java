@@ -17,7 +17,7 @@ public class RUDCashierListScreen extends JInternalFrame {
 		
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
@@ -51,7 +51,7 @@ public class RUDCashierListScreen extends JInternalFrame {
 				this.setClosable(true);
 				this.setIconifiable(true);
 				this.setMaximizable(true);
-				this.setTitle("RUD Cashiers");
+				this.setTitle("Cashiers");
 				this.setDoubleBuffered(true);
 				this.setMinimumSize(new Dimension(800, 500));
 				var contentPane = this.getContentPane();

@@ -78,7 +78,7 @@ public class CashierScreen extends JFrame {
 			});
 
 			//---- button2 ----
-			button2.setText("      Add Bill");
+			button2.setText("Scan Products");
 			button2.setIcon(new ImageIcon(getClass().getResource("/transaction.png")));
 			panel1.add(button2);
 			button2.setBounds(700, 15, 160, 40);

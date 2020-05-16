@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 /*
- * Created by JFormDesigner on Fri May 15 18:10:40 EEST 2020
+ * Created by JFormDesigner on Sat May 16 19:29:45 EEST 2020
  */
 
 
@@ -10,8 +10,8 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
-public class ScanProductsScreen extends JInternalFrame {
-	public ScanProductsScreen() {
+public class RUDProductListScreen extends JInternalFrame {
+	public RUDProductListScreen() {
 		initComponents();
 		this.setLocation(50, 50);
 	}
@@ -20,16 +20,18 @@ public class ScanProductsScreen extends JInternalFrame {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 		panel1 = new JPanel();
-		textField1 = new JTextField();
-		textField2 = new JTextField();
-		textField3 = new JTextField();
-		textField4 = new JTextField();
 		label1 = new JLabel();
 		label2 = new JLabel();
 		label3 = new JLabel();
 		label4 = new JLabel();
 		label5 = new JLabel();
+		label6 = new JLabel();
+		textField1 = new JTextField();
+		textField2 = new JTextField();
+		textField3 = new JTextField();
+		textField4 = new JTextField();
 		textField5 = new JTextField();
+		textField6 = new JTextField();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
 		button1 = new JButton();
@@ -47,59 +49,52 @@ public class ScanProductsScreen extends JInternalFrame {
 				this.setClosable(true);
 				this.setIconifiable(true);
 				this.setMaximizable(true);
-				this.setTitle("Scan Products");
 				this.setResizable(true);
+				this.setTitle("Products List");
 				var contentPane = this.getContentPane();
 				contentPane.setLayout(null);
-				contentPane.add(textField1);
-				textField1.setBounds(110, 50, 150, textField1.getPreferredSize().height);
-
-				//---- textField2 ----
-				textField2.setEditable(false);
-				contentPane.add(textField2);
-				textField2.setBounds(110, 170, 150, 28);
-
-				//---- textField3 ----
-				textField3.setColumns(2);
-				textField3.setEditable(false);
-				contentPane.add(textField3);
-				textField3.setBounds(110, 110, 150, 28);
-
-				//---- textField4 ----
-				textField4.setText("1");
-				contentPane.add(textField4);
-				textField4.setBounds(110, 230, 70, 28);
 
 				//---- label1 ----
 				label1.setText("Product ID");
 				contentPane.add(label1);
-				label1.setBounds(new Rectangle(new Point(30, 55), label1.getPreferredSize()));
+				label1.setBounds(30, 35, 70, label1.getPreferredSize().height);
 
 				//---- label2 ----
 				label2.setText("Name");
 				contentPane.add(label2);
-				label2.setBounds(30, 115, 57, 16);
+				label2.setBounds(30, 85, 70, 16);
 
 				//---- label3 ----
-				label3.setText("Price");
+				label3.setText("Stock Type");
 				contentPane.add(label3);
-				label3.setBounds(30, 175, 57, 16);
+				label3.setBounds(30, 135, 70, 16);
 
 				//---- label4 ----
-				label4.setText("Quantity");
+				label4.setText("Stock");
 				contentPane.add(label4);
-				label4.setBounds(30, 235, 57, 16);
+				label4.setBounds(30, 185, 70, 16);
 
 				//---- label5 ----
-				label5.setText("Date");
-				label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 2f));
+				label5.setText("Price");
 				contentPane.add(label5);
-				label5.setBounds(465, 15, 57, 16);
+				label5.setBounds(30, 235, 70, 16);
 
-				//---- textField5 ----
-				textField5.setEditable(false);
+				//---- label6 ----
+				label6.setText("Supplier ID");
+				contentPane.add(label6);
+				label6.setBounds(25, 285, 70, 16);
+				contentPane.add(textField1);
+				textField1.setBounds(120, 30, 150, textField1.getPreferredSize().height);
+				contentPane.add(textField2);
+				textField2.setBounds(120, 80, 150, 28);
+				contentPane.add(textField3);
+				textField3.setBounds(120, 130, 150, 28);
+				contentPane.add(textField4);
+				textField4.setBounds(120, 180, 150, 28);
 				contentPane.add(textField5);
-				textField5.setBounds(545, 10, 150, 28);
+				textField5.setBounds(120, 230, 150, 28);
+				contentPane.add(textField6);
+				textField6.setBounds(120, 280, 150, 28);
 
 				//======== scrollPane1 ========
 				{
@@ -109,38 +104,45 @@ public class ScanProductsScreen extends JInternalFrame {
 						new Object[][] {
 						},
 						new String[] {
-							"ID", "NAME", "PRICE", "QUANTITY"
+							"ID", "NAME", "TYPE", "STOCK", "PRICE", "SUPPLIER ID"
 						}
-					));
-					table1.setAutoCreateRowSorter(true);
+					) {
+						boolean[] columnEditable = new boolean[] {
+							false, false, false, false, false, false
+						};
+						@Override
+						public boolean isCellEditable(int rowIndex, int columnIndex) {
+							return columnEditable[columnIndex];
+						}
+					});
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					scrollPane1.setViewportView(table1);
 				}
 				contentPane.add(scrollPane1);
-				scrollPane1.setBounds(355, 50, 520, 400);
+				scrollPane1.setBounds(350, 15, 625, 440);
 
 				//---- button1 ----
 				button1.setText("Add Product");
-				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign3.png")));
+				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign2.png")));
 				contentPane.add(button1);
-				button1.setBounds(20, 290, 150, 40);
+				button1.setBounds(20, 330, 150, 40);
 
 				//---- button2 ----
-				button2.setText("Remove Product");
-				button2.setIcon(new ImageIcon(getClass().getResource("/minusSign.png")));
+				button2.setText("Update Product");
+				button2.setIcon(new ImageIcon(getClass().getResource("/update.png")));
 				contentPane.add(button2);
-				button2.setBounds(185, 290, 150, 40);
+				button2.setBounds(190, 330, 150, 40);
 
 				//---- button3 ----
-				button3.setText("Proceed to Payment");
-				button3.setIcon(new ImageIcon(getClass().getResource("/payment1.png")));
+				button3.setText("Delete Product");
+				button3.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
 				contentPane.add(button3);
-				button3.setBounds(80, 375, 195, 40);
+				button3.setBounds(20, 385, 150, 40);
 			}
 			panel1.add(this);
-			this.setBounds(0, 0, 905, 500);
+			this.setBounds(0, 0, 1000, 500);
 
-			panel1.setPreferredSize(new Dimension(905, 500));
+			panel1.setPreferredSize(new Dimension(1000, 500));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
@@ -148,16 +150,18 @@ public class ScanProductsScreen extends JInternalFrame {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private JPanel panel1;
-	private JTextField textField1;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
 	private JLabel label1;
 	private JLabel label2;
 	private JLabel label3;
 	private JLabel label4;
 	private JLabel label5;
+	private JLabel label6;
+	private JTextField textField1;
+	private JTextField textField2;
+	private JTextField textField3;
+	private JTextField textField4;
 	private JTextField textField5;
+	private JTextField textField6;
 	private JScrollPane scrollPane1;
 	private JTable table1;
 	private JButton button1;
