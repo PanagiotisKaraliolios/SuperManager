@@ -30,7 +30,12 @@ public class ManagerScreen extends JFrame {
 			pls.setVisible(true);
 		}
 		//else if(evt.getSource().equals(button3)) new ViewStatisticsScreen();
-		//else if(evt.getSource().equals(button4)) new ViewStockScreen();
+		else if(evt.getSource().equals(button4)) {
+			ViewStockScreen vss = new ViewStockScreen();
+			new ViewStockScreen();
+			this.desktopPane1.add(vss);
+			vss.setVisible(true);
+		}
 	}
 	
 	
@@ -99,6 +104,11 @@ public class ManagerScreen extends JFrame {
 			button4.setIcon(new ImageIcon(getClass().getResource("/stock.png")));
 			panel1.add(button4);
 			button4.setBounds(860, 15, 160, 40);
+			button4.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					ManagerScreenActionPerformed(evt);
+				}
+			});
 
 			{
 				// compute preferred size
