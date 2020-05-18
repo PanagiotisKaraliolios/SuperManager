@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
 /*
@@ -59,7 +63,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 				label1.setBounds(20, 55, 105, label1.getPreferredSize().height);
 
 				//---- textField1 ----
-				textField1.setEditable(false);
+				textField1.setEditable(true);
 				contentPane.add(textField1);
 				textField1.setBounds(145, 50, 170, textField1.getPreferredSize().height);
 
@@ -135,24 +139,172 @@ public class CreateMemberCardScreen extends JInternalFrame {
 			panel1.setPreferredSize(new Dimension(900, 500));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
+		//add buttonActionListeners
+		button1.addActionListener(new ActionListener()
+		{
+					
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					addMemberButtonAction(e);
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+				});
+		
+		button2.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					deleteMemberButtonAction(e);
+				}
+				catch (Exception e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		});
+		
+		//initialize table
+		try
+		{
+			//get member list
+			ArrayList<Member> memList = new ArrayList<>();
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			ResultSet rs = stm.executeQuery("SELECT * FROM members");
+			
+			while(rs.next())
+				memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address")));
+			
+			//add list to table
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(Member mem: memList)
+			{
+				model.addRow(new Object[] {mem.getMemberCardId(), mem.getName(), mem.getEmail(), mem.getPhoneNumber(), mem.getAddress()});
+			}
+			stm.close();
+			con.close();
+		}
+		catch (Exception e3)
+		{
+			e3.printStackTrace();
+		}
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private JPanel panel1;
 	private JLabel label1;
-	private JTextField textField1;
+	private JTextField textField1; //Member/Card ID field
 	private JLabel label2;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
-	private JTextField textField5;
+	private JTextField textField2; //Name field
+	private JTextField textField3; //Email field
+	private JTextField textField4; //phoneNum field
+	private JTextField textField5; //address field
 	private JLabel label3;
 	private JLabel label4;
 	private JLabel label5;
-	private JButton button1;
-	private JButton button2;
+	private JButton button1; //addMemberButton
+	private JButton button2; //deleteMemberButton
 	private JScrollPane scrollPane1;
 	private JTable table1;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
+	private void addMemberButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	{
+		//retrieve input
+		String inputID = textField1.getText();
+		String inputName = textField2.getText();
+		String inputEmail = textField3.getText();
+		String inputNum = textField4.getText();
+		String inputAddress = textField5.getText();
+		
+		//create connection and receive member list
+		Connection con = null;
+		Statement  stm = null;
+		ArrayList<Member> memList = new ArrayList<>();
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		
+		ResultSet rs=stm.executeQuery("SELECT * FROM members");
+		
+		while(rs.next())
+			memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address")));
+		
+		stm.close();
+		
+		//search if given ID is taken. if not add the new member else display message.
+		boolean flag = false;
+		
+		for(Member mem : memList)
+		{
+			if( mem.getMemberCardId().equals(inputID) )
+			{
+				JOptionPane.showMessageDialog(null, "Given Member/Card ID already taken.", "ERROR", 2);
+				flag = true;
+				break;
+			}
+		}
+		
+		if(flag == false)
+		{
+			stm = con.createStatement();
+			stm.executeUpdate("INSERT INTO members VALUES('" + inputID + "', '" + inputName + "', '" + inputAddress + "', '" + inputNum + "', '" + inputEmail + "', 0)"); 
+			stm.close();
+			//update the table
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			model.addRow(new Object[] {inputID, inputName, inputEmail, inputNum, inputAddress});
+		}
+		
+		con.close();
+		
+	}
+	
+	
+	private void deleteMemberButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	{
+		//get Selected Row
+		int index = table1.getSelectedRow();		
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		if(index == -1)
+		{
+			JOptionPane.showMessageDialog(null, "No member selected", "ERROR", 2);
+		}
+		else
+		{
+			String selectedID = (String) table1.getValueAt(index, 0);
+			model.removeRow(index);
+			
+			try
+			{
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+				Statement stm = con.createStatement();
+				stm.executeUpdate("DELETE FROM  members WHERE memberCardID = '" + selectedID + "'");
+				stm.close();
+				con.close();
+
+			}
+			catch (Exception e4)
+			{
+				e4.printStackTrace();
+			}
+		}
+		
+		
+		
+	}
+	
+	
 }
