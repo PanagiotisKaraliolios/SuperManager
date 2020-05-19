@@ -167,7 +167,8 @@ public class LoginScreen extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	       
-	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {
+	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException
+	{
 		
 		listOfcashiers = new ArrayList<Cashier>();
 		listOfmanagers = new ArrayList<Manager>();
