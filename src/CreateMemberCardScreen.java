@@ -300,11 +300,6 @@ public class CreateMemberCardScreen extends JInternalFrame {
 			{
 				e4.printStackTrace();
 			}
-		}
-		
-		
-		
+		}		
 	}
-	
-	
 }

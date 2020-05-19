@@ -49,7 +49,7 @@ public class Product
 		this.name = name;
 	}
 	
-	public void setPride(double price)
+	public void setPrice(double price)
 	{
 		this.price = price;
 	}

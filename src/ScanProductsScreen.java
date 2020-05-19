@@ -1,4 +1,9 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.table.*;
 /*
@@ -29,12 +34,56 @@ public class ScanProductsScreen extends JInternalFrame {
 		label3 = new JLabel();
 		label4 = new JLabel();
 		label5 = new JLabel();
-		textField5 = new JTextField();
+		textField5 = new JTextField(); //date field
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button1 = new JButton();
-		button2 = new JButton();
+		button1 = new JButton(); //addProductButton
+		button1.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						try
+						{
+							addProductButtonAction(e);
+						}
+						catch (Exception e1)
+						{
+							e1.printStackTrace();
+						}
+					}
+				});
+		button2 = new JButton(); //remove Product button
+		button2.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						try
+						{
+							removeProductButtonAction(e);
+						}
+						catch (Exception e2)
+						{
+							e2.printStackTrace();
+						}
+					}
+				});
 		button3 = new JButton();
+		button3.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						try
+						{
+							proc2paymentButtonAction(e);
+						}
+						catch (Exception e3)
+						{
+							e3.printStackTrace();
+						}
+					}
+				});
+			
+		
 
 		//======== panel1 ========
 		{
@@ -143,25 +192,73 @@ public class ScanProductsScreen extends JInternalFrame {
 			panel1.setPreferredSize(new Dimension(905, 500));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
+		
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private JPanel panel1;
-	private JTextField textField1;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
+	private JTextField textField1;  //ProductID field
+	private JTextField textField2;	//Price Tag
+	private JTextField textField3;	//Name field
+	private JTextField textField4;	//Quantity field
 	private JLabel label1;
 	private JLabel label2;
 	private JLabel label3;
 	private JLabel label4;
 	private JLabel label5;
-	private JTextField textField5;
+	private JTextField textField5;	//Date field
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
+	private JButton button1;	//addProduct
+	private JButton button2;	//removeProduct
+	private JButton button3;	//proceed to payment
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
+	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	{
+		String inputID = textField1.getText();
+		Product chosenProduct = new Product("",0 , "units", 0, 0);
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		Statement stm = con.createStatement();
+		
+		ResultSet rs = stm.executeQuery("SELECT * FROM products WHERE id = '" + inputID + "'");
+		//loop probably not needed
+		while(rs.next())
+		{
+			chosenProduct.setProductsID(rs.getInt("id"));
+			chosenProduct.setName(rs.getString("name"));
+			chosenProduct.setPrice(rs.getDouble("price"));
+			chosenProduct.setStockType(rs.getString("stockType"));
+			chosenProduct.setSuppliersID(rs.getInt("supplierID"));
+		}
+		boolean flag = true;
+		if(chosenProduct.getProductsID() == 0)
+		{
+			JOptionPane.showMessageDialog(null, "Given ProductID doesnt exist", "ERROR", 2);
+			flag = false;
+		}
+		
+		if(flag)
+		{
+			textField2.setText("" + chosenProduct.getPrice());
+			textField3.setText(chosenProduct.getName());
+			
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			model.addRow(new Object[] {chosenProduct.getProductsID(), chosenProduct.getName(), chosenProduct.getPrice(), textField4.getText()});
+		}		
+	}
+	
+	private void removeProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	{
+		
+	}
+	
+	private void proc2paymentButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	{
+		
+	}
 }
