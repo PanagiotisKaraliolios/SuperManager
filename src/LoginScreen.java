@@ -27,7 +27,7 @@ public class LoginScreen extends JFrame {
 			
 		}
 		
-		new LoginScreen().setVisible(true);
+		new LoginScreen();
 		
 	}
 	
@@ -35,6 +35,7 @@ public class LoginScreen extends JFrame {
 		initComponents(); 
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
+		this.setVisible(true);
 	}
 	
 	private JPanel dialogPane;
@@ -216,12 +217,13 @@ public class LoginScreen extends JFrame {
 				new CashierScreen();
 				found=true;
 			}
-			else if(Arrays.equals(managerPass, comparepasswordfield) && manager.getUsername().equals(compareusernamefield)) {
-				this.dispose();
-				new ManagerScreen();
-				found=true;
-			}
-			
+				
+		}
+		
+		if(Arrays.equals(managerPass, comparepasswordfield) && manager.getUsername().equals(compareusernamefield)) {
+			this.dispose();
+			new ManagerScreen();
+			found=true;	
 		}
 		
 		if(found==false) JOptionPane.showMessageDialog(null, "User not found", "ERROR", 2);

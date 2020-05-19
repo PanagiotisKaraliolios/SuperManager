@@ -1,0 +1,70 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "14" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "panel1"
+			add( new FormContainer( "javax.swing.JInternalFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+				"autoSize": false
+			} ) {
+				name: "this"
+				"visible": true
+				"title": "Statistics"
+				"iconifiable": true
+				"maximizable": true
+				"resizable": true
+				"closable": true
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "table1"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+							add( "PRODUCT" )
+							add( "SOLD" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( false )
+							add( false )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						} )
+						"selectionMode": 0
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 425
+					"y": 10
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Confirm"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/checkMark.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 280
+					"y": 130
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button2"
+					"text": "Advanced Statistics"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/stats.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 225
+					"y": 360
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 900
+				"height": 475
+				"x": 0
+				"y": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 80, 60 )
+			"size": new java.awt.Dimension( 900, 475 )
+		} )
+	}
+}
