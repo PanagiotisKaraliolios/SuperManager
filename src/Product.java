@@ -5,15 +5,17 @@ public class Product
 	private String stockType;
 	private int productsID;
 	private int suppliersID;
+	private int stock;
 	
 	//Constructor
-	public Product(String name, double price, String stockType, int productsID, int suppliersID)
+	public Product(String name, double price, String stockType, int productsID, int suppliersID, int stock)
 	{
 		this.name = name;
 		this.price = price;
 		this.stockType = stockType;
 		this.productsID = productsID;
 		this.suppliersID = suppliersID;
+		this.stock = stock;
 	}
 	
 	//get methods
@@ -41,6 +43,10 @@ public class Product
 	{
 		return this.suppliersID;
 	}
+	public int getStock()
+	{
+		return this.stock;
+	}
 	
 	
 	//set methods
@@ -67,6 +73,10 @@ public class Product
 	public void setSuppliersID(int suppID)
 	{
 		this.suppliersID = suppID;
+	}
+	public void setStock(int stock)
+	{
+		this.stock = stock;
 	}
 	
 		

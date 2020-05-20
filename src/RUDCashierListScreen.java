@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.sql.*;
-import java.util.ArrayList;
 
 
 
@@ -238,7 +237,7 @@ public class RUDCashierListScreen extends JInternalFrame {
 				
 		if(row == -1)
 		{
-			JOptionPane.showMessageDialog(null, "No member selected", "ERROR", 2);
+			JOptionPane.showMessageDialog(null, "No cashier selected", "ERROR", 2);
 		}
 		else {	
 			/*table update*/
