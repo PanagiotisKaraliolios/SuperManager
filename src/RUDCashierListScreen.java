@@ -1,9 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.table.*;
-/*
- * Created by JFormDesigner on Thu May 14 16:27:15 EEST 2020
- */
+import java.sql.*;
+import java.util.ArrayList;
 
 
 
@@ -19,8 +22,7 @@ public class RUDCashierListScreen extends JInternalFrame {
 
 	
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		//Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		panel1 = new JPanel();
 		label2 = new JLabel();
 		textField2 = new JTextField();
@@ -88,12 +90,40 @@ public class RUDCashierListScreen extends JInternalFrame {
 				//---- button1 ----
 				button1.setText("Add Cashier");
 				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
+				button1.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e)
+					{
+						try
+						{
+							addCashier(e);
+						}
+						catch (Exception e1)
+						{
+							e1.printStackTrace();
+						}
+					}
+				});
 				contentPane.add(button1);
 				button1.setBounds(15, 315, 145, 40);
 
 				//---- button2 ----
 				button2.setText("Delete Cashier");
 				button2.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
+				button2.addActionListener(new ActionListener() {
+				
+					public void actionPerformed(ActionEvent e) {
+					
+						try
+						{
+							deleteCashier(e);
+						}
+						catch (Exception e1)
+						{
+							e1.printStackTrace();
+						}
+					}
+				});
 				contentPane.add(button2);
 				button2.setBounds(15, 375, 145, 40);
 
@@ -126,6 +156,20 @@ public class RUDCashierListScreen extends JInternalFrame {
 				//---- button3 ----
 				button3.setText("Update Cashier");
 				button3.setIcon(new ImageIcon(getClass().getResource("/update.png")));
+				button3.addActionListener(new ActionListener() {
+				
+					public void actionPerformed(ActionEvent e) {
+					
+						try
+						{
+							updateCashier(e);
+						}
+						catch (Exception e1)
+						{
+							e1.printStackTrace();
+						}
+					}
+				});
 				contentPane.add(button3);
 				button3.setBounds(170, 315, 145, 40);
 
@@ -148,12 +192,157 @@ public class RUDCashierListScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(865, 475));
 		}
+		
+		listOfCashiers=new ArrayList<Cashier>();
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		
+		try {
+			getCashierListFromDB(listOfCashiers,model);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 	
+	
+	private void deleteCashier(ActionEvent e) throws ClassNotFoundException, SQLException {
+		//get Selected Row
+		int row = table1.getSelectedRow();		
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		String selectedUsername = null;
+		
+		//delete is done based on username
+		Connection con = null;
+		Statement  stm = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		ResultSet rs = stm.executeQuery("SELECT username FROM cashiers");
+		for(int i=0;i<=row;i++) {
+			rs.next();
+			selectedUsername = rs.getString("username");
+		}
+		
+				
+		if(row == -1)
+		{
+			JOptionPane.showMessageDialog(null, "No member selected", "ERROR", 2);
+		}
+		else {	
+			/*table update*/
+			model.removeRow(row);
+			
+			/*db update*/
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			stm = con.createStatement();
+			stm.executeUpdate("DELETE FROM  cashiers WHERE username = '" + selectedUsername + "'");
+			
+		}
+		stm.close();
+		con.close();
+	}
+	
+	
+	private void addCashier(ActionEvent e) throws ClassNotFoundException, SQLException {
+		/*retrieve input*/
+		String inputUsername = textField6.getText();
+		String inputPassword = textField7.getText();
+		String inputName = textField2.getText();
+		String inputEmail = textField3.getText();
+		String inputNum = textField4.getText();
+		String inputAddress = textField5.getText();
+		
+		/*update db*/
+		Connection con = null;
+		Statement  stm = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		stm.executeUpdate("INSERT INTO cashiers VALUES('" + inputUsername + "', '" + inputPassword + "', '" + inputName + "', '" + inputEmail + "', '" + inputNum + "', '"+ inputAddress+ "')"); 
+		
+		/*update table*/
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		model.addRow(new Object[] {inputName,inputEmail,inputNum,inputAddress});
+		
+		stm.close();
+		con.close();
+	}
+	
+	
+	private void updateCashier(ActionEvent e) throws ClassNotFoundException, SQLException {
+		int row = table1.getSelectedRow();
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		String selectedUsername = null;
+		
+		//update is done based on username
+		Connection con = null;
+		Statement  stm = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		ResultSet rs = stm.executeQuery("SELECT username FROM cashiers");
+		for(int i=0;i<=row;i++) {
+			rs.next();
+			selectedUsername = rs.getString("username");
+		}
+		
+		
+		if(row == -1)
+		{
+			JOptionPane.showMessageDialog(null, "No member selected", "ERROR", 2);
+		}
+		else {
+			
+			/*table update*/
+			if(!textField2.getText().trim().isEmpty()) model.setValueAt(textField2.getText(), row, 0);
+			if(!textField3.getText().trim().isEmpty()) model.setValueAt(textField3.getText(), row, 1);
+			if(!textField4.getText().trim().isEmpty()) model.setValueAt(textField4.getText(), row, 2);
+			if(!textField5.getText().trim().isEmpty()) model.setValueAt(textField5.getText(), row, 3);
+			
+			/*db update*/
+			//username can't be updated
+			if(!textField7.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET password = '" + textField7.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!textField2.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET name = '" + textField2.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!textField3.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET email = '" + textField3.getText() + "'" + " WHERE username = '" + selectedUsername + "'");;
+			if(!textField4.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET phoneNumber = '" + textField4.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!textField5.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET address = '" + textField5.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			
+		}
+		
+		stm.close();
+		con.close();
+		
+	}
+	
+	
+	private void getCashierListFromDB(ArrayList<Cashier> listOfCashiers,DefaultTableModel model) throws ClassNotFoundException, SQLException {
+		
+		Connection con = null;
+		Statement  stm = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
+		
+		//get member list
+		while(rs.next()) {
+			listOfCashiers.add(new Cashier(rs.getString("username"),rs.getString("password"),rs.getString("name"),rs.getString("email"),rs.getString("phoneNumber"),rs.getString("address")));
+		}
+		
+		//add list to table
+		for(Cashier c: listOfCashiers){
+			model.addRow(new Object[] {c.getName(),c.getEmail(),c.getPhoneNumber(),c.getAddress()});
+		}
+		
+		stm.close();
+		con.close();
+	}
+	
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	//Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	private JPanel panel1;
 	private JLabel label2;
 	private JTextField textField2;
@@ -173,4 +362,6 @@ public class RUDCashierListScreen extends JInternalFrame {
 	private JTextField textField6;
 	private JTextField textField7;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
+	private ArrayList<Cashier> listOfCashiers;
 }
