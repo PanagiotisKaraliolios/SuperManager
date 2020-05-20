@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -148,6 +149,15 @@ public class RUDCashierListScreen extends JInternalFrame {
 					});
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table1.setAutoCreateRowSorter(true);
+					table1.addMouseListener(new java.awt.event.MouseAdapter() {
+			            public void mouseClicked(java.awt.event.MouseEvent evt) {
+			                try {
+								rowClicked(evt);
+							} catch (ClassNotFoundException | SQLException e) {
+								e.printStackTrace();
+							}
+			            }
+			        });
 					scrollPane1.setViewportView(table1);
 				}
 				contentPane.add(scrollPane1);
@@ -311,10 +321,8 @@ public class RUDCashierListScreen extends JInternalFrame {
 			if(!textField5.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET address = '" + textField5.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
 			
 		}
-		
 		stm.close();
 		con.close();
-		
 	}
 	
 	
@@ -337,6 +345,37 @@ public class RUDCashierListScreen extends JInternalFrame {
 			model.addRow(new Object[] {c.getName(),c.getEmail(),c.getPhoneNumber(),c.getAddress()});
 		}
 		
+		stm.close();
+		con.close();
+	}
+	
+	
+	private void rowClicked(java.awt.event.MouseEvent evt) throws SQLException, ClassNotFoundException {
+		int row = table1.getSelectedRow();
+		Cashier cash=null;
+		
+		Connection con = null;
+		Statement  stm = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
+		
+		if(row!=-1) {
+			for(int i=0;i<=row;i++) {
+				rs.next();
+				cash=new Cashier(rs.getString("username"),rs.getString("password"),rs.getString("name"),rs.getString("email"),rs.getString("phoneNumber"),rs.getString("address"));
+			}
+		}
+		
+		if(row!=-1) {
+			textField6.setText(cash.getUsername());
+			textField7.setText(cash.getPassword());
+		    textField2.setText(cash.getName());
+		    textField3.setText(cash.getEmail());
+		    textField4.setText(cash.getPhoneNumber());
+		    textField5.setText(cash.getAddress());
+		}
 		stm.close();
 		con.close();
 	}
