@@ -37,16 +37,17 @@ new FormModel {
 						"selectionMode": 0
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 425
+					"x": 420
 					"y": 10
+					"width": 461
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button1"
 					"text": "Confirm"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/checkMark.png" )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 280
-					"y": 130
+					"x": 205
+					"y": 160
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button2"
@@ -56,6 +57,49 @@ new FormModel {
 					"x": 225
 					"y": 360
 				} )
+				add( new FormComponent( "com.github.lgooddatepicker.components.DatePicker" ) {
+					name: "datePicker1"
+					"settings": new FormReference( "datePickerSettings1" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 135
+					"y": 35
+				} )
+				add( new FormComponent( "com.github.lgooddatepicker.components.DatePicker" ) {
+					name: "datePicker2"
+					"settings": new FormReference( "datePickerSettings2" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 170
+					"height": 30
+					"x": 135
+					"y": 100
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "From :"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 35
+					"height": 16
+					"x": 0
+					"y": 443
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "From :"
+					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 75
+					"y": 40
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "To :"
+					"font": #SwingDerivedFont0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 48
+					"height": 23
+					"x": 75
+					"y": 105
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 900
 				"height": 475
@@ -63,8 +107,18 @@ new FormModel {
 				"y": 0
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 80, 60 )
+			"location": new java.awt.Point( 80, 65 )
 			"size": new java.awt.Dimension( 900, 475 )
+		} )
+		add( new FormNonVisual( "com.github.lgooddatepicker.components.DatePickerSettings" ) {
+			name: "datePickerSettings1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 200, 10 )
+		} )
+		add( new FormNonVisual( "com.github.lgooddatepicker.components.DatePickerSettings" ) {
+			name: "datePickerSettings2"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 340, 10 )
 		} )
 	}
 }

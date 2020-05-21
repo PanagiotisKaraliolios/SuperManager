@@ -219,7 +219,7 @@ public class ScanProductsScreen extends JInternalFrame {
 	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
 		String inputID = textField1.getText();
-		Product chosenProduct = new Product("",0 , "units", 0, 0);
+		Product chosenProduct = new Product("",0 , "units", 0, 0, 0);
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
