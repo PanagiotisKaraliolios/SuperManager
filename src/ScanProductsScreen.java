@@ -74,7 +74,7 @@ public class ScanProductsScreen extends JInternalFrame {
 					{
 						try
 						{
-							proc2paymentButtonAction(e);
+							proceedToPaymentButtonAction(e);
 						}
 						catch (Exception e3)
 						{
