@@ -279,6 +279,7 @@ import java.sql.*;
 		String inputStock = textField4.getText();
 		String inputPrice = textField5.getText();
 		String inputSupplierID = textField6.getText();
+		
 		Connection con = null;
 		Statement  stm = null;
 		boolean flag=false;
@@ -286,6 +287,7 @@ import java.sql.*;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
 		stm = con.createStatement();
+		
 		ResultSet rs=stm.executeQuery("SELECT id FROM products");
 		while(rs.next()) {
 			if(inputID.equals(rs.getString("id"))) {

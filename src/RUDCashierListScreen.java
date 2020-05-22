@@ -228,6 +228,8 @@ public class RUDCashierListScreen extends JInternalFrame {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
 		stm = con.createStatement();
+		
+		
 		ResultSet rs = stm.executeQuery("SELECT username FROM cashiers");
 		for(int i=0;i<=row;i++) {
 			rs.next();
@@ -244,9 +246,6 @@ public class RUDCashierListScreen extends JInternalFrame {
 			model.removeRow(row);
 			
 			/*db update*/
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
-			stm = con.createStatement();
 			stm.executeUpdate("DELETE FROM  cashiers WHERE username = '" + selectedUsername + "'");
 			
 		}
@@ -264,17 +263,33 @@ public class RUDCashierListScreen extends JInternalFrame {
 		String inputNum = textField4.getText();
 		String inputAddress = textField5.getText();
 		
-		/*update db*/
 		Connection con = null;
 		Statement  stm = null;
+		boolean flag=false;
+		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
 		stm = con.createStatement();
-		stm.executeUpdate("INSERT INTO cashiers VALUES('" + inputUsername + "', '" + inputPassword + "', '" + inputName + "', '" + inputEmail + "', '" + inputNum + "', '"+ inputAddress+ "')"); 
 		
-		/*update table*/
-		DefaultTableModel model = (DefaultTableModel) table1.getModel();
-		model.addRow(new Object[] {inputName,inputEmail,inputNum,inputAddress});
+		ResultSet rs = stm.executeQuery("SELECT username FROM cashiers");
+		while(rs.next()) {
+			if(inputUsername.equals(rs.getString("username"))) {
+				flag=true;
+				break;
+			}
+		}
+		
+		if(flag==false) {
+			/*update db*/
+			stm.executeUpdate("INSERT INTO cashiers VALUES('" + inputUsername + "', '" + inputPassword + "', '" + inputName + "', '" + inputEmail + "', '" + inputNum + "', '"+ inputAddress+ "')"); 
+			
+			/*update table*/
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			model.addRow(new Object[] {inputName,inputEmail,inputNum,inputAddress});
+		}
+		else if(flag==true) {
+			JOptionPane.showMessageDialog(null, "cashier username already exists", "ERROR", 2);
+		}
 		
 		stm.close();
 		con.close();
