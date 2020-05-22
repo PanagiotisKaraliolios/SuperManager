@@ -5,15 +5,16 @@ public class Member {
 	private String email;
 	private String phoneNumber;
 	private String Address;
+	private double points;
 
 	//Constructor
-	public Member(String memberCardId, String name, String email, String phoneNumber, String Address) {
+	public Member(String memberCardId, String name, String email, String phoneNumber, String Address, double points) {
 		this.memberCardId = memberCardId;
 		this.name = name;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.Address = Address;
-		
+		this.points = points;		
 	}
 	
 	//get methods
@@ -36,6 +37,11 @@ public class Member {
 	public String getAddress() {
 		return Address;
 	}
+	
+	public double getPoints()
+	{
+		return points;
+	}
 
 	//set methods
 	public void setMemberCardId(String memberCardId) {
@@ -56,6 +62,11 @@ public class Member {
 
 	public void setAddress(String address) {
 		Address = address;
+	}
+	
+	public void setPoints(double points)
+	{
+		this.points = points;
 	}
 	
 

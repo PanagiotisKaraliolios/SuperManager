@@ -184,7 +184,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 			ResultSet rs = stm.executeQuery("SELECT * FROM members");
 			
 			while(rs.next())
-				memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address")));
+				memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address"), rs.getDouble("points")));
 			
 			//add list to table
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
@@ -240,7 +240,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 		ResultSet rs=stm.executeQuery("SELECT * FROM members");
 		
 		while(rs.next())
-			memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address")));
+			memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address"), rs.getDouble("points")));
 		
 		stm.close();
 		

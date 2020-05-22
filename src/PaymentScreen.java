@@ -1,4 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.*;
 import javax.swing.table.*;
 /*
@@ -23,11 +31,42 @@ public class PaymentScreen extends JInternalFrame {
 		table1 = new JTable();
 		label1 = new JLabel();
 		textField1 = new JTextField();
-		button1 = new JButton();
-		button2 = new JButton();
+		button1 = new JButton(); //check points button
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					checkPointsButtonAction(e);
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		button2 = new JButton(); //print button
+		button2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				printButtonAction(e);
+			}
+		});
 		textField2 = new JTextField();
-		button3 = new JButton();
+		button3 = new JButton(); //aply discount button
+		button3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				applyDiscountButtonAction(e);
+			}
+		});
 		button4 = new JButton();
+		button4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				finishButtonAction(e);
+			}
+		});
 		label2 = new JLabel();
 		textField3 = new JTextField();
 		label5 = new JLabel();
@@ -92,6 +131,7 @@ public class PaymentScreen extends JInternalFrame {
 				button2.setBounds(new Rectangle(new Point(105, 460), button2.getPreferredSize()));
 				contentPane.add(textField2);
 				textField2.setBounds(10, 185, 280, 30);
+				textField2.setEditable(false);
 
 				//---- button3 ----
 				button3.setText("Apply Discount");
@@ -112,6 +152,7 @@ public class PaymentScreen extends JInternalFrame {
 				label2.setBounds(new Rectangle(new Point(140, 355), label2.getPreferredSize()));
 				contentPane.add(textField3);
 				textField3.setBounds(185, 350, 100, 30);
+				textField3.setEditable(false);
 
 				//---- label5 ----
 				label5.setText("Date");
@@ -130,6 +171,8 @@ public class PaymentScreen extends JInternalFrame {
 			panel1.setPreferredSize(new Dimension(840, 540));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
+		
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -138,15 +181,71 @@ public class PaymentScreen extends JInternalFrame {
 	private JScrollPane scrollPane1;
 	private JTable table1;
 	private JLabel label1;
-	private JTextField textField1;
+	private JTextField textField1; //ID field
 	private JButton button1;
 	private JButton button2;
-	private JTextField textField2;
+	private JTextField textField2; //Apply Discount Field
 	private JButton button3;
 	private JButton button4;
 	private JLabel label2;
-	private JTextField textField3;
+	private JTextField textField3; //Total field
 	private JLabel label5;
 	private JTextField textField5;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
+	public void checkPointsButtonAction(ActionEvent e) throws SQLException,ClassNotFoundException
+	{
+		//get input id
+		String inputID = textField1.getText();
+		//connection
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		Statement stm = con.createStatement();
+		//retrieve member points
+		ResultSet rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
+		
+		int points = -1;
+		while(rs.next())
+			points = rs.getInt("points");
+		
+		if(points == -1)
+		{
+			JOptionPane.showMessageDialog(null, "Given member ID doesnt exist", "ERROR",2);
+		}
+		else
+		{
+			//calculate potential discount
+		}
+		
+		
+	}
+	
+	public void applyDiscountButtonAction(ActionEvent e)
+	{
+		//get discount
+		double discount = 0;
+		if(!textField2.getText().equals(""))
+		{
+			discount = Double.parseDouble(textField2.getText());
+			double newTotal = Double.parseDouble(textField3.getText()) - discount;
+			
+			textField3.setText("" + newTotal);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Potential discount not calculated", "ERROR",2);
+		}
+		
+		
+	}
+	
+	public void finishButtonAction(ActionEvent e)
+	{
+		
+	}
+	
+	public void printButtonAction(ActionEvent e)
+	{
+		
+	}
 }
