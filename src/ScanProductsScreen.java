@@ -252,13 +252,18 @@ public class ScanProductsScreen extends JInternalFrame {
 		}		
 	}
 	
-	private void removeProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	private void removeProductButtonAction(ActionEvent e)
 	{
-		
+		int index = table1.getSelectedRow();
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		model.removeRow(index);
 	}
 	
-	private void proc2paymentButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
+	private void proceedToPaymentButtonAction(ActionEvent e)
 	{
-		
+		PaymentScreen newScreen = new PaymentScreen();
+		//Not sure if 100% correct way
+		super.getDesktopPane().add(newScreen);
+		this.dispose();
 	}
 }
