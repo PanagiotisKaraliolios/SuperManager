@@ -377,10 +377,11 @@ import java.sql.*;
 		else {
 			
 			/*table update*/
-			if(!textField2.getText().trim().isEmpty()) model.setValueAt(textField2.getText(), row, 0);
-			if(!textField3.getText().trim().isEmpty()) model.setValueAt(textField3.getText(), row, 1);
-			if(!textField4.getText().trim().isEmpty()) model.setValueAt(textField4.getText(), row, 2);
-			if(!textField5.getText().trim().isEmpty()) model.setValueAt(textField5.getText(), row, 3);
+			if(!textField2.getText().trim().isEmpty()) model.setValueAt(textField2.getText(), row, 1);
+			if(!textField3.getText().trim().isEmpty()) model.setValueAt(textField3.getText(), row, 2);
+			if(!textField4.getText().trim().isEmpty()) model.setValueAt(textField4.getText(), row, 3);
+			if(!textField5.getText().trim().isEmpty()) model.setValueAt(textField5.getText(), row, 4);
+			if(!textField6.getText().trim().isEmpty()) model.setValueAt(textField6.getText(), row, 5);
 			
 			/*db update*/
 			//username can't be updated
@@ -388,7 +389,7 @@ import java.sql.*;
 			if(!textField3.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stockType = '" + textField3.getText() + "'" + " WHERE id = '" + selectedID + "'");;
 			if(!textField4.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stock = '" + textField4.getText() + "'" + " WHERE id = '" + selectedID + "'");
 			if(!textField5.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET price = '" + textField5.getText() + "'" + " WHERE id = '" + selectedID + "'");
-			if(!textField5.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET supplierID = '" + textField6.getText() + "'" + " WHERE id = '" + selectedID + "'");
+			if(!textField6.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET supplierID = '" + textField6.getText() + "'" + " WHERE id = '" + selectedID + "'");
 		}
 		stm.close();
 		con.close();
