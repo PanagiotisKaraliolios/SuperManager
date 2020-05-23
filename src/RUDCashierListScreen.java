@@ -147,7 +147,7 @@ public class RUDCashierListScreen extends JInternalFrame {
 						}
 					});
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					table1.setAutoCreateRowSorter(true);
+					table1.setAutoCreateRowSorter(false);
 					table1.addMouseListener(new java.awt.event.MouseAdapter() {
 			            public void mouseClicked(java.awt.event.MouseEvent evt) {
 			                try {
