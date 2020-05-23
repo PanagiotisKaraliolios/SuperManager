@@ -1,9 +1,19 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 /*
  * Created by JFormDesigner on Sun May 17 23:00:48 EEST 2020
  */
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+
 
 
 
@@ -11,6 +21,7 @@ import javax.swing.table.*;
  * @author Panagiotis Karaliolios
  */
 public class ViewStockScreen extends JInternalFrame  {
+	ArrayList<Product> listOfProducts;
 
 	public ViewStockScreen() {
 		initComponents();
@@ -73,6 +84,8 @@ public class ViewStockScreen extends JInternalFrame  {
 				button1.setIcon(new ImageIcon(getClass().getResource("/order.png")));
 				contentPane.add(button1);
 				button1.setBounds(new Rectangle(new Point(170, 505), button1.getPreferredSize()));
+				ButtonListener listener = new ButtonListener();
+				button1.addActionListener(listener);
 			}
 			panel1.add(this);
 			this.setBounds(0, 0, 500, 600);
@@ -80,13 +93,52 @@ public class ViewStockScreen extends JInternalFrame  {
 			panel1.setPreferredSize(new Dimension(500, 600));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		listOfProducts=new ArrayList<Product>();
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		
+		try {
+			getProductListFromDB(listOfProducts,model);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
 	private JButton button1;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	private void getProductListFromDB(ArrayList<Product> listOfProducts,DefaultTableModel model) throws ClassNotFoundException, SQLException {
+		
+		Connection con = null;
+		Statement  stm = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
+		ResultSet rs = stm.executeQuery("SELECT * FROM products");
+		
+		//get member list
+		while(rs.next()) {
+			listOfProducts.add(new Product(rs.getString("name"), rs.getDouble("price"), rs.getString("stockType"),Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("supplierID")), rs.getInt("stock")));
+		}
+		
+		//add list to table
+		for(Product p: listOfProducts){
+			model.addRow(new Object[] {p.getStock(),p.getName(),p.getProductsID()});
+		}
+		
+		stm.close();
+		con.close();
+	}
+	class ButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+
+		}
+	}
 }
