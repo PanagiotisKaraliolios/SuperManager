@@ -113,13 +113,22 @@ import java.sql.*;
 						new String[] {
 							"ID", "NAME", "TYPE", "STOCK", "PRICE", "SUPPLIER ID"
 						}
-					) {
+					) 
+					{
+						Class<?>[] columnTypes = new Class<?>[] {
+							Integer.class, Object.class, Object.class, Integer.class, Double.class, Integer.class
+						};
 						boolean[] columnEditable = new boolean[] {
 							false, false, false, false, false, false
 						};
 						@Override
 						public boolean isCellEditable(int rowIndex, int columnIndex) {
 							return columnEditable[columnIndex];
+						}
+						
+						@Override
+						public Class<?> getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
 						}
 					});
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -227,7 +236,7 @@ import java.sql.*;
 		
 		//get member list
 		while(rs.next()) {
-			listOfProducts.add(new Product(rs.getString("name"), rs.getDouble("price"), rs.getString("stockType"),Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("supplierID")), rs.getInt("stock")));
+			listOfProducts.add(new Product(rs.getString("name"), rs.getDouble("price"), rs.getString("stockType"),rs.getInt("id"), Integer.parseInt(rs.getString("supplierID")), rs.getInt("stock")));
 		}
 		
 		//add list to table
@@ -290,7 +299,7 @@ import java.sql.*;
 		
 		ResultSet rs=stm.executeQuery("SELECT id FROM products");
 		while(rs.next()) {
-			if(inputID.equals(rs.getString("id"))) {
+			if(Integer.parseInt(inputID) == rs.getInt("id")) {
 				flag=true;
 				break;
 			}

@@ -2,7 +2,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -18,6 +20,7 @@ import javax.swing.table.*;
 public class ScanProductsScreen extends JInternalFrame {
 	public ScanProductsScreen() {
 		initComponents();
+		showDate();
 		this.setLocation(50, 50);
 	}
 
@@ -160,7 +163,16 @@ public class ScanProductsScreen extends JInternalFrame {
 						new String[] {
 							"ID", "NAME", "PRICE", "QUANTITY"
 						}
-					));
+					)
+					{
+						Class<?>[] columnTypes = new Class<?>[] {
+						Integer.class, String.class, Double.class, Integer.class};
+							
+						@Override
+						public Class<?> getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
+						}
+					});
 					table1.setAutoCreateRowSorter(true);
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					scrollPane1.setViewportView(table1);
@@ -214,6 +226,7 @@ public class ScanProductsScreen extends JInternalFrame {
 	private JButton button1;	//addProduct
 	private JButton button2;	//removeProduct
 	private JButton button3;	//proceed to payment
+	public static  String DateFormat = "yyyy-MM-dd";
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
@@ -255,15 +268,37 @@ public class ScanProductsScreen extends JInternalFrame {
 	private void removeProductButtonAction(ActionEvent e)
 	{
 		int index = table1.getSelectedRow();
-		DefaultTableModel model = (DefaultTableModel) table1.getModel();
-		model.removeRow(index);
+		if(index!=-1)
+		{DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		model.removeRow(index);}
 	}
 	
 	private void proceedToPaymentButtonAction(ActionEvent e)
 	{
-		PaymentScreen newScreen = new PaymentScreen();
+		
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		ArrayList<String> Names = new ArrayList<>();
+		ArrayList<Integer> Quantities = new ArrayList<>();
+		ArrayList<Double> Prices = new ArrayList<>();	
+		for(int i=0;i<model.getRowCount(); i++)
+		{
+			Names.add((table1.getValueAt(i, 1).toString()));
+			Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
+		}
+		
+		PaymentScreen newScreen = new PaymentScreen(Names, Quantities,Prices);
 		//Not sure if 100% correct way
 		super.getDesktopPane().add(newScreen);
+		
+		
 		this.dispose();
 	}
+	
+	public void showDate()
+    {
+      Calendar cal= Calendar.getInstance();
+      SimpleDateFormat format = new SimpleDateFormat(DateFormat);
+      textField5.setText(format.format(cal.getTime()));        
+    }
 }

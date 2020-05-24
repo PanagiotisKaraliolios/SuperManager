@@ -17,7 +17,6 @@ public class RUDCashierListScreen extends JInternalFrame {
 	public RUDCashierListScreen() {
 		initComponents();
 		this.setLocation(50, 50);
-		
 	}
 
 	

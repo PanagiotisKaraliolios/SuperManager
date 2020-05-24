@@ -23,21 +23,25 @@ public class ManagerScreen extends JFrame {
 			RUDCashierListScreen cls = new RUDCashierListScreen();
 			this.desktopPane1.add(cls);
 			cls.setVisible(true);
+			cls.toFront();
 		}
 		else if(evt.getSource().equals(button2)) {
 			RUDProductListScreen pls = new RUDProductListScreen();
 			this.desktopPane1.add(pls);
 			pls.setVisible(true);
+			pls.toFront();
 		}
 		else if(evt.getSource().equals(button3)) {
 			ViewStatisticsScreen vss = new ViewStatisticsScreen();
 			this.desktopPane1.add(vss);
 			vss.setVisible(true);
+			vss.toFront();
 		}
 		else if(evt.getSource().equals(button4)) {
 			ViewStockScreen vss = new ViewStockScreen();
 			this.desktopPane1.add(vss);
 			vss.setVisible(true);
+			vss.toFront();
 		}
 	}
 	

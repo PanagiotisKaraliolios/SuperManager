@@ -64,13 +64,22 @@ public class ViewStockScreen extends JInternalFrame  {
 						new String[] {
 							"STOCK", "NAME", "ID"
 						}
-					) {
+					) 
+					{
+						Class<?>[] columnTypes = new Class<?>[] {
+							Integer.class, Object.class, Integer.class
+						};
 						boolean[] columnEditable = new boolean[] {
 							false, false, false
 						};
 						@Override
 						public boolean isCellEditable(int rowIndex, int columnIndex) {
 							return columnEditable[columnIndex];
+						}
+						
+						@Override
+						public Class<?> getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
 						}
 					});
 					table1.setAutoCreateRowSorter(true);
@@ -125,7 +134,7 @@ public class ViewStockScreen extends JInternalFrame  {
 		
 		//get member list
 		while(rs.next()) {
-			listOfProducts.add(new Product(rs.getString("name"), rs.getDouble("price"), rs.getString("stockType"),Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("supplierID")), rs.getInt("stock")));
+			listOfProducts.add(new Product(rs.getString("name"), rs.getDouble("price"), rs.getString("stockType"), rs.getInt("id"), Integer.parseInt(rs.getString("supplierID")), rs.getInt("stock")));
 		}
 		
 		//add list to table

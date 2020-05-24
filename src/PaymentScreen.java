@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -19,8 +20,9 @@ import javax.swing.table.*;
  * @author Panagiotis Karaliolios
  */
 public class PaymentScreen extends JInternalFrame {
-	public PaymentScreen() {
+	public PaymentScreen(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
 		initComponents();
+		fillTable(Names, Quantities,Prices);
 	}
 
 	private void initComponents() {
@@ -103,7 +105,17 @@ public class PaymentScreen extends JInternalFrame {
 						new String[] {
 							"NAME", "PRICE", "QUANTITY"
 						}
-					));
+						
+					)
+					{
+						Class<?>[] columnTypes = new Class<?>[] {
+						String.class, Double.class, Integer.class};
+						
+						@Override
+						public Class<?> getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
+						}
+					});
 					table1.setAutoCreateRowSorter(true);
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					scrollPane1.setViewportView(table1);
@@ -192,6 +204,13 @@ public class PaymentScreen extends JInternalFrame {
 	private JLabel label5;
 	private JTextField textField5;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
+	public void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
+	{
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		for(int i=0; i<Names.size(); i++)
+		model.addRow(new Object[] {Names.get(i), Prices.get(i), Quantities.get(i)});
+	}
 	
 	public void checkPointsButtonAction(ActionEvent e) throws SQLException,ClassNotFoundException
 	{
