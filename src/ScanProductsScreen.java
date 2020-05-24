@@ -280,11 +280,18 @@ public class ScanProductsScreen extends JInternalFrame {
 		ArrayList<String> Names = new ArrayList<>();
 		ArrayList<Integer> Quantities = new ArrayList<>();
 		ArrayList<Double> Prices = new ArrayList<>();	
+		if(model.getRowCount()!=0)
+		{
 		for(int i=0;i<model.getRowCount(); i++)
 		{
 			Names.add((table1.getValueAt(i, 1).toString()));
 			Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
 			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
+		}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "No products scanned", "ERROR", 2);
 		}
 		
 		PaymentScreen newScreen = new PaymentScreen(Names, Quantities,Prices);
