@@ -45,6 +45,5 @@
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.4.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.4.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Cprograms/EXTERNAL_JARS/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
