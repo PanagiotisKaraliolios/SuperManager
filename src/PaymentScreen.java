@@ -20,14 +20,20 @@ import javax.swing.table.*;
  * @author Panagiotis Karaliolios
  */
 public class PaymentScreen extends JInternalFrame {
-	public PaymentScreen(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
+	private ArrayList<Integer> ids = new ArrayList<>();
+	public PaymentScreen(ArrayList<Integer> productID,ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
+		ids = productID;
+		
+		
 	}
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
+	
 		panel1 = new JPanel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
@@ -189,6 +195,10 @@ public class PaymentScreen extends JInternalFrame {
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	private Connection con;
+	private Statement st;
+	private ResultSet rs;
+	
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
@@ -260,7 +270,33 @@ public class PaymentScreen extends JInternalFrame {
 	
 	public void finishButtonAction(ActionEvent e)
 	{
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+			st = con.createStatement();
+			
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Error1: "+ex);
+		}
 		
+		
+		try
+		{
+			int h=0;
+		   for (int i=0; i<ids.size();i++)
+		   {
+			   //h = ids.get(i);
+		       //st.executeUpdate("INSERT INTO sales(id)" + "VALUES (h)");
+		   }
+		      	
+		}
+		catch(Exception exep)
+		{
+			System.out.println("Error2: "+exep);
+		}
 	}
 	
 	public void printButtonAction(ActionEvent e)
