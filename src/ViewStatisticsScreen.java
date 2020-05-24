@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -43,6 +44,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 		label3 = new JLabel();
 		datePickerSettings1 = new DatePickerSettings();
 		datePickerSettings2 = new DatePickerSettings();
+		
 
 		//======== panel1 ========
 		{
@@ -98,11 +100,20 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				button2.setBounds(new Rectangle(new Point(225, 360), button2.getPreferredSize()));
 
 				//---- datePicker1 ----
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				datePickerSettings1.getFormatsForParsing().add(formatter);
+				datePickerSettings1.setFormatForDatesCommonEra(formatter);
+				datePickerSettings1.setFormatForDatesBeforeCommonEra(formatter);
+				datePickerSettings1.setFormatForTodayButton(formatter);
 				datePicker1.setSettings(datePickerSettings1);
 				contentPane.add(datePicker1);
 				datePicker1.setBounds(135, 35, 170, datePicker1.getPreferredSize().height);
 
 				//---- datePicker2 ----
+				datePickerSettings2.getFormatsForParsing().add(formatter);
+				datePickerSettings2.setFormatForDatesCommonEra(formatter);
+				datePickerSettings2.setFormatForDatesBeforeCommonEra(formatter);
+				datePickerSettings2.setFormatForTodayButton(formatter);
 				datePicker2.setSettings(datePickerSettings2);
 				contentPane.add(datePicker2);
 				datePicker2.setBounds(135, 100, 170, 30);
@@ -146,5 +157,6 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	private JLabel label3;
 	private DatePickerSettings datePickerSettings1;
 	private DatePickerSettings datePickerSettings2;
+	
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }
