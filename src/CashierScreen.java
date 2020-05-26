@@ -25,11 +25,13 @@ public class CashierScreen extends JFrame {
 			CreateMemberCardScreen mcs = new CreateMemberCardScreen();
 			this.desktopPane1.add(mcs);
 			mcs.setVisible(true);
+			mcs.toFront();
 		}
 		else if(evt.getSource().equals(button2)) {
 			ScanProductsScreen sps = new ScanProductsScreen();
 			this.desktopPane1.add(sps);
 			sps.setVisible(true);
+			sps.toFront();
 		}
 	}
 	
