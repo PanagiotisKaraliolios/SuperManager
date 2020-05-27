@@ -1,6 +1,8 @@
 
 
 import java.awt.*;
+import java.beans.PropertyVetoException;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.InternalFrameAdapter;
@@ -31,6 +33,12 @@ public class CashierScreen extends JFrame {
 				this.desktopPane1.add(mcs);
 				mcs.setVisible(true);
 				mcs.toFront();
+				try {
+					mcs.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				mcs.addInternalFrameListener(new InternalFrameAdapter() {
 					@Override
 					public void internalFrameClosing(InternalFrameEvent e) {
@@ -43,6 +51,19 @@ public class CashierScreen extends JFrame {
 					
 				}				
 			}
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(CreateMemberCardScreen.class)) {
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
+					if(i.getClass().equals(CreateMemberCardScreen.class)) {
+						i.moveToFront();
+						try {
+							i.setSelected(true);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 			
 		}
 		else if(evt.getSource().equals(button2)) {
@@ -51,6 +72,12 @@ public class CashierScreen extends JFrame {
 				this.desktopPane1.add(sps);
 				sps.setVisible(true);
 				sps.toFront();
+				try {
+					sps.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				sps.addInternalFrameListener(new InternalFrameAdapter() {
 					@Override
 					public void internalFrameClosing(InternalFrameEvent e) {
@@ -63,7 +90,19 @@ public class CashierScreen extends JFrame {
 					
 				}				
 			}
-			
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(ScanProductsScreen.class)) {
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
+					if(i.getClass().equals(ScanProductsScreen.class)) {
+						i.moveToFront();
+						try {
+							i.setSelected(true);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 			
 		}
 	}
