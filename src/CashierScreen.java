@@ -4,14 +4,10 @@ import java.awt.*;
 import java.beans.PropertyVetoException;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
-import com.jgoodies.forms.factories.Borders;
-
-import net.miginfocom.swing.*;
-
+@SuppressWarnings("serial")
 public class CashierScreen extends JFrame {
 	private boolean isMCSopen = false;
 	private boolean isSPSopen = false;

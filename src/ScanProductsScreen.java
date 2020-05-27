@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class ScanProductsScreen extends JInternalFrame {
 	public ScanProductsScreen() {
 		initComponents();
@@ -281,27 +283,30 @@ public class ScanProductsScreen extends JInternalFrame {
 		ArrayList<Integer> Quantities = new ArrayList<>();
 		ArrayList<Double> Prices = new ArrayList<>();	
 		ArrayList<Integer> Ids = new ArrayList<>();
-		if(model.getRowCount()!=0)
-		{
-		for(int i=0;i<model.getRowCount(); i++)
-		{
-			Names.add((table1.getValueAt(i, 1).toString()));
-			Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
-			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
-			Ids.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+		if(model.getRowCount()!=0){
+			for(int i=0;i<model.getRowCount(); i++){
+				Names.add((table1.getValueAt(i, 1).toString()));
+				Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+				Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
+				Ids.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+			}
+			PaymentScreen PS = new PaymentScreen(Ids,Names, Quantities,Prices);
+			this.getParent().add(PS);
+			try {
+				this.setClosed(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-		}
-		else
-		{
+		else{
 			JOptionPane.showMessageDialog(null, "No products scanned", "ERROR", 2);
 		}
 		
-		PaymentScreen newScreen = new PaymentScreen(Ids,Names, Quantities,Prices);
-		//Not sure if 100% correct way
-		super.getDesktopPane().add(newScreen);
 		
 		
-		this.dispose();
+		
+		
 	}
 	
 	public void showDate()

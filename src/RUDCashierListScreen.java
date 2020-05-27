@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -13,6 +12,7 @@ import java.sql.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class RUDCashierListScreen extends JInternalFrame {
 	public RUDCashierListScreen() {
 		initComponents();

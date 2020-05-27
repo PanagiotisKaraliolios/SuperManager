@@ -10,6 +10,7 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class OrderProductsScreen extends JInternalFrame {
 	public OrderProductsScreen() {
 		initComponents();

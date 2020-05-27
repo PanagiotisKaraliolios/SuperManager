@@ -14,6 +14,7 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class CreateMemberCardScreen extends JInternalFrame {
 	public CreateMemberCardScreen() {
 		initComponents();

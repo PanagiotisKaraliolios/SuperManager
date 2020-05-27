@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.*;
-import java.sql.*;
 
 
 
 /**
  * @author Panagiotis Karaliolios
  */
+	@SuppressWarnings("serial")
 	public class RUDProductListScreen extends JInternalFrame {
 	
 		public RUDProductListScreen() {

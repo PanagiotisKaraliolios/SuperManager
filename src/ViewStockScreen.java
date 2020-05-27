@@ -20,6 +20,7 @@ import java.util.ArrayList;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class ViewStockScreen extends JInternalFrame  {
 	ArrayList<Product> listOfProducts;
 

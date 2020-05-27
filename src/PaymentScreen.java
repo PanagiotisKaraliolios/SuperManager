@@ -19,13 +19,14 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class PaymentScreen extends JInternalFrame {
 	private ArrayList<Integer> ids = new ArrayList<>();
 	public PaymentScreen(ArrayList<Integer> productID,ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
 		ids = productID;
-		
+		this.setLocation(100, 30);
 		
 	}
 
@@ -196,7 +197,7 @@ public class PaymentScreen extends JInternalFrame {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private Connection con;
-	private Statement st;
+	private Statement stm;
 	private ResultSet rs;
 	
 	private JPanel panel1;
@@ -228,10 +229,10 @@ public class PaymentScreen extends JInternalFrame {
 		String inputID = textField1.getText();
 		//connection
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
-		Statement stm = con.createStatement();
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
 		//retrieve member points
-		ResultSet rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
+		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
 		int points = -1;
 		while(rs.next())
@@ -274,7 +275,7 @@ public class PaymentScreen extends JInternalFrame {
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
-			st = con.createStatement();
+			stm = con.createStatement();
 			
 		}
 		catch(Exception ex)
@@ -286,11 +287,11 @@ public class PaymentScreen extends JInternalFrame {
 		try
 		{
 			int h=0;
-		   for (int i=0; i<ids.size();i++)
-		   {
+			for (int i=0; i<ids.size();i++)
+		{
 			   //h = ids.get(i);
 		       //st.executeUpdate("INSERT INTO sales(id)" + "VALUES (h)");
-		   }
+		}
 		      	
 		}
 		catch(Exception exep)
