@@ -3,12 +3,16 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import com.jgoodies.forms.factories.Borders;
 
 import net.miginfocom.swing.*;
 
 public class CashierScreen extends JFrame {
+	private boolean isMCSopen = false;
+	private boolean isSPSopen = false;
 
 	
 	
@@ -22,16 +26,45 @@ public class CashierScreen extends JFrame {
 	
 	private void CashierScreenActionPerformed(java.awt.event.ActionEvent evt){
 		if(evt.getSource().equals(button1)) {
-			CreateMemberCardScreen mcs = new CreateMemberCardScreen();
-			this.desktopPane1.add(mcs);
-			mcs.setVisible(true);
-			mcs.toFront();
+			if(isMCSopen==false) {
+				CreateMemberCardScreen mcs = new CreateMemberCardScreen();
+				this.desktopPane1.add(mcs);
+				mcs.setVisible(true);
+				mcs.toFront();
+				mcs.addInternalFrameListener(new InternalFrameAdapter() {
+					@Override
+					public void internalFrameClosing(InternalFrameEvent e) {
+						isMCSopen = false;
+					}
+
+				});
+				if(mcs.isEnabled()) {
+					isMCSopen = true;
+					
+				}				
+			}
+			
 		}
 		else if(evt.getSource().equals(button2)) {
-			ScanProductsScreen sps = new ScanProductsScreen();
-			this.desktopPane1.add(sps);
-			sps.setVisible(true);
-			sps.toFront();
+			if(isSPSopen==false) {
+				ScanProductsScreen sps = new ScanProductsScreen();
+				this.desktopPane1.add(sps);
+				sps.setVisible(true);
+				sps.toFront();
+				sps.addInternalFrameListener(new InternalFrameAdapter() {
+					@Override
+					public void internalFrameClosing(InternalFrameEvent e) {
+						isSPSopen = false;
+					}
+
+				});
+				if(sps.isEnabled()) {
+					isSPSopen = true;
+					
+				}				
+			}
+			
+			
 		}
 	}
 	
