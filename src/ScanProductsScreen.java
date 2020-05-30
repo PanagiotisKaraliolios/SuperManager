@@ -228,7 +228,7 @@ public class ScanProductsScreen extends JInternalFrame {
 	private JButton button1;	//addProduct
 	private JButton button2;	//removeProduct
 	private JButton button3;	//proceed to payment
-	public static  String DateFormat = "yyyy-MM-dd";
+	private static  String DateFormat = "yyyy-MM-dd";
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
@@ -309,7 +309,7 @@ public class ScanProductsScreen extends JInternalFrame {
 		
 	}
 	
-	public void showDate()
+	private void showDate()
     {
       Calendar cal= Calendar.getInstance();
       SimpleDateFormat format = new SimpleDateFormat(DateFormat);
