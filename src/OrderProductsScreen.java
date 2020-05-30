@@ -14,6 +14,7 @@ import javax.swing.table.*;
 public class OrderProductsScreen extends JInternalFrame {
 	public OrderProductsScreen() {
 		initComponents();
+		this.setLocation(200, 50);
 	}
 
 	private void initComponents() {

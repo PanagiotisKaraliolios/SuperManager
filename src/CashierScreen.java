@@ -11,6 +11,7 @@ import javax.swing.event.InternalFrameEvent;
 public class CashierScreen extends JFrame {
 	private boolean isMCSopen = false;
 	private boolean isSPSopen = false;
+	public boolean isPSopen = false;
 
 	
 	
@@ -22,6 +23,7 @@ public class CashierScreen extends JFrame {
 		this.setVisible(true);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void CashierScreenActionPerformed(java.awt.event.ActionEvent evt){
 		if(evt.getSource().equals(button1)) {
 			if(isMCSopen==false) {
@@ -63,7 +65,23 @@ public class CashierScreen extends JFrame {
 			
 		}
 		else if(evt.getSource().equals(button2)) {
-			if(isSPSopen==false) {
+			
+			for(JInternalFrame i : this.desktopPane1.getAllFrames()) {
+				if(i.getClass().equals(PaymentScreen.class)) {
+					isPSopen = true;
+				}
+				else {
+					isPSopen = false;
+				}
+			}
+			
+			if(this.desktopPane1.getAllFrames().length == 0) {
+				isPSopen = false;
+			}
+			
+			
+			if(isSPSopen==false && isPSopen==false) {
+				
 				ScanProductsScreen sps = new ScanProductsScreen();
 				this.desktopPane1.add(sps);
 				sps.setVisible(true);

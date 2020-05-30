@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.*;
 /*
  * Created by JFormDesigner on Fri May 15 18:10:40 EEST 2020
@@ -291,6 +293,7 @@ public class ScanProductsScreen extends JInternalFrame {
 				Ids.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
 			}
 			PaymentScreen PS = new PaymentScreen(Ids,Names, Quantities,Prices);
+			
 			this.getParent().add(PS);
 			try {
 				this.setClosed(true);

@@ -35,6 +35,7 @@ public class PaymentScreen extends JInternalFrame {
 		ids = productID;
 		this.setLocation(100, 30);
 		showDate();
+		//this.addInternalFrameListener(new);
 	}
 
 	private void initComponents() {
