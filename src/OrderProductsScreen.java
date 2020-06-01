@@ -33,8 +33,6 @@ public class OrderProductsScreen extends JInternalFrame {
 
 		//======== panel1 ========
 		{
-			
-			panel1.setLayout(null);
 
 			//======== this ========
 			{
@@ -70,14 +68,14 @@ public class OrderProductsScreen extends JInternalFrame {
 						new Object[][] {
 						},
 						new String[] {
-							"Product", "Quantity"
+							"Product", "Quantity", "Supplier ID"
 						}
 					) {
 						Class<?>[] columnTypes = new Class<?>[] {
-							String.class, Integer.class
+							String.class, Integer.class, Integer.class
 						};
 						boolean[] columnEditable = new boolean[] {
-							false, false
+							false, false, false
 						};
 						@Override
 						public Class<?> getColumnClass(int columnIndex) {
