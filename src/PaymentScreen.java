@@ -158,11 +158,6 @@ public class PaymentScreen extends JInternalFrame {
 				button2.setIcon(new ImageIcon(getClass().getResource("/print.png")));
 				contentPane.add(button2);
 				button2.setBounds(new Rectangle(new Point(105, 460), button2.getPreferredSize()));
-				button2.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						printButtonAction(evt);
-					}
-				});
 				contentPane.add(textField2);
 				textField2.setBounds(10, 185, 280, 30);
 				textField2.setEditable(false);
@@ -266,10 +261,15 @@ public class PaymentScreen extends JInternalFrame {
 			{
 				textField2.setText("6.0");
 			}
-			else
+			else				
+			{
 				JOptionPane.showMessageDialog(null, "No potential discount", "Notification", 2);
+				textField2.setText("");
+			}
 		}
 		
+		stm.close();
+		con.close();
 		
 	}
 	
@@ -288,8 +288,6 @@ public class PaymentScreen extends JInternalFrame {
 		{
 			JOptionPane.showMessageDialog(null, "Potential discount not calculated", "ERROR",2);
 		}
-		
-		
 	}
 	
 	                                                                           

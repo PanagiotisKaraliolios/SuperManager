@@ -287,36 +287,30 @@ public class ScanProductsScreen extends JInternalFrame {
 		ArrayList<Integer> Ids = new ArrayList<>();
 		if(model.getRowCount()!=0)
 		{
-		for(int i=0;i<model.getRowCount(); i++)
-		{
-			Ids.add(Integer.parseInt( table1.getValueAt(i, 0).toString()));
-			Names.add((table1.getValueAt(i, 1).toString()));
-			Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
-			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
-			
-		}
-		if(model.getRowCount()!=0){
-			for(int i=0;i<model.getRowCount(); i++){
+			for(int i=0;i<model.getRowCount(); i++)
+			{
+				Ids.add(Integer.parseInt( table1.getValueAt(i, 0).toString()));
 				Names.add((table1.getValueAt(i, 1).toString()));
 				Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
 				Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
-				Ids.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
 			}
+			
 			PaymentScreen PS = new PaymentScreen(Ids,Names, Quantities,Prices);
 			
 			this.getParent().add(PS);
-			try {
+			try
+			{
 				this.setClosed(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
+			} catch (PropertyVetoException e1)
+			{
 				e1.printStackTrace();
 			}
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "No products scanned", "ERROR", 2);
+			JOptionPane.showMessageDialog(null, "No products scanned", "Warning", 2);
 		}
 		
-	   }
+	  
 	}
 	
 	private void showDate()
