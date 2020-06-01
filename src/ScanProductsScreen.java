@@ -285,7 +285,6 @@ public class ScanProductsScreen extends JInternalFrame {
 		ArrayList<Integer> Quantities = new ArrayList<>();
 		ArrayList<Double> Prices = new ArrayList<>();	
 		ArrayList<Integer> Ids = new ArrayList<>();
-<<<<<<< HEAD
 		if(model.getRowCount()!=0)
 		{
 		for(int i=0;i<model.getRowCount(); i++)
@@ -296,7 +295,6 @@ public class ScanProductsScreen extends JInternalFrame {
 			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
 			
 		}
-=======
 		if(model.getRowCount()!=0){
 			for(int i=0;i<model.getRowCount(); i++){
 				Names.add((table1.getValueAt(i, 1).toString()));
@@ -313,16 +311,12 @@ public class ScanProductsScreen extends JInternalFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "No products scanned", "ERROR", 2);
 		}
 		
-		
-		
-		
-		
+	   }
 	}
 	
 	private void showDate()

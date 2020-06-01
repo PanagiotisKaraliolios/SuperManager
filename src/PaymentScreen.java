@@ -8,10 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-<<<<<<< HEAD
-=======
 import java.text.MessageFormat;
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,13 +39,10 @@ public class PaymentScreen extends JInternalFrame {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
 		ids = productID;
-<<<<<<< HEAD
 		quantities = Quantities;	
-=======
 		this.setLocation(100, 30);
 		showDate();
 		//this.addInternalFrameListener(new);
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 	}
 
 	private void initComponents() {
@@ -291,19 +285,14 @@ public class PaymentScreen extends JInternalFrame {
 		
 	}
 	
-<<<<<<< HEAD
-	public void finishButtonAction(ActionEvent e)/*when the finish button is pushed this method sends the data 
-	 												about the products that the cashier scanned to mySQL table sales*/
 	                                                                           
-=======
-	private void finishButtonAction(ActionEvent e)
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
+	private void finishButtonAction(ActionEvent e)/*when the finish button is pushed this method sends the data 
+		about the products that the cashier scanned to mySQL table sales*/
 	{
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
-<<<<<<< HEAD
 			
 			String sql1 =" INSERT INTO sales(id,date,quantity) VALUES (?,?,?)";
 			String sql2 =" UPDATE sales SET quantity = quantity + ? WHERE id=? AND date=?";
@@ -340,9 +329,7 @@ public class PaymentScreen extends JInternalFrame {
 		   
 		   ps1.close();
 		   ps2.close();
-=======
 			stm = con.createStatement();
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 			
 		}
 		catch(Exception ex)
@@ -350,7 +337,6 @@ public class PaymentScreen extends JInternalFrame {
 			System.out.println("Error1: "+ex);
 		}
 		
-<<<<<<< HEAD
 	}
 	
 	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
@@ -366,23 +352,10 @@ public class PaymentScreen extends JInternalFrame {
 	        return rs.next();
 	    }
 		catch(Exception ex)
-=======
+		{
+			System.out.println(ex);
+		}
 		
-		try
-		{
-			int h=0;
-			for (int i=0; i<ids.size();i++)
-		{
-			   //h = ids.get(i);
-		       //st.executeUpdate("INSERT INTO sales(id)" + "VALUES (h)");
-		}
-		      	
-		}
-		catch(Exception exep)
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
-		{
-	    	System.out.println(ex);
-		}
 		
 		return false;
 	  
@@ -390,9 +363,7 @@ public class PaymentScreen extends JInternalFrame {
 	
 	private void printButtonAction(ActionEvent e1)
 	{
-<<<<<<< HEAD
-		System.out.println(e);
-=======
+		System.out.println(e1);
 		MessageFormat header = new MessageFormat("Legitimate Invoice Start");
 		MessageFormat footer = new MessageFormat("Invoice End");
 		
@@ -405,7 +376,6 @@ public class PaymentScreen extends JInternalFrame {
 			System.err.format("Cannot print %%n", e2.getMessage());
 		}
 		
->>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 	}
 	
 	private void showDate()
