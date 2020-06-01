@@ -187,6 +187,7 @@ public class PaymentScreen extends JInternalFrame {
 				contentPane.add(textField3);
 				textField3.setBounds(185, 350, 100, 30);
 				textField3.setEditable(false);
+				//do sum of cost
 
 				//---- label5 ----
 				label5.setText("Date");
@@ -260,7 +261,13 @@ public class PaymentScreen extends JInternalFrame {
 		}
 		else
 		{
-			//calculate potential discount
+			//Assuming discount by 6€ on 200 points
+			if(points>=200)
+			{
+				textField2.setText("6.0");
+			}
+			else
+				JOptionPane.showMessageDialog(null, "No potential discount", "Notification", 2);
 		}
 		
 		
