@@ -39,7 +39,8 @@ public class PaymentScreen extends JInternalFrame {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
 		ids = productID;
-		quantities = Quantities;	
+		quantities = Quantities;
+		totalCalculation(Quantities,Prices);
 		this.setLocation(100, 30);
 		showDate();
 		//this.addInternalFrameListener(new);
@@ -389,4 +390,13 @@ public class PaymentScreen extends JInternalFrame {
       SimpleDateFormat format = new SimpleDateFormat(DateFormat);
       textField5.setText(format.format(cal.getTime()));        
     }
+	
+	private void totalCalculation(ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
+		int total=0;
+		for(int i=0; i<Prices.size();i++) {
+			total+=Quantities.get(i)*Prices.get(i);
+
+		}
+		textField3.setText(Integer.toString(total));
+	}
 }
