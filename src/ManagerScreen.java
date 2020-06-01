@@ -1,12 +1,17 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import com.jgoodies.forms.factories.*;
-import net.miginfocom.swing.*;
-import java.awt.event.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+
+import java.beans.PropertyVetoException;
 
 
+@SuppressWarnings("serial")
 public class ManagerScreen extends JFrame {
+	private boolean isCLSopen = false;
+	private boolean isPLSopen = false;
+	private boolean isStatisticsScreenOpen = false;
+	private boolean isstockScreenOpen = false;
 	
 	public ManagerScreen() {
 		initComponents();
@@ -20,28 +25,163 @@ public class ManagerScreen extends JFrame {
 	
 	private void ManagerScreenActionPerformed(java.awt.event.ActionEvent evt){
 		if(evt.getSource().equals(button1)) {
-			RUDCashierListScreen cls = new RUDCashierListScreen();
-			this.desktopPane1.add(cls);
-			cls.setVisible(true);
-			cls.toFront();
+			
+			if(isCLSopen==false) {
+				RUDCashierListScreen cls = new RUDCashierListScreen();
+				this.desktopPane1.add(cls);
+				cls.setVisible(true);
+				cls.toFront();
+				try {
+					cls.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				cls.addInternalFrameListener(new InternalFrameAdapter() {
+					@Override
+					public void internalFrameClosing(InternalFrameEvent e) {
+						isCLSopen = false;
+					}
+
+				});
+				if(cls.isEnabled()) {
+					isCLSopen = true;
+					
+				}				
+			}
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(RUDCashierListScreen.class)) {
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
+					if(i.getClass().equals(RUDCashierListScreen.class)) {
+						i.moveToFront();
+						try {
+							i.setSelected(true);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 		}
+		
 		else if(evt.getSource().equals(button2)) {
-			RUDProductListScreen pls = new RUDProductListScreen();
-			this.desktopPane1.add(pls);
-			pls.setVisible(true);
-			pls.toFront();
+			
+			if(isPLSopen==false) {
+				RUDProductListScreen pls = new RUDProductListScreen();
+				this.desktopPane1.add(pls);
+				pls.setVisible(true);
+				pls.toFront();
+				try {
+					pls.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				pls.addInternalFrameListener(new InternalFrameAdapter() {
+					@Override
+					public void internalFrameClosing(InternalFrameEvent e) {
+						isPLSopen = false;
+					}
+
+				});
+				if(pls.isEnabled()) {
+					isPLSopen = true;
+					
+				}				
+			}
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(RUDProductListScreen.class)) {
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
+					if(i.getClass().equals(RUDProductListScreen.class)) {
+						i.moveToFront();
+						try {
+							i.setSelected(true);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 		}
+		
 		else if(evt.getSource().equals(button3)) {
-			ViewStatisticsScreen vss = new ViewStatisticsScreen();
-			this.desktopPane1.add(vss);
-			vss.setVisible(true);
-			vss.toFront();
+			
+			if(isStatisticsScreenOpen==false) {
+				ViewStatisticsScreen vStat = new ViewStatisticsScreen();
+				this.desktopPane1.add(vStat);
+				vStat.setVisible(true);
+				vStat.toFront();
+				try {
+					vStat.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				vStat.addInternalFrameListener(new InternalFrameAdapter() {
+					@Override
+					public void internalFrameClosing(InternalFrameEvent e) {
+						isStatisticsScreenOpen = false;
+					}
+
+				});
+				if(vStat.isEnabled()) {
+					isStatisticsScreenOpen = true;
+					
+				}				
+			}
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(ViewStatisticsScreen.class)) {
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
+					if(i.getClass().equals(ViewStatisticsScreen.class)) {
+						i.moveToFront();
+						try {
+							i.setSelected(true);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 		}
+		
 		else if(evt.getSource().equals(button4)) {
-			ViewStockScreen vss = new ViewStockScreen();
-			this.desktopPane1.add(vss);
-			vss.setVisible(true);
-			vss.toFront();
+
+			if(isstockScreenOpen==false) {
+				ViewStockScreen vStock = new ViewStockScreen();
+				this.desktopPane1.add(vStock);
+				vStock.setVisible(true);
+				vStock.toFront();
+				try {
+					vStock.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				vStock.addInternalFrameListener(new InternalFrameAdapter() {
+					@Override
+					public void internalFrameClosing(InternalFrameEvent e) {
+						isstockScreenOpen = false;
+					}
+
+				});
+				if(vStock.isEnabled()) {
+					isstockScreenOpen = true;
+					
+				}				
+			}
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(ViewStockScreen.class)) {
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
+					if(i.getClass().equals(ViewStockScreen.class)) {
+						i.moveToFront();
+						try {
+							i.setSelected(true);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 		}
 	}
 	

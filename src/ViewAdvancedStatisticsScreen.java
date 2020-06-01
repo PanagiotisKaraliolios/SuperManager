@@ -9,6 +9,7 @@ import javax.swing.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 	public ViewAdvancedStatisticsScreen() {
 		initComponents();

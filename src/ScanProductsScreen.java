@@ -1,12 +1,15 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.*;
 /*
  * Created by JFormDesigner on Fri May 15 18:10:40 EEST 2020
@@ -17,6 +20,7 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class ScanProductsScreen extends JInternalFrame {
 	public ScanProductsScreen() {
 		initComponents();
@@ -226,7 +230,7 @@ public class ScanProductsScreen extends JInternalFrame {
 	private JButton button1;	//addProduct
 	private JButton button2;	//removeProduct
 	private JButton button3;	//proceed to payment
-	public static  String DateFormat = "yyyy-MM-dd";
+	private static  String DateFormat = "yyyy-MM-dd";
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
@@ -281,6 +285,7 @@ public class ScanProductsScreen extends JInternalFrame {
 		ArrayList<Integer> Quantities = new ArrayList<>();
 		ArrayList<Double> Prices = new ArrayList<>();	
 		ArrayList<Integer> Ids = new ArrayList<>();
+<<<<<<< HEAD
 		if(model.getRowCount()!=0)
 		{
 		for(int i=0;i<model.getRowCount(); i++)
@@ -291,21 +296,36 @@ public class ScanProductsScreen extends JInternalFrame {
 			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
 			
 		}
+=======
+		if(model.getRowCount()!=0){
+			for(int i=0;i<model.getRowCount(); i++){
+				Names.add((table1.getValueAt(i, 1).toString()));
+				Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+				Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
+				Ids.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+			}
+			PaymentScreen PS = new PaymentScreen(Ids,Names, Quantities,Prices);
+			
+			this.getParent().add(PS);
+			try {
+				this.setClosed(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 		}
-		else
-		{
+		else{
 			JOptionPane.showMessageDialog(null, "No products scanned", "ERROR", 2);
 		}
 		
-		PaymentScreen newScreen = new PaymentScreen(Ids,Names, Quantities,Prices);
-		//Not sure if 100% correct way
-		super.getDesktopPane().add(newScreen);
 		
 		
-		this.dispose();
+		
+		
 	}
 	
-	public void showDate()
+	private void showDate()
     {
       Calendar cal= Calendar.getInstance();
       SimpleDateFormat format = new SimpleDateFormat(DateFormat);

@@ -1,28 +1,15 @@
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import javax.swing.text.*;
 import com.github.lgooddatepicker.components.*;
-import com.github.lgooddatepicker.optionalusertools.*;
-import com.github.lgooddatepicker.tableeditors.*;
-
-import org.jdatepicker.*;
-
-import java.util.Calendar;
-import org.jdatepicker.impl.*;
-import org.jdesktop.beansbinding.*;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-/*
- * Created by JFormDesigner on Tue May 19 17:55:44 EEST 2020
- */
 
 
 
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class ViewStatisticsScreen extends JInternalFrame {
 	public ViewStatisticsScreen() {
 		initComponents();
@@ -42,9 +29,10 @@ public class ViewStatisticsScreen extends JInternalFrame {
 		label2 = new JLabel();
 		label1 = new JLabel();
 		label3 = new JLabel();
+		label4 = new JLabel();
+		textField1 = new JTextField();
 		datePickerSettings1 = new DatePickerSettings();
 		datePickerSettings2 = new DatePickerSettings();
-		
 
 		//======== panel1 ========
 		{
@@ -73,9 +61,16 @@ public class ViewStatisticsScreen extends JInternalFrame {
 							"PRODUCT", "SOLD"
 						}
 					) {
+						Class<?>[] columnTypes = new Class<?>[] {
+							String.class, Double.class
+						};
 						boolean[] columnEditable = new boolean[] {
 							false, false
 						};
+						@Override
+						public Class<?> getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
+						}
 						@Override
 						public boolean isCellEditable(int rowIndex, int columnIndex) {
 							return columnEditable[columnIndex];
@@ -85,29 +80,30 @@ public class ViewStatisticsScreen extends JInternalFrame {
 					scrollPane1.setViewportView(table1);
 				}
 				contentPane.add(scrollPane1);
-				scrollPane1.setBounds(420, 10, 461, scrollPane1.getPreferredSize().height);
+				scrollPane1.setBounds(270, 5, 461, scrollPane1.getPreferredSize().height);
 
 				//---- button1 ----
 				button1.setText("Confirm");
 				button1.setIcon(new ImageIcon(getClass().getResource("/checkMark.png")));
 				contentPane.add(button1);
-				button1.setBounds(new Rectangle(new Point(205, 160), button1.getPreferredSize()));
+				button1.setBounds(new Rectangle(new Point(140, 200), button1.getPreferredSize()));
 
 				//---- button2 ----
 				button2.setText("Advanced Statistics");
 				button2.setIcon(new ImageIcon(getClass().getResource("/stats.png")));
 				contentPane.add(button2);
-				button2.setBounds(new Rectangle(new Point(225, 360), button2.getPreferredSize()));
+				button2.setBounds(new Rectangle(new Point(75, 305), button2.getPreferredSize()));
 
 				//---- datePicker1 ----
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				
 				datePickerSettings1.getFormatsForParsing().add(formatter);
 				datePickerSettings1.setFormatForDatesCommonEra(formatter);
 				datePickerSettings1.setFormatForDatesBeforeCommonEra(formatter);
 				datePickerSettings1.setFormatForTodayButton(formatter);
 				datePicker1.setSettings(datePickerSettings1);
 				contentPane.add(datePicker1);
-				datePicker1.setBounds(135, 35, 170, datePicker1.getPreferredSize().height);
+				datePicker1.setBounds(90, 100, 170, datePicker1.getPreferredSize().height);
 
 				//---- datePicker2 ----
 				datePickerSettings2.getFormatsForParsing().add(formatter);
@@ -116,7 +112,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				datePickerSettings2.setFormatForTodayButton(formatter);
 				datePicker2.setSettings(datePickerSettings2);
 				contentPane.add(datePicker2);
-				datePicker2.setBounds(135, 100, 170, 30);
+				datePicker2.setBounds(90, 150, 170, 30);
 
 				//---- label2 ----
 				label2.setText("From :");
@@ -127,18 +123,26 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				label1.setText("From :");
 				label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 5f));
 				contentPane.add(label1);
-				label1.setBounds(new Rectangle(new Point(75, 40), label1.getPreferredSize()));
+				label1.setBounds(new Rectangle(new Point(35, 100), label1.getPreferredSize()));
 
 				//---- label3 ----
 				label3.setText("To :");
 				label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 5f));
 				contentPane.add(label3);
-				label3.setBounds(75, 105, 48, 23);
+				label3.setBounds(55, 150, 30, 23);
+
+				//---- label4 ----
+				label4.setText("Product ID :");
+				label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 3f));
+				contentPane.add(label4);
+				label4.setBounds(new Rectangle(new Point(10, 45), label4.getPreferredSize()));
+				contentPane.add(textField1);
+				textField1.setBounds(90, 40, 125, 30);
 			}
 			panel1.add(this);
-			this.setBounds(0, 0, 900, 475);
+			this.setBounds(0, 0, 745, 465);
 
-			panel1.setPreferredSize(new Dimension(900, 475));
+			panel1.setPreferredSize(new Dimension(745, 465));
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
@@ -155,8 +159,9 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	private JLabel label2;
 	private JLabel label1;
 	private JLabel label3;
+	private JLabel label4;
+	private JTextField textField1;
 	private DatePickerSettings datePickerSettings1;
 	private DatePickerSettings datePickerSettings2;
-	
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

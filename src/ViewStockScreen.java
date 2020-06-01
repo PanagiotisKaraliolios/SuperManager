@@ -1,8 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class ViewStockScreen extends JInternalFrame  {
 	ArrayList<Product> listOfProducts;
 
@@ -64,22 +68,13 @@ public class ViewStockScreen extends JInternalFrame  {
 						new String[] {
 							"STOCK", "NAME", "ID"
 						}
-					) 
-					{
-						Class<?>[] columnTypes = new Class<?>[] {
-							Integer.class, Object.class, Integer.class
-						};
+					) {
 						boolean[] columnEditable = new boolean[] {
 							false, false, false
 						};
 						@Override
 						public boolean isCellEditable(int rowIndex, int columnIndex) {
 							return columnEditable[columnIndex];
-						}
-						
-						@Override
-						public Class<?> getColumnClass(int columnIndex) {
-							return columnTypes[columnIndex];
 						}
 					});
 					table1.setAutoCreateRowSorter(true);
@@ -93,8 +88,11 @@ public class ViewStockScreen extends JInternalFrame  {
 				button1.setIcon(new ImageIcon(getClass().getResource("/order.png")));
 				contentPane.add(button1);
 				button1.setBounds(new Rectangle(new Point(170, 505), button1.getPreferredSize()));
-				ButtonListener listener = new ButtonListener();
-				button1.addActionListener(listener);
+				button1.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						StockScreenActionPerformed(evt);
+					}
+				});
 			}
 			panel1.add(this);
 			this.setBounds(0, 0, 500, 600);
@@ -116,7 +114,6 @@ public class ViewStockScreen extends JInternalFrame  {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
@@ -145,9 +142,41 @@ public class ViewStockScreen extends JInternalFrame  {
 		stm.close();
 		con.close();
 	}
-	class ButtonListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-
+	
+	private boolean isOPSopen = false;
+	private void StockScreenActionPerformed(java.awt.event.ActionEvent evt) {
+		for(Component i : this.getParent().getComponents()) {
+			if(i.getClass() == OrderProductsScreen.class) {
+				isOPSopen = true;
+			}
 		}
+				
+		if(this.getParent().getComponentCount()==0) {
+			isOPSopen = false;
+		}
+		
+		if(isOPSopen==false) {
+			
+			OrderProductsScreen ops = new OrderProductsScreen();
+			this.getParent().add(ops);
+			ops.setVisible(true);
+			ops.toFront();
+			ops.addInternalFrameListener(new InternalFrameAdapter() {
+				@Override
+				public void internalFrameClosing(InternalFrameEvent e) {
+					isOPSopen = false;
+				}
+
+			});
+			
+			try {
+				ops.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		
 	}
 }

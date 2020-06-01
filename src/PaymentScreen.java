@@ -1,18 +1,26 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+<<<<<<< HEAD
+=======
+import java.text.MessageFormat;
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.print.*;
 /*
  * Created by JFormDesigner on Mon May 18 16:57:19 EEST 2020
  */
@@ -22,6 +30,7 @@ import javax.swing.table.*;
 /**
  * @author Panagiotis Karaliolios
  */
+@SuppressWarnings("serial")
 public class PaymentScreen extends JInternalFrame {
 	
 	private ArrayList<Integer> ids = new ArrayList<>();
@@ -33,7 +42,13 @@ public class PaymentScreen extends JInternalFrame {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
 		ids = productID;
+<<<<<<< HEAD
 		quantities = Quantities;	
+=======
+		this.setLocation(100, 30);
+		showDate();
+		//this.addInternalFrameListener(new);
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 	}
 
 	private void initComponents() {
@@ -89,12 +104,7 @@ public class PaymentScreen extends JInternalFrame {
 
 		//======== panel1 ========
 		{
-			panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
-			.EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax
-			. swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
-			12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans
-			.PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e.
-			getPropertyName () ) )throw new RuntimeException( ) ;} } );
+			
 			panel1.setLayout(null);
 
 			//======== this ========
@@ -154,6 +164,11 @@ public class PaymentScreen extends JInternalFrame {
 				button2.setIcon(new ImageIcon(getClass().getResource("/print.png")));
 				contentPane.add(button2);
 				button2.setBounds(new Rectangle(new Point(105, 460), button2.getPreferredSize()));
+				button2.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						printButtonAction(evt);
+					}
+				});
 				contentPane.add(textField2);
 				textField2.setBounds(10, 185, 280, 30);
 				textField2.setEditable(false);
@@ -203,7 +218,7 @@ public class PaymentScreen extends JInternalFrame {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
 	private Connection con;
-	private Statement st;
+	private Statement stm;
 	private ResultSet rs;
 	
 	private JPanel panel1;
@@ -220,25 +235,26 @@ public class PaymentScreen extends JInternalFrame {
 	private JTextField textField3; //Total field
 	private JLabel label5;
 	private JTextField textField5;
+	private static  String DateFormat = "yyyy-MM-dd";
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
-	public void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
+	private void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
 	{
 		DefaultTableModel model = (DefaultTableModel) table1.getModel();
 		for(int i=0; i<Names.size(); i++)
 		model.addRow(new Object[] {Names.get(i), Prices.get(i), Quantities.get(i)});
 	}
 	
-	public void checkPointsButtonAction(ActionEvent e) throws SQLException,ClassNotFoundException
+	private void checkPointsButtonAction(ActionEvent e) throws SQLException,ClassNotFoundException
 	{
 		//get input id
 		String inputID = textField1.getText();
 		//connection
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
-		Statement stm = con.createStatement();
+		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		stm = con.createStatement();
 		//retrieve member points
-		ResultSet rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
+		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
 		int points = -1;
 		while(rs.next())
@@ -256,7 +272,7 @@ public class PaymentScreen extends JInternalFrame {
 		
 	}
 	
-	public void applyDiscountButtonAction(ActionEvent e)
+	private void applyDiscountButtonAction(ActionEvent e)
 	{
 		//get discount
 		double discount = 0;
@@ -275,14 +291,19 @@ public class PaymentScreen extends JInternalFrame {
 		
 	}
 	
+<<<<<<< HEAD
 	public void finishButtonAction(ActionEvent e)/*when the finish button is pushed this method sends the data 
 	 												about the products that the cashier scanned to mySQL table sales*/
 	                                                                           
+=======
+	private void finishButtonAction(ActionEvent e)
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 	{
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+<<<<<<< HEAD
 			
 			String sql1 =" INSERT INTO sales(id,date,quantity) VALUES (?,?,?)";
 			String sql2 =" UPDATE sales SET quantity = quantity + ? WHERE id=? AND date=?";
@@ -319,6 +340,9 @@ public class PaymentScreen extends JInternalFrame {
 		   
 		   ps1.close();
 		   ps2.close();
+=======
+			stm = con.createStatement();
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 			
 		}
 		catch(Exception ex)
@@ -326,6 +350,7 @@ public class PaymentScreen extends JInternalFrame {
 			System.out.println("Error1: "+ex);
 		}
 		
+<<<<<<< HEAD
 	}
 	
 	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
@@ -341,6 +366,20 @@ public class PaymentScreen extends JInternalFrame {
 	        return rs.next();
 	    }
 		catch(Exception ex)
+=======
+		
+		try
+		{
+			int h=0;
+			for (int i=0; i<ids.size();i++)
+		{
+			   //h = ids.get(i);
+		       //st.executeUpdate("INSERT INTO sales(id)" + "VALUES (h)");
+		}
+		      	
+		}
+		catch(Exception exep)
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 		{
 	    	System.out.println(ex);
 		}
@@ -349,8 +388,30 @@ public class PaymentScreen extends JInternalFrame {
 	  
 	}
 	
-	public void printButtonAction(ActionEvent e)
+	private void printButtonAction(ActionEvent e1)
 	{
+<<<<<<< HEAD
 		System.out.println(e);
+=======
+		MessageFormat header = new MessageFormat("Legitimate Invoice Start");
+		MessageFormat footer = new MessageFormat("Invoice End");
+		
+		
+		try {
+			table1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+		} catch (PrinterException e2) {
+			
+			e2.printStackTrace();
+			System.err.format("Cannot print %%n", e2.getMessage());
+		}
+		
+>>>>>>> b165384117d86acb61c8eda0adc36329141505e1
 	}
+	
+	private void showDate()
+    {
+      Calendar cal= Calendar.getInstance();
+      SimpleDateFormat format = new SimpleDateFormat(DateFormat);
+      textField5.setText(format.format(cal.getTime()));        
+    }
 }

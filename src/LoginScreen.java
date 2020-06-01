@@ -2,7 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
-import javax.swing.plaf.*;
 import com.jgoodies.forms.factories.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.Arrays;
 import javax.swing.UIManager.*;
 
 
+@SuppressWarnings("serial")
 public class LoginScreen extends JFrame {
 	
 	
