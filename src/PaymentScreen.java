@@ -3,10 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -20,13 +23,17 @@ import javax.swing.table.*;
  * @author Panagiotis Karaliolios
  */
 public class PaymentScreen extends JInternalFrame {
+	
 	private ArrayList<Integer> ids = new ArrayList<>();
+	private ArrayList<Integer> quantities = new ArrayList<>();/*those two arrayLists are used to store the data from
+																form the ScanProductScreen list to store them in 
+																mySQL table sales
+															   */
 	public PaymentScreen(ArrayList<Integer> productID,ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
 		ids = productID;
-		
-		
+		quantities = Quantities;	
 	}
 
 	private void initComponents() {
@@ -268,13 +275,50 @@ public class PaymentScreen extends JInternalFrame {
 		
 	}
 	
-	public void finishButtonAction(ActionEvent e)
+	public void finishButtonAction(ActionEvent e)/*when the finish button is pushed this method sends the data 
+	 												about the products that the cashier scanned to mySQL table sales*/
+	                                                                           
 	{
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
-			st = con.createStatement();
+			
+			String sql1 =" INSERT INTO sales(id,date,quantity) VALUES (?,?,?)";
+			String sql2 =" UPDATE sales SET quantity = quantity + ? WHERE id=? AND date=?";
+			
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+	        PreparedStatement ps1 = con.prepareStatement(sql1);
+	        
+	        
+	        String DateFormat = "yyyy-MM-dd";
+			Calendar cal= Calendar.getInstance();
+		    SimpleDateFormat format = new SimpleDateFormat(DateFormat);
+
+		   for (int i=0; i<ids.size();i++)
+		   {
+			   
+			   
+			   if (checkExistanceOfRecord(ids.get(i),format,cal))//if the record already exists update only the quantity of that record
+			   {
+				   ps2.setInt(1, quantities.get(i));
+				   ps2.setInt(2, ids.get(i));
+				   ps2.setDate(3, java.sql.Date.valueOf(format.format(cal.getTime())));
+				   ps2.executeUpdate(); 
+				   
+			   }
+			   else//else add the record to the sales table
+			   {
+				   ps1.setInt(1, ids.get(i));
+				   ps1.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
+				   ps1.setInt(3, quantities.get(i)); 
+				   ps1.executeUpdate(); 
+			   }
+			   
+		   }
+		   
+		   ps1.close();
+		   ps2.close();
 			
 		}
 		catch(Exception ex)
@@ -282,25 +326,31 @@ public class PaymentScreen extends JInternalFrame {
 			System.out.println("Error1: "+ex);
 		}
 		
+	}
+	
+	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
+	{
+		try 
+		{  
+			String sql = " SELECT id,date FROM sales WHERE id = ? AND date = ?";  
+	    	PreparedStatement ps = con.prepareStatement(sql);
+	    	ps.setInt(1, id);
+	    	ps.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
+	    	ResultSet rs = ps.executeQuery();
+
+	        return rs.next();
+	    }
+		catch(Exception ex)
+		{
+	    	System.out.println(ex);
+		}
 		
-		try
-		{
-			int h=0;
-		   for (int i=0; i<ids.size();i++)
-		   {
-			   //h = ids.get(i);
-		       //st.executeUpdate("INSERT INTO sales(id)" + "VALUES (h)");
-		   }
-		      	
-		}
-		catch(Exception exep)
-		{
-			System.out.println("Error2: "+exep);
-		}
+		return false;
+	  
 	}
 	
 	public void printButtonAction(ActionEvent e)
 	{
-		
+		System.out.println(e);
 	}
 }

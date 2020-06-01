@@ -285,10 +285,11 @@ public class ScanProductsScreen extends JInternalFrame {
 		{
 		for(int i=0;i<model.getRowCount(); i++)
 		{
+			Ids.add(Integer.parseInt( table1.getValueAt(i, 0).toString()));
 			Names.add((table1.getValueAt(i, 1).toString()));
 			Quantities.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
 			Prices.add(Double.parseDouble(table1.getValueAt(i, 2).toString()));
-			Ids.add(Integer.parseInt( table1.getValueAt(i, 3).toString()));
+			
 		}
 		}
 		else
