@@ -392,11 +392,11 @@ public class PaymentScreen extends JInternalFrame {
     }
 	
 	private void totalCalculation(ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
-		int total=0;
+		double total=0;
 		for(int i=0; i<Prices.size();i++) {
-			total+=Quantities.get(i)*Prices.get(i);
+			total=total+Quantities.get(i)*Prices.get(i);
 
 		}
-		textField3.setText(Integer.toString(total));
+		textField3.setText(Double.toString(total));
 	}
 }
