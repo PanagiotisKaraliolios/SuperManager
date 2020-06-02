@@ -419,10 +419,8 @@ public class PaymentScreen extends JInternalFrame {
 			total=total+Quantities.get(i)*Prices.get(i);
 			
 		}
-		DecimalFormat df = new DecimalFormat("#,##");
-		String A;
-		A = df.format(total);
-		total = Double.parseDouble(A) ;
+
+		total = (double)Math.round(total* 1000) / 1000;
 		
 		textField3.setText(Double.toString(total) + " €");
 	}
