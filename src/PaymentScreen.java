@@ -420,7 +420,9 @@ public class PaymentScreen extends JInternalFrame {
 			
 		}
 		DecimalFormat df = new DecimalFormat("#.##");
-		total = Double.parseDouble(df.format(total)) ;
+		String A;
+		A = df.format(total);
+		total = Double.parseDouble(A) ;
 		
 		textField3.setText(Double.toString(total) + " €");
 	}
