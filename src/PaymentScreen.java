@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -227,6 +228,11 @@ public class PaymentScreen extends JInternalFrame {
 	private JLabel label5;
 	private JTextField textField5;
 	private static  String DateFormat = "yyyy-MM-dd";
+	private boolean hasThePaymentFinished = false;
+	private boolean hasDiscountAlreadyApplied = false;
+	private double total=0;
+	private double discount = 0;
+	private double limit = 10;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	private void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
@@ -257,14 +263,15 @@ public class PaymentScreen extends JInternalFrame {
 		}
 		else
 		{
-			//Assuming discount by 6â‚¬ on 200 points
+			//Assuming discount by 6€ on 200 points
 			if(points>=200)
 			{
-				textField2.setText("6.0");
+				discount = 6;
+				textField2.setText("Applicable discount of " + discount + "€");
 			}
 			else				
 			{
-				JOptionPane.showMessageDialog(null, "No potential discount", "Notification", 2);
+				JOptionPane.showMessageDialog(null, "No potential discount!", "Notification", 1);
 				textField2.setText("");
 			}
 		}
@@ -277,72 +284,85 @@ public class PaymentScreen extends JInternalFrame {
 	private void applyDiscountButtonAction(ActionEvent e)
 	{
 		//get discount
-		double discount = 0;
-		if(!textField2.getText().equals(""))
-		{
-			discount = Double.parseDouble(textField2.getText());
-			double newTotal = Double.parseDouble(textField3.getText()) - discount;
+		if(hasDiscountAlreadyApplied==false) {
 			
-			textField3.setText("" + newTotal);
+			if(!textField2.getText().equals("") && total > limit) 
+			{
+				
+				total = total - discount;
+				
+				textField3.setText("" + total + "€");
+				hasDiscountAlreadyApplied = true;
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Potential discount not calculated\nOr the purchase is lower than 10 €", "ERROR",2);
+			}
 		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Potential discount not calculated", "ERROR",2);
+		else {
+			JOptionPane.showMessageDialog(null, "Discount already applied!", "ERROR",1);
 		}
+		
 	}
 	
 	                                                                           
-	private void finishButtonAction(ActionEvent e)/*when the finish button is pushed this method sends the data 
-		about the products that the cashier scanned to mySQL table sales*/
-	{
-		try
-		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+	private void finishButtonAction(ActionEvent e)											//when the finish button is pushed this method sends the data 
+	{																						//about the products that the cashier scanned to mySQL table sales
+		if(hasThePaymentFinished==false) {
 			
-			String sql1 =" INSERT INTO sales(id,date,quantity) VALUES (?,?,?)";
-			String sql2 =" UPDATE sales SET quantity = quantity + ? WHERE id=? AND date=?";
-			
-			PreparedStatement ps2 = con.prepareStatement(sql2);
-	        PreparedStatement ps1 = con.prepareStatement(sql1);
-	        
-	        
-	        String DateFormat = "yyyy-MM-dd";
-			Calendar cal= Calendar.getInstance();
-		    SimpleDateFormat format = new SimpleDateFormat(DateFormat);
-
-		   for (int i=0; i<ids.size();i++)
-		   {
-			   
-			   
-			   if (checkExistanceOfRecord(ids.get(i),format,cal))//if the record already exists update only the quantity of that record
+			try
+			{
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+				
+				String sql1 =" INSERT INTO sales(id,date,quantity) VALUES (?,?,?)";
+				String sql2 =" UPDATE sales SET quantity = quantity + ? WHERE id=? AND date=?";
+				
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+		        PreparedStatement ps1 = con.prepareStatement(sql1);
+		        
+		        
+		        String DateFormat = "yyyy-MM-dd";
+				Calendar cal= Calendar.getInstance();
+			    SimpleDateFormat format = new SimpleDateFormat(DateFormat);
+	
+			   for (int i=0; i<ids.size();i++)
 			   {
-				   ps2.setInt(1, quantities.get(i));
-				   ps2.setInt(2, ids.get(i));
-				   ps2.setDate(3, java.sql.Date.valueOf(format.format(cal.getTime())));
-				   ps2.executeUpdate(); 
+				   
+				   
+				   if (checkExistanceOfRecord(ids.get(i),format,cal))								//if the record already exists update only the quantity of that record
+				   {
+					   ps2.setInt(1, quantities.get(i));
+					   ps2.setInt(2, ids.get(i));
+					   ps2.setDate(3, java.sql.Date.valueOf(format.format(cal.getTime())));
+					   ps2.executeUpdate(); 
+					   
+				   }
+				   else																				//else add the record to the sales table
+				   {
+					   ps1.setInt(1, ids.get(i));
+					   ps1.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
+					   ps1.setInt(3, quantities.get(i)); 
+					   ps1.executeUpdate(); 
+				   }
 				   
 			   }
-			   else//else add the record to the sales table
-			   {
-				   ps1.setInt(1, ids.get(i));
-				   ps1.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
-				   ps1.setInt(3, quantities.get(i)); 
-				   ps1.executeUpdate(); 
-			   }
 			   
-		   }
-		   
-		   ps1.close();
-		   ps2.close();
-			stm = con.createStatement();
+			   ps1.close();
+			   ps2.close();
+			   stm = con.createStatement();
+			   hasThePaymentFinished = true;
+			   
+			}
+			catch(Exception ex)
+			{
+				System.out.println("Error1: "+ex);
+			}
 			
 		}
-		catch(Exception ex)
-		{
-			System.out.println("Error1: "+ex);
+		else {
+			JOptionPane.showMessageDialog(null, "The Transaction has already been made!", "Info",1);
 		}
-		
 	}
 	
 	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
@@ -392,11 +412,21 @@ public class PaymentScreen extends JInternalFrame {
     }
 	
 	private void totalCalculation(ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
-		double total=0;
+		
 		for(int i=0; i<Prices.size();i++) {
 			total=total+Quantities.get(i)*Prices.get(i);
+			round(total, 3);
 
 		}
-		textField3.setText(Double.toString(total));
+		textField3.setText(Double.toString(total) + " €");
+	}
+	
+	private double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
 	}
 }
