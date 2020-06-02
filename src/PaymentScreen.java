@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -352,6 +353,7 @@ public class PaymentScreen extends JInternalFrame {
 			   ps2.close();
 			   stm = con.createStatement();
 			   hasThePaymentFinished = true;
+			   JOptionPane.showMessageDialog(null, "The Transaction completed successfully!", "Info",1);
 			   
 			}
 			catch(Exception ex)
@@ -391,7 +393,7 @@ public class PaymentScreen extends JInternalFrame {
 	{
 		System.out.println(e1);
 		MessageFormat header = new MessageFormat("Legitimate Invoice Start");
-		MessageFormat footer = new MessageFormat("Invoice End");
+		MessageFormat footer = new MessageFormat("Invoice End------TOTAL : " + total + " €");
 		
 		
 		try {
@@ -415,18 +417,13 @@ public class PaymentScreen extends JInternalFrame {
 		
 		for(int i=0; i<Prices.size();i++) {
 			total=total+Quantities.get(i)*Prices.get(i);
-			round(total, 3);
-
+			
 		}
+		DecimalFormat df = new DecimalFormat("#.##");
+		total = Double.parseDouble(df.format(total)) ;
+		
 		textField3.setText(Double.toString(total) + " €");
 	}
 	
-	private double round(double value, int places) {
-	    if (places < 0) throw new IllegalArgumentException();
-
-	    long factor = (long) Math.pow(10, places);
-	    value = value * factor;
-	    long tmp = Math.round(value);
-	    return (double) tmp / factor;
-	}
+	
 }
