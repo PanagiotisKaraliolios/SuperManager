@@ -231,7 +231,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			}
 		}
 		else
-			JOptionPane.showMessageDialog(null, "No ID given", "ERROR", 2);		
+			JOptionPane.showMessageDialog(null, "No ID given", "ERROR", 2);
 	}
 	
 	private void advancedStatisticsButtonAction(ActionEvent e)
