@@ -91,7 +91,8 @@ public class PaymentScreen extends JInternalFrame {
 		button4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				finishButtonAction(e);
+				addProductsToSales(e);
+				decreaseStock(e);
 			}
 		});
 		label2 = new JLabel();
@@ -307,8 +308,8 @@ public class PaymentScreen extends JInternalFrame {
 	}
 	
 	                                                                           
-	private void finishButtonAction(ActionEvent e)											//when the finish button is pushed this method sends the data 
-	{																						//about the products that the cashier scanned to mySQL table sales
+	private void addProductsToSales(ActionEvent e)//when the finish button is pushed this method sends the data 
+	{											 //about the products that the cashier scanned to mySQL table sales
 		if(hasThePaymentFinished==false) {
 			
 			try
@@ -331,7 +332,7 @@ public class PaymentScreen extends JInternalFrame {
 			   {
 				   
 				   
-				   if (checkExistanceOfRecord(ids.get(i),format,cal))								//if the record already exists update only the quantity of that record
+				   if (checkExistanceOfRecord(ids.get(i),format,cal))//if the record already exists update only the quantity of that record
 				   {
 					   ps2.setInt(1, quantities.get(i));
 					   ps2.setInt(2, ids.get(i));
@@ -339,7 +340,7 @@ public class PaymentScreen extends JInternalFrame {
 					   ps2.executeUpdate(); 
 					   
 				   }
-				   else																				//else add the record to the sales table
+				   else //else add the record to the sales table
 				   {
 					   ps1.setInt(1, ids.get(i));
 					   ps1.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
@@ -365,6 +366,65 @@ public class PaymentScreen extends JInternalFrame {
 		else {
 			JOptionPane.showMessageDialog(null, "The Transaction has already been made!", "Info",1);
 		}
+	}
+	private void decreaseStock(ActionEvent e)
+	{	
+			try
+			{
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+				
+				String sql =" UPDATE products SET stock = stock - ? WHERE id = ? ";
+				System.out.println("hello");
+				PreparedStatement ps = con.prepareStatement(sql);
+				
+				
+				int anID = 0;
+				for (int i=0; i<ids.size();i++)
+				{
+					anID = ids.get(i);
+					if(getStock(anID)>0)
+					{
+						ps.setInt(1, quantities.get(i));
+						ps.setInt(2, anID);
+						ps.executeUpdate(); 
+					}
+				}
+				ps.close();
+			}
+			catch(Exception ex)
+			{
+				System.out.println(ex);
+			}
+	}
+	
+	private int getStock(int id)
+	{
+		Connection con;
+		ResultSet rs;
+		
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+			
+			String sql = "SELECT stock FROM products WHERE id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1,id);
+			System.out.println("hee");
+			rs = ps.executeQuery();
+			
+			rs.next();
+			int takenStock = rs.getInt("stock");
+			
+			return takenStock;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		return 0;
 	}
 	
 	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
