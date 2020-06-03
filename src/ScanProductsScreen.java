@@ -265,7 +265,14 @@ public class ScanProductsScreen extends JInternalFrame {
 			textField3.setText(chosenProduct.getName());
 			
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
-			model.addRow(new Object[] {chosenProduct.getProductsID(), chosenProduct.getName(), chosenProduct.getPrice(), textField4.getText()});
+			if(textField4.getText().contains("-") || textField4.getText().equals("0")) {//Checks product quantity >0
+				JOptionPane.showMessageDialog(null, "Please select a valid quantity", "WARNING", 2);
+			}
+			else {
+				model.addRow(new Object[] {chosenProduct.getProductsID(), chosenProduct.getName(), chosenProduct.getPrice(), textField4.getText()});
+			}
+				
+			
 		}		
 	}
 	
