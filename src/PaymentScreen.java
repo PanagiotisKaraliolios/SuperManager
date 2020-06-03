@@ -91,8 +91,7 @@ public class PaymentScreen extends JInternalFrame {
 		button4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				addProductsToSales(e);
-				decreaseStock(e);
+				finishButtonAction(e);
 			}
 		});
 		label2 = new JLabel();
@@ -308,7 +307,7 @@ public class PaymentScreen extends JInternalFrame {
 	}
 	
 	                                                                           
-	private void addProductsToSales(ActionEvent e)//when the finish button is pushed this method sends the data 
+	private void finishButtonAction(ActionEvent e)//when the finish button is pushed this method sends the data 
 	{											 //about the products that the cashier scanned to mySQL table sales
 		if(hasThePaymentFinished==false) {
 			
@@ -354,6 +353,7 @@ public class PaymentScreen extends JInternalFrame {
 			   ps2.close();
 			   stm = con.createStatement();
 			   hasThePaymentFinished = true;
+			   decreaseStock();
 			   JOptionPane.showMessageDialog(null, "The Transaction completed successfully!", "Info",1);
 			   
 			}
@@ -367,7 +367,7 @@ public class PaymentScreen extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, "The Transaction has already been made!", "Info",1);
 		}
 	}
-	private void decreaseStock(ActionEvent e)//decreases the stock if it's not zero
+	private void decreaseStock()//decreases the stock if it's not zero
 	{	
 			try
 			{
