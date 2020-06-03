@@ -367,7 +367,7 @@ public class PaymentScreen extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, "The Transaction has already been made!", "Info",1);
 		}
 	}
-	private void decreaseStock(ActionEvent e)
+	private void decreaseStock(ActionEvent e)//decreases the stock if it's not zero
 	{	
 			try
 			{
@@ -375,7 +375,6 @@ public class PaymentScreen extends JInternalFrame {
 				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
 				
 				String sql =" UPDATE products SET stock = stock - ? WHERE id = ? ";
-				System.out.println("hello");
 				PreparedStatement ps = con.prepareStatement(sql);
 				
 				
@@ -398,7 +397,7 @@ public class PaymentScreen extends JInternalFrame {
 			}
 	}
 	
-	private int getStock(int id)
+	private int getStock(int id)//gets the stock from the data base 
 	{
 		Connection con;
 		ResultSet rs;
@@ -411,7 +410,6 @@ public class PaymentScreen extends JInternalFrame {
 			String sql = "SELECT stock FROM products WHERE id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,id);
-			System.out.println("hee");
 			rs = ps.executeQuery();
 			
 			rs.next();
