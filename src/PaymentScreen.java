@@ -80,7 +80,7 @@ public class PaymentScreen extends JInternalFrame {
 			}
 		});
 		textField2 = new JTextField();
-		button3 = new JButton(); //aply discount button
+		button3 = new JButton(); //apply discount button
 		button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
@@ -256,7 +256,7 @@ public class PaymentScreen extends JInternalFrame {
 		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
 		
-		while(rs.next())
+		while(rs.next())//ERROR
 			points = rs.getInt("points");
 		
 		if(points == -1)
@@ -294,13 +294,9 @@ public class PaymentScreen extends JInternalFrame {
 				total = total - discount;
 				
 				textField3.setText("" + total + "€");
-				if((points - 200) >= 0) {
-					points = points - 200;
-				}
-				else {
-					points = 0;
-				}
 				
+				//points = points - 200;--------------------
+				decresePointsInDB();
 				hasDiscountAlreadyApplied = true;
 			}
 			else
@@ -362,7 +358,8 @@ public class PaymentScreen extends JInternalFrame {
 			   stm = con.createStatement();
 			   hasThePaymentFinished = true;
 			   decreaseStock();
-			   calculateNewPoints();
+			   //calculateNewPoints();
+			   addPointsInDB();
 			   JOptionPane.showMessageDialog(null, "The Transaction completed successfully!", "Info",1);
 			   
 			}
@@ -377,9 +374,91 @@ public class PaymentScreen extends JInternalFrame {
 		}
 	}
 	
-	private void calculateNewPoints() {
-		int addedPoints = (int) (Math.floor(total));
-		points = points + addedPoints;
+	//private void calculateNewPoints() {
+		//int addedPoints = (int) (Math.floor(total));
+		//points = points + addedPoints;
+	//}
+	
+	private void addPointsInDB()
+	{
+		String inputID = textField1.getText();
+		
+		if(inputID != "")
+		{
+			if (checkExistanceOfMember(inputID))
+			{
+				try
+				{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+					
+					String sql =" UPDATE members SET points = points + ? WHERE memberCardID = ? ";
+					PreparedStatement ps = con.prepareStatement(sql);
+					
+					ps.setInt(1, 200);
+					ps.setString(2, inputID);
+					ps.executeUpdate(); 
+					
+				}
+				catch(Exception ex)
+				{
+					System.out.println(ex);
+				}
+			}
+		}
+		
+	}
+	
+	private void decresePointsInDB()
+	{
+		String inputID = textField1.getText();
+		
+		if(inputID != "")
+		{
+			if (checkExistanceOfMember(inputID))
+			{
+				try
+				{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+					
+					String sql =" UPDATE members SET points = points - ? WHERE memberCardID = ? ";
+					PreparedStatement ps = con.prepareStatement(sql);
+					
+					ps.setInt(1, points);
+					ps.setString(2, inputID);
+					ps.executeUpdate(); 
+					
+				}
+				catch(Exception ex)
+				{
+					System.out.println(ex);
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	private  boolean checkExistanceOfMember(String memberID)
+	{
+		try 
+		{  
+			String sql = " SELECT memberCardID FROM members WHERE memberCardID = ? ";  
+	    	PreparedStatement ps = con.prepareStatement(sql);
+	    	ps.setString(1, memberID);
+	    	ResultSet rs = ps.executeQuery();
+
+	        return rs.next();
+	    }
+		catch(Exception ex)
+		{
+			System.out.println(ex);
+		}
+	
+		return false;
+	  
 	}
 	
 	private void decreaseStock()//decreases the stock if it's not zero
