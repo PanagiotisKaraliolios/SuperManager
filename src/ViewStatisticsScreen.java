@@ -225,7 +225,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 					names.add(rs.getString("products.name"));
 					quantities.add(rs.getInt("sales.quantity"));
 				}
-				//fill talbe
+				//fill table
 				for(int i = 0; i<names.size(); i++)
 					model.addRow(new Object[] {names.get(i), quantities.get(i)});
 			}
@@ -239,12 +239,6 @@ public class ViewStatisticsScreen extends JInternalFrame {
 		ViewAdvancedStatisticsScreen ASC = new ViewAdvancedStatisticsScreen();
 		
 		this.getParent().add(ASC);
-		try
-		{
-			this.setClosed(true);
-		} catch (PropertyVetoException e1)
-		{
-			e1.printStackTrace();
-		}
+		
 	}
 }

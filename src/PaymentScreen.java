@@ -234,6 +234,7 @@ public class PaymentScreen extends JInternalFrame {
 	private double total=0;
 	private double discount = 0;
 	private double limit = 10;
+	private int points = -1;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	private void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
@@ -254,7 +255,7 @@ public class PaymentScreen extends JInternalFrame {
 		//retrieve member points
 		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
-		int points = -1;
+		
 		while(rs.next())
 			points = rs.getInt("points");
 		
@@ -293,6 +294,13 @@ public class PaymentScreen extends JInternalFrame {
 				total = total - discount;
 				
 				textField3.setText("" + total + "€");
+				if((points - 200) >= 0) {
+					points = points - 200;
+				}
+				else {
+					points = 0;
+				}
+				
 				hasDiscountAlreadyApplied = true;
 			}
 			else
@@ -354,6 +362,7 @@ public class PaymentScreen extends JInternalFrame {
 			   stm = con.createStatement();
 			   hasThePaymentFinished = true;
 			   decreaseStock();
+			   calculateNewPoints();
 			   JOptionPane.showMessageDialog(null, "The Transaction completed successfully!", "Info",1);
 			   
 			}
@@ -367,6 +376,12 @@ public class PaymentScreen extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, "The Transaction has already been made!", "Info",1);
 		}
 	}
+	
+	private void calculateNewPoints() {
+		int addedPoints = (int) (Math.floor(total));
+		points = points + addedPoints;
+	}
+	
 	private void decreaseStock()//decreases the stock if it's not zero
 	{	
 			try
