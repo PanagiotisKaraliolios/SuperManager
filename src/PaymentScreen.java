@@ -234,6 +234,7 @@ public class PaymentScreen extends JInternalFrame {
 	private double total=0;
 	private double discount = 0;
 	private double limit = 10;
+	private int points = -1;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	private void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
@@ -254,7 +255,7 @@ public class PaymentScreen extends JInternalFrame {
 		//retrieve member points
 		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
-		int points = -1;
+		
 		while(rs.next())
 			points = rs.getInt("points");
 		
@@ -293,6 +294,13 @@ public class PaymentScreen extends JInternalFrame {
 				total = total - discount;
 				
 				textField3.setText("" + total + "€");
+				if((points - 200) >= 0) {
+					points = points - 200;
+				}
+				else {
+					points = 0;
+				}
+				
 				hasDiscountAlreadyApplied = true;
 			}
 			else
@@ -307,8 +315,8 @@ public class PaymentScreen extends JInternalFrame {
 	}
 	
 	                                                                           
-	private void finishButtonAction(ActionEvent e)											//when the finish button is pushed this method sends the data 
-	{																						//about the products that the cashier scanned to mySQL table sales
+	private void finishButtonAction(ActionEvent e)//when the finish button is pushed this method sends the data 
+	{											 //about the products that the cashier scanned to mySQL table sales
 		if(hasThePaymentFinished==false) {
 			
 			try
@@ -331,7 +339,7 @@ public class PaymentScreen extends JInternalFrame {
 			   {
 				   
 				   
-				   if (checkExistanceOfRecord(ids.get(i),format,cal))								//if the record already exists update only the quantity of that record
+				   if (checkExistanceOfRecord(ids.get(i),format,cal))//if the record already exists update only the quantity of that record
 				   {
 					   ps2.setInt(1, quantities.get(i));
 					   ps2.setInt(2, ids.get(i));
@@ -339,7 +347,7 @@ public class PaymentScreen extends JInternalFrame {
 					   ps2.executeUpdate(); 
 					   
 				   }
-				   else																				//else add the record to the sales table
+				   else //else add the record to the sales table
 				   {
 					   ps1.setInt(1, ids.get(i));
 					   ps1.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
@@ -353,6 +361,8 @@ public class PaymentScreen extends JInternalFrame {
 			   ps2.close();
 			   stm = con.createStatement();
 			   hasThePaymentFinished = true;
+			   decreaseStock();
+			   calculateNewPoints();
 			   JOptionPane.showMessageDialog(null, "The Transaction completed successfully!", "Info",1);
 			   
 			}
@@ -365,6 +375,69 @@ public class PaymentScreen extends JInternalFrame {
 		else {
 			JOptionPane.showMessageDialog(null, "The Transaction has already been made!", "Info",1);
 		}
+	}
+	
+	private void calculateNewPoints() {
+		int addedPoints = (int) (Math.floor(total));
+		points = points + addedPoints;
+	}
+	
+	private void decreaseStock()//decreases the stock if it's not zero
+	{	
+			try
+			{
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+				
+				String sql =" UPDATE products SET stock = stock - ? WHERE id = ? ";
+				PreparedStatement ps = con.prepareStatement(sql);
+				
+				
+				int anID = 0;
+				for (int i=0; i<ids.size();i++)
+				{
+					anID = ids.get(i);
+					if(getStock(anID)>0)
+					{
+						ps.setInt(1, quantities.get(i));
+						ps.setInt(2, anID);
+						ps.executeUpdate(); 
+					}
+				}
+				ps.close();
+			}
+			catch(Exception ex)
+			{
+				System.out.println(ex);
+			}
+	}
+	
+	private int getStock(int id)//gets the stock from the data base 
+	{
+		Connection con;
+		ResultSet rs;
+		
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+			
+			String sql = "SELECT stock FROM products WHERE id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1,id);
+			rs = ps.executeQuery();
+			
+			rs.next();
+			int takenStock = rs.getInt("stock");
+			
+			return takenStock;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		return 0;
 	}
 	
 	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
