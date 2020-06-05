@@ -251,12 +251,20 @@ public class ScanProductsScreen extends JInternalFrame {
 			chosenProduct.setPrice(rs.getDouble("price"));
 			chosenProduct.setStockType(rs.getString("stockType"));
 			chosenProduct.setSuppliersID(rs.getInt("supplierID"));
+			chosenProduct.setStock(rs.getInt("stock"));
 		}
+		
 		boolean flag = true;
+		int quantity = Integer.parseInt(textField4.getText());
+		
 		if(chosenProduct.getProductsID() == 0)
 		{
 			JOptionPane.showMessageDialog(null, "Given ProductID doesnt exist", "ERROR", 2);
 			flag = false;
+		}
+		else if(chosenProduct.getStock()-quantity<0){
+			JOptionPane.showMessageDialog(null, "Too much quantity asked", "ERROR", 2);
+			flag=false;
 		}
 		
 		if(flag)
@@ -270,10 +278,10 @@ public class ScanProductsScreen extends JInternalFrame {
 			}
 			else {
 				model.addRow(new Object[] {chosenProduct.getProductsID(), chosenProduct.getName(), chosenProduct.getPrice(), textField4.getText()});
-			}
-				
-			
-		}		
+			}	
+		}
+		stm.close();
+		con.close();
 	}
 	
 	private void removeProductButtonAction(ActionEvent e)
