@@ -255,16 +255,12 @@ public class ScanProductsScreen extends JInternalFrame {
 		}
 		
 		boolean flag = true;
-		int quantity = Integer.parseInt(textField4.getText());
+		
 		
 		if(chosenProduct.getProductsID() == 0)
 		{
 			JOptionPane.showMessageDialog(null, "Given ProductID doesnt exist", "ERROR", 2);
 			flag = false;
-		}
-		else if(chosenProduct.getStock()-quantity<0){
-			JOptionPane.showMessageDialog(null, "Too much quantity asked", "ERROR", 2);
-			flag=false;
 		}
 		
 		if(flag)
@@ -273,7 +269,7 @@ public class ScanProductsScreen extends JInternalFrame {
 			textField3.setText(chosenProduct.getName());
 			
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
-			if(textField4.getText().contains("-") || textField4.getText().equals("0")) {//Checks product quantity >0
+			if(textField4.getText().contains("-") || textField4.getText().equals("0") || textField4.getText().equals("")) {//Checks product quantity >0
 				JOptionPane.showMessageDialog(null, "Please select a valid quantity", "WARNING", 2);
 			}
 			else {
