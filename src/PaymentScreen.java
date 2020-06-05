@@ -80,7 +80,7 @@ public class PaymentScreen extends JInternalFrame {
 			}
 		});
 		textField2 = new JTextField();
-		button3 = new JButton(); //aply discount button
+		button3 = new JButton(); //apply discount button
 		button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
@@ -256,7 +256,7 @@ public class PaymentScreen extends JInternalFrame {
 		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
 		
-		while(rs.next())
+		while(rs.next())//ERROR
 			points = rs.getInt("points");
 		
 		if(points == -1)
@@ -285,33 +285,34 @@ public class PaymentScreen extends JInternalFrame {
 	
 	private void applyDiscountButtonAction(ActionEvent e)
 	{
-		//get discount
-		if(hasDiscountAlreadyApplied==false) {
-			
-			if(!textField2.getText().equals("") && total > limit) 
-			{
+		if (hasThePaymentFinished == false)
+		{
+			//get discount
+			if(hasDiscountAlreadyApplied==false) {
 				
-				total = total - discount;
-				
-				textField3.setText("" + total + "€");
-				if((points - 200) >= 0) {
-					points = points - 200;
+				if(!textField2.getText().equals("") && total > limit) 
+				{
+					
+					total = total - discount;
+					
+					textField3.setText("" + total + "€");
+					
+					decresePointsInDB();
+					hasDiscountAlreadyApplied = true;
 				}
-				else {
-					points = 0;
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Potential discount not calculated\nOr the purchase is lower than 10 €", "ERROR",2);
 				}
-				
-				hasDiscountAlreadyApplied = true;
 			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "Potential discount not calculated\nOr the purchase is lower than 10 €", "ERROR",2);
+			else {
+				JOptionPane.showMessageDialog(null, "Discount already applied!", "ERROR",1);
 			}
+	    }
+		else
+		{
+			JOptionPane.showMessageDialog(null, "You can not apply any discount if the transaction is finished!", "ERROR",1);
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "Discount already applied!", "ERROR",1);
-		}
-		
 	}
 	
 	                                                                           
@@ -362,7 +363,9 @@ public class PaymentScreen extends JInternalFrame {
 			   stm = con.createStatement();
 			   hasThePaymentFinished = true;
 			   decreaseStock();
-			   calculateNewPoints();
+			   //calculateNewPoints();
+			   addPointsInDB();
+			   con.close();
 			   JOptionPane.showMessageDialog(null, "The Transaction completed successfully!", "Info",1);
 			   
 			}
@@ -377,9 +380,95 @@ public class PaymentScreen extends JInternalFrame {
 		}
 	}
 	
-	private void calculateNewPoints() {
-		int addedPoints = (int) (Math.floor(total));
-		points = points + addedPoints;
+	
+	private void addPointsInDB()
+	{
+		String inputID = textField1.getText();
+		
+		if(inputID != "")
+		{
+			if (checkExistanceOfMember(inputID))
+			{
+				try
+				{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+					
+					String sql =" UPDATE members SET points = points + ? WHERE memberCardID = ? ";
+					PreparedStatement ps = con.prepareStatement(sql);
+					
+					int addedPoints = (int) (Math.floor(total));
+					ps.setInt(1, addedPoints);
+					ps.setString(2, inputID);
+					ps.executeUpdate(); 
+					
+					con.close();
+					
+				}
+				catch(Exception ex)
+				{
+					System.out.println(ex);
+				}
+			}
+		}
+		
+	}
+	
+	private void decresePointsInDB()
+	{
+		String inputID = textField1.getText();
+		
+		if(inputID != "")
+		{
+			if (checkExistanceOfMember(inputID))
+			{
+				try
+				{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+					
+					String sql =" UPDATE members SET points = points - ? WHERE memberCardID = ? ";
+					PreparedStatement ps = con.prepareStatement(sql);
+					
+					ps.setInt(1, 200);
+					ps.setString(2, inputID);
+					ps.executeUpdate(); 
+					
+					con.close();
+					
+				}
+				catch(Exception ex)
+				{
+					System.out.println(ex);
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	private  boolean checkExistanceOfMember(String memberID)
+	{
+		try 
+		{  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sm","root","");
+			
+			String sql = " SELECT memberCardID FROM members WHERE memberCardID = ? ";  
+	    	PreparedStatement ps = con.prepareStatement(sql);
+	    	ps.setString(1, memberID);
+	    	ResultSet rs = ps.executeQuery();
+	    	
+	        return rs.next();
+	    }
+		catch(Exception ex)
+		{
+			System.out.println(ex);
+		}
+	
+		return false;
+	  
 	}
 	
 	private void decreaseStock()//decreases the stock if it's not zero
@@ -405,6 +494,7 @@ public class PaymentScreen extends JInternalFrame {
 					}
 				}
 				ps.close();
+				con.close();
 			}
 			catch(Exception ex)
 			{
@@ -430,6 +520,8 @@ public class PaymentScreen extends JInternalFrame {
 			rs.next();
 			int takenStock = rs.getInt("stock");
 			
+			con.close();
+			
 			return takenStock;
 		}
 		catch(Exception e)
@@ -449,7 +541,7 @@ public class PaymentScreen extends JInternalFrame {
 	    	ps.setInt(1, id);
 	    	ps.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
 	    	ResultSet rs = ps.executeQuery();
-
+	    	
 	        return rs.next();
 	    }
 		catch(Exception ex)
