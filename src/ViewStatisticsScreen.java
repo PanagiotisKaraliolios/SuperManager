@@ -414,11 +414,12 @@ public class ViewStatisticsScreen extends JInternalFrame {
 		}
 		else if(ID.equals("") && !from.equals("") && to.equals(""))
 		{
+			//error
 			//only from field given
 			ArrayList<Sale> sales = new ArrayList<>();
 			
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
-			for(int i = model.getRowCount(); i >= 0; i--)
+			for(int i = model.getRowCount() - 1; i >= 0; i--)
 			{
 				model.removeRow(i);
 			}
@@ -472,7 +473,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			ArrayList<Sale> sales = new ArrayList<>();
 			
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
-			for(int i = model.getRowCount(); i >= 0; i--)
+			for(int i = model.getRowCount() -1 ; i >= 0; i--)
 			{
 				model.removeRow(i);
 			}
