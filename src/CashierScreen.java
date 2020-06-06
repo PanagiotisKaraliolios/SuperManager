@@ -23,7 +23,6 @@ public class CashierScreen extends JFrame {
 		this.setVisible(true);
 	}
 	
-	@SuppressWarnings("deprecation")
 	private void CashierScreenActionPerformed(java.awt.event.ActionEvent evt){
 		if(evt.getSource().equals(button1)) {
 			if(isMCSopen==false) {

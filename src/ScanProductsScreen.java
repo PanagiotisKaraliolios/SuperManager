@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.*;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.*;
 /*
  * Created by JFormDesigner on Fri May 15 18:10:40 EEST 2020

@@ -1,22 +1,13 @@
 import java.awt.*;
-import javafx.embed.swing.*;
+
 import javax.swing.*;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.resources.*;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.XYChart;
-import org.knowm.xchart.demo.*;
-import org.knowm.xchart.demo.charts.bar.*;
-/*
- * Created by JFormDesigner on Tue May 19 18:28:30 EEST 2020
- */
 
-import com.sun.prism.paint.Paint;
+
 
 
 
