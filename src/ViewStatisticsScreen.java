@@ -228,12 +228,15 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				quantity += rs.getInt("sales.quantity");
 			}
 			
-			if(name.equals(""))
+			if(name.equals("") || quantity == 0)
 				JOptionPane.showMessageDialog(null, "No product / sale with given product ID", "Notification", 2);
 			else
 			{
 				model.addRow(new Object[] {name, quantity});
 			}
+			
+			con.close();
+			stm.close();
 			
 		}
 		else if(!ID.equals("") && !from.equals("") && to.equals(""))
@@ -266,14 +269,26 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				quantity += rs.getInt("sales.quantity");
 			}
 			
-			model.addRow(new Object[] {name, quantity});
+			if(name.equals("") || quantity == 0)
+				JOptionPane.showMessageDialog(null, "No product / sale with given product ID", "Notification", 2);
+			else
+			{
+				model.addRow(new Object[] {name, quantity});
+			}
+			
+			con.close();
+			stm.close();
 			
 		}
-		//else if all fields given
 		else if(!ID.equals("") && !from.equals("") && !to.equals("") )
 		{
+			//all fields given
 			int inputID = Integer.parseInt(ID);
 			
+			String name = "";
+			int quantity = 0;
+			
+			//empty the table
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
 			for(int i = model.getRowCount()-1; i>=0; i--)
 			{
@@ -288,9 +303,229 @@ public class ViewStatisticsScreen extends JInternalFrame {
 					+ " FROM sales JOIN products ON sales.id = products.id "
 					+ "WHERE products.id =" + inputID + " AND sales.date >='" + from + "' AND sales.date<= '" + to + "'");
 			
-			//make sales list
+			while(rs.next())
+			{
+				name = rs.getString("products.name");
+				quantity+= rs.getInt("sales.quantity");
+			}
 			
+			if(name.equals("") || quantity == 0)
+				JOptionPane.showMessageDialog(null, "No product / sale with given product ID", "Notification", 2);
+			else
+			{
+				model.addRow(new Object[] {name, quantity});
+			}
+			
+			
+			con.close();
+			stm.close();			
 		}
+		else if(!ID.equals("") && from.equals("") && !to.equals(""))
+		{
+			//ID and to fields given
+			int inputID = Integer.parseInt(ID);
+			
+			String name = "";
+			int quantity = 0;
+			
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount() - 1; i>=0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			ResultSet rs = stm.executeQuery("SELECT products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE products.id = " + inputID + " AND sales.date <= '" + to + "'");
+			
+			while(rs.next())
+			{
+				name = rs.getString("products.name");
+				quantity+= rs.getInt("sales.quantity");
+			}
+			
+			if(name.equals("") || quantity == 0)
+				JOptionPane.showMessageDialog(null, "No product / sale with given product ID", "Notification", 2);
+			else
+			{
+				model.addRow(new Object[] {name, quantity});
+			}
+			
+			con.close();
+			stm.close();
+		}
+		else if(ID.equals("") && !from.equals("") && !to.equals(""))
+		{
+			//Only from and to fields given
+			ArrayList<Sale> sales = new ArrayList<>();
+			
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount() - 1; i>=0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			ResultSet rs = stm.executeQuery("SELECT products.id, products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.ID "
+					+ "WHERE sales.date>= '" + from + "' AND sales.date <= '" + to + "'");
+			
+			while(rs.next())
+			{
+				int inID = rs.getInt("products.id");
+				String inName = rs.getString("products.name");
+				int inQuantity = rs.getInt("sales.quantity");
+				
+				boolean prodFound = false;
+				int index =-1;
+				for(int i=0; i<sales.size(); i++)
+				{
+					if( sales.get(i).getProduct().getProductsID() == inID)
+					{
+						prodFound = true;
+						index = i;
+					}
+				}
+				
+				if(prodFound)
+				{
+					sales.get(index).setQuantity( sales.get(index).getQuantity() + inQuantity);
+				}
+				else
+				{
+					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity));
+				}
+			}
+			
+			for(int i = 0; i < sales.size(); i++)
+			{
+				model.addRow(new Object[] {sales.get(i).getProduct().getName(), sales.get(i).getQuantity()});
+			}
+			
+			if(model.getRowCount() == 0)
+				JOptionPane.showMessageDialog(null, "No sales during given period", "Notification", 2);
+		}
+		else if(ID.equals("") && !from.equals("") && to.equals(""))
+		{
+			//only from field given
+			ArrayList<Sale> sales = new ArrayList<>();
+			
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount(); i >= 0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			ResultSet rs = stm.executeQuery("SELECT products.id, products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE sales.date >= '" + from + "'");
+			
+			while(rs.next())
+			{
+				int inID = rs.getInt("products.id");
+				String inName = rs.getString("products.name");
+				int inQuantity = rs.getInt("sales.quantity");
+				
+				boolean prodFound = false;
+				int index =-1;
+				for(int i=0; i<sales.size(); i++)
+				{
+					if( sales.get(i).getProduct().getProductsID() == inID)
+					{
+						prodFound = true;
+						index = i;
+					}
+				}
+				
+				if(prodFound)
+				{
+					sales.get(index).setQuantity( sales.get(index).getQuantity() + inQuantity);
+				}
+				else
+				{
+					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity));
+				}
+			}
+			
+			for(int i = 0; i < sales.size(); i++)
+			{
+				model.addRow(new Object[] {sales.get(i).getProduct().getName(), sales.get(i).getQuantity()});
+			}
+			
+			if(model.getRowCount() == 0)
+				JOptionPane.showMessageDialog(null, "No sales during given period", "Notification", 2);
+		}
+		else if(ID.equals("") && from.equals("") && !to.equals(""))
+		{
+			//only to field given
+			ArrayList<Sale> sales = new ArrayList<>();
+			
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount(); i >= 0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			ResultSet rs = stm.executeQuery("SELECT products.id, products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE sales.date <= '" + to + "'");
+			
+			while(rs.next())
+			{
+				int inID = rs.getInt("products.id");
+				String inName = rs.getString("products.name");
+				int inQuantity = rs.getInt("sales.quantity");
+				
+				boolean prodFound = false;
+				int index =-1;
+				for(int i=0; i<sales.size(); i++)
+				{
+					if( sales.get(i).getProduct().getProductsID() == inID)
+					{
+						prodFound = true;
+						index = i;
+					}
+				}
+				
+				if(prodFound)
+				{
+					sales.get(index).setQuantity( sales.get(index).getQuantity() + inQuantity);
+				}
+				else
+				{
+					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity));
+				}
+			}
+			
+			for(int i = 0; i < sales.size(); i++)
+			{
+				model.addRow(new Object[] {sales.get(i).getProduct().getName(), sales.get(i).getQuantity()});
+			}
+			
+			if(model.getRowCount() == 0)
+				JOptionPane.showMessageDialog(null, "No sales during given period", "Notification", 2);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "No input", "WARNING", 2);
+		}
+		
+		
 	}
 	
 	private void advancedStatisticsButtonAction(ActionEvent e)
