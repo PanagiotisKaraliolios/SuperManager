@@ -176,8 +176,16 @@ public class ScanProductsScreen extends JInternalFrame {
 						public Class<?> getColumnClass(int columnIndex) {
 							return columnTypes[columnIndex];
 						}
+						
+						boolean[] columnEditable = new boolean[] {
+								false, false, false, false
+						};
+						@Override
+						public boolean isCellEditable(int rowIndex, int columnIndex) {
+							return columnEditable[columnIndex];
+						}
 					});
-					table1.setAutoCreateRowSorter(true);
+					table1.setAutoCreateRowSorter(false);
 					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					scrollPane1.setViewportView(table1);
 				}

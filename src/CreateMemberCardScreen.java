@@ -223,52 +223,59 @@ public class CreateMemberCardScreen extends JInternalFrame {
 	
 	private void addMemberButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
-		//retrieve input
-		String inputID = textField1.getText();
-		String inputName = textField2.getText();
-		String inputEmail = textField3.getText();
-		String inputNum = textField4.getText();
-		String inputAddress = textField5.getText();
+		if(!textField1.getText().equals("") || !textField2.getText().equals("") || !textField3.getText().equals("") || !textField4.getText().equals("") || !textField5.getText().equals("")) {
+			
 		
-		//create connection and receive member list
-		Connection con = null;
-		Statement  stm = null;
-		ArrayList<Member> memList = new ArrayList<>();
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
-		stm = con.createStatement();
-		
-		ResultSet rs=stm.executeQuery("SELECT * FROM members");
-		
-		while(rs.next())
-			memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address"), rs.getDouble("points")));
-		
-		stm.close();
-		
-		//search if given ID is taken. if not add the new member else display message.
-		boolean flag = false;
-		
-		for(Member mem : memList)
-		{
-			if( mem.getMemberCardId().equals(inputID) )
-			{
-				JOptionPane.showMessageDialog(null, "Given Member/Card ID already taken.", "ERROR", 2);
-				flag = true;
-				break;
-			}
-		}
-		
-		if(flag == false)
-		{
+			//retrieve input
+			String inputID = textField1.getText();
+			String inputName = textField2.getText();
+			String inputEmail = textField3.getText();
+			String inputNum = textField4.getText();
+			String inputAddress = textField5.getText();
+			
+			//create connection and receive member list
+			Connection con = null;
+			Statement  stm = null;
+			ArrayList<Member> memList = new ArrayList<>();
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
 			stm = con.createStatement();
-			stm.executeUpdate("INSERT INTO members VALUES('" + inputID + "', '" + inputName + "', '" + inputAddress + "', '" + inputNum + "', '" + inputEmail + "', 0)"); 
+			
+			ResultSet rs=stm.executeQuery("SELECT * FROM members");
+			
+			while(rs.next())
+				memList.add(new Member(rs.getString("memberCardID"), rs.getString("name"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address"), rs.getDouble("points")));
+			
 			stm.close();
-			//update the table
-			DefaultTableModel model = (DefaultTableModel) table1.getModel();
-			model.addRow(new Object[] {inputID, inputName, inputEmail, inputNum, inputAddress});
+			
+			//search if given ID is taken. if not add the new member else display message.
+			boolean flag = false;
+			
+			for(Member mem : memList)
+			{
+				if( mem.getMemberCardId().equals(inputID) )
+				{
+					JOptionPane.showMessageDialog(null, "Given Member/Card ID already taken.", "ERROR", 2);
+					flag = true;
+					break;
+				}
+			}
+			
+			if(flag == false)
+			{
+				stm = con.createStatement();
+				stm.executeUpdate("INSERT INTO members VALUES('" + inputID + "', '" + inputName + "', '" + inputAddress + "', '" + inputNum + "', '" + inputEmail + "', 0)"); 
+				stm.close();
+				//update the table
+				DefaultTableModel model = (DefaultTableModel) table1.getModel();
+				model.addRow(new Object[] {inputID, inputName, inputEmail, inputNum, inputAddress});
+			}
+			
+			con.close();
 		}
-		
-		con.close();
+		else {
+			JOptionPane.showMessageDialog(null, "Please fill every field", "ERROR", 2);
+		}
 		
 	}
 	

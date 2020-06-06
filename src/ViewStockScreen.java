@@ -69,6 +69,14 @@ public class ViewStockScreen extends JInternalFrame  {
 							"STOCK", "NAME", "ID"
 						}
 					) {
+						Class<?>[] columnTypes = new Class<?>[] {
+						Integer.class, String.class, Integer.class};
+								
+						@Override
+						public Class<?> getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
+						}
+							
 						boolean[] columnEditable = new boolean[] {
 							false, false, false
 						};

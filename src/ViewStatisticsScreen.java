@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.*;
 import com.github.lgooddatepicker.components.*;
 
@@ -19,7 +21,7 @@ import com.github.lgooddatepicker.components.*;
 public class ViewStatisticsScreen extends JInternalFrame {
 	public ViewStatisticsScreen() {
 		initComponents();
-		this.setLocation(30, 10);
+		this.setLocation(80, 30);
 	}
 
 	private void initComponents() {
@@ -411,6 +413,9 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			
 			if(model.getRowCount() == 0)
 				JOptionPane.showMessageDialog(null, "No sales during given period", "Notification", 2);
+			
+			con.close();
+			stm.close();
 		}
 		else if(ID.equals("") && !from.equals("") && to.equals(""))
 		{
@@ -466,6 +471,9 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			
 			if(model.getRowCount() == 0)
 				JOptionPane.showMessageDialog(null, "No sales during given period", "Notification", 2);
+			
+			con.close();
+			stm.close();
 		}
 		else if(ID.equals("") && from.equals("") && !to.equals(""))
 		{
@@ -520,6 +528,9 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			
 			if(model.getRowCount() == 0)
 				JOptionPane.showMessageDialog(null, "No sales during given period", "Notification", 2);
+			
+			con.close();
+			stm.close();
 		}
 		else
 		{
@@ -529,11 +540,18 @@ public class ViewStatisticsScreen extends JInternalFrame {
 		
 	}
 	
+	
 	private void advancedStatisticsButtonAction(ActionEvent e)
 	{
-		ViewAdvancedStatisticsScreen ASC = new ViewAdvancedStatisticsScreen();
-		
-		this.getParent().add(ASC);
-		
+		if(!this.textField1.getText().equals("") && this.table1.getRowCount() != 0) {
+			
+			ViewAdvancedStatisticsScreen vas = new ViewAdvancedStatisticsScreen();
+			this.getParent().add(vas);
+			vas.setVisible(true);
+			vas.toFront();		
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Please select one product ID", "WARNING", 2);
+		}
 	}
 }
