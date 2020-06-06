@@ -195,43 +195,102 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	{
 		String from = datePicker1.getComponentDateTextField().getText();
 		String to = datePicker2.getComponentDateTextField().getText();
-		int inputID;
-		if(!textField1.getText().equals(""))
+		String ID = textField1.getText();
+		
+		if(!ID.equals("") && from.equals("") && to.equals(""))
 		{
-			inputID = Integer.parseInt(textField1.getText());
-			if(from.equals("") || to .equals(""))
-				JOptionPane.showMessageDialog(null, "No date given", "ERROR", 2);
+			//Only ID given
+			int inputID = Integer.parseInt(ID);
+			
+			//Empty the table
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount() - 1; i>=0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			String name = "";
+			int quantity = 0;
+			
+			
+			ResultSet rs = stm.executeQuery("SELECT products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE products.id = " + inputID );
+			
+			while(rs.next())
+			{
+				name = rs.getString("products.name");
+				quantity += rs.getInt("sales.quantity");
+			}
+			
+			if(name.equals(""))
+				JOptionPane.showMessageDialog(null, "No product / sale with given product ID", "Notification", 2);
 			else
 			{
-				//Empty the table
-				DefaultTableModel model = (DefaultTableModel) table1.getModel();
-				for(int i = model.getRowCount()-1; i>=0; i--)
-					model.removeRow(i);
-				
-				//fill the table with new input
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
-				Statement stm = con.createStatement();
-				
-				ResultSet rs = stm.executeQuery("SELECT products.name, sales.quantity "
-						+ "FROM products JOIN sales ON sales.id = products.id "
-						+ "WHERE sales.date >= '" + from + "' AND sales.date <= '" + to + "' AND sales.id = " + inputID);
-				
-				ArrayList<String> names = new ArrayList<>();
-				ArrayList<Integer> quantities = new ArrayList<>(); 
-				//get names and quantities of products
-				while(rs.next())
-				{
-					names.add(rs.getString("products.name"));
-					quantities.add(rs.getInt("sales.quantity"));
-				}
-				//fill table
-				for(int i = 0; i<names.size(); i++)
-					model.addRow(new Object[] {names.get(i), quantities.get(i)});
+				model.addRow(new Object[] {name, quantity});
 			}
+			
 		}
-		else
-			JOptionPane.showMessageDialog(null, "No ID given", "ERROR", 2);
+		else if(!ID.equals("") && !from.equals("") && to.equals(""))
+		{
+			//ID and from date given
+			int inputID = Integer.parseInt(ID);
+			
+			String name = "";
+			int quantity = 0;
+			
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			//Empty the table
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount() - 1; i>=0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+			ResultSet rs = stm.executeQuery("SELECT products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE products.id = " + inputID + " AND sales.date >= '" + from + "'");
+			
+			while(rs.next())
+			{
+				name = rs.getString("products.name");
+				quantity += rs.getInt("sales.quantity");
+			}
+			
+			model.addRow(new Object[] {name, quantity});
+			
+		}
+		//else if all fields given
+		else if(!ID.equals("") && !from.equals("") && !to.equals("") )
+		{
+			int inputID = Integer.parseInt(ID);
+			
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			for(int i = model.getRowCount()-1; i>=0; i--)
+			{
+				model.removeRow(i);
+			}
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Statement stm = con.createStatement();
+			
+			ResultSet rs = stm.executeQuery("SELECT products.name, sales.quantity"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE products.id =" + inputID + " AND sales.date >='" + from + "' AND sales.date<= '" + to + "'");
+			
+			//make sales list
+			
+		}
 	}
 	
 	private void advancedStatisticsButtonAction(ActionEvent e)
