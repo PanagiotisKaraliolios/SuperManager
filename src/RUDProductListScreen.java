@@ -13,9 +13,7 @@ import javax.swing.table.*;
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
 	@SuppressWarnings("serial")
 	public class RUDProductListScreen extends JInternalFrame {
 	
@@ -25,7 +23,7 @@ import javax.swing.table.*;
 		}
 
 		private void initComponents() {
-		//Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		
 		panel1 = new JPanel();
 		label1 = new JLabel();
 		label2 = new JLabel();
@@ -222,9 +220,31 @@ import javax.swing.table.*;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//End of component initialization  //GEN-END:initComponents
+		
 	}
 	
+		
+	private JPanel panel1;
+	private JLabel label1;
+	private JLabel label2;
+	private JLabel label3;
+	private JLabel label4;
+	private JLabel label5;
+	private JLabel label6;
+	private JTextField textField1;
+	private JTextField textField2;
+	private JTextField textField3;
+	private JTextField textField4;
+	private JTextField textField5;
+	private JTextField textField6;
+	private JScrollPane scrollPane1;
+	private JTable table1;
+	private JButton button1;
+	private JButton button2;
+	private JButton button3;
+	private ArrayList<Product> listOfProducts;
+		
+		
 	private void getProductListFromDB(ArrayList<Product> listOfProducts,DefaultTableModel model) throws ClassNotFoundException, SQLException {
 		
 		Connection con = null;
@@ -328,7 +348,7 @@ import javax.swing.table.*;
 		DefaultTableModel model = (DefaultTableModel) table1.getModel();
 		String selectedID = null;
 		
-		//delete is done based on username
+		//delete is done based on name
 		Connection con = null;
 		Statement  stm = null;
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -366,7 +386,7 @@ import javax.swing.table.*;
 		DefaultTableModel model = (DefaultTableModel) table1.getModel();
 		String selectedID = null;
 		
-		//update is done based on username
+		//update is done based on id
 		Connection con = null;
 		Statement  stm = null;
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -393,7 +413,7 @@ import javax.swing.table.*;
 			if(!textField6.getText().trim().isEmpty()) model.setValueAt(textField6.getText(), row, 5);
 			
 			/*db update*/
-			//username can't be updated
+			//id can't be updated
 			if(!textField2.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET name = '" + textField2.getText() + "'" + " WHERE id = '" + selectedID + "'");
 			if(!textField3.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stockType = '" + textField3.getText() + "'" + " WHERE id = '" + selectedID + "'");;
 			if(!textField4.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stock = '" + textField4.getText() + "'" + " WHERE id = '" + selectedID + "'");
@@ -405,26 +425,7 @@ import javax.swing.table.*;
 	}
 	
 	
-	//Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	private JPanel panel1;
-	private JLabel label1;
-	private JLabel label2;
-	private JLabel label3;
-	private JLabel label4;
-	private JLabel label5;
-	private JLabel label6;
-	private JTextField textField1;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
-	private JTextField textField5;
-	private JTextField textField6;
-	private JScrollPane scrollPane1;
-	private JTable table1;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
-	private ArrayList<Product> listOfProducts;
+	
+	
 
 }

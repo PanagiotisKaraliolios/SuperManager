@@ -4,16 +4,13 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.table.*;
 import com.github.lgooddatepicker.components.*;
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
 @SuppressWarnings("serial")
 public class ViewStatisticsScreen extends JInternalFrame {
 	public ViewStatisticsScreen() {
@@ -22,8 +19,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
 		panel1 = new JPanel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
@@ -168,12 +164,11 @@ public class ViewStatisticsScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(745, 465));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
@@ -188,7 +183,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	private JTextField textField1;
 	private DatePickerSettings datePickerSettings1;
 	private DatePickerSettings datePickerSettings2;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	
 	private void confirmButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
@@ -548,7 +543,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			vas.toFront();		
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Please select one product ID", "WARNING", 2);
+			JOptionPane.showMessageDialog(null, "Please first select one product ID and press Confirm", "WARNING", 2);
 		}
 	}
 }

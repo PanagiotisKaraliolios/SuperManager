@@ -5,15 +5,11 @@ import java.sql.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
-/*
- * Created by JFormDesigner on Mon May 25 19:40:00 EEST 2020
- */
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
+
 @SuppressWarnings("serial")
 public class OrderProductsScreen extends JInternalFrame {
 	public OrderProductsScreen() {
@@ -22,8 +18,7 @@ public class OrderProductsScreen extends JInternalFrame {
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
 		panel1 = new JPanel();
 		textField1 = new JTextField();
 		label1 = new JLabel();
@@ -140,11 +135,10 @@ public class OrderProductsScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(590, 415));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JTextField textField1; //productID field
 	private JLabel label1;
@@ -155,7 +149,7 @@ public class OrderProductsScreen extends JInternalFrame {
 	private JButton button1; //addOrderButton
 	private JButton button2; //sendOrderButton
 	private JLabel label3;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	
 	private void addOrderButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{

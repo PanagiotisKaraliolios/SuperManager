@@ -7,9 +7,6 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-/*
- * Created by JFormDesigner on Sun May 17 23:00:48 EEST 2020
- */
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -18,9 +15,7 @@ import java.util.ArrayList;
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
 @SuppressWarnings("serial")
 public class ViewStockScreen extends JInternalFrame  {
 	ArrayList<Product> listOfProducts;
@@ -32,8 +27,7 @@ public class ViewStockScreen extends JInternalFrame  {
 	}
 	
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
 		panel1 = new JPanel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
@@ -105,7 +99,7 @@ public class ViewStockScreen extends JInternalFrame  {
 
 			panel1.setPreferredSize(new Dimension(500, 600));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 		listOfProducts=new ArrayList<Product>();
 		DefaultTableModel model = (DefaultTableModel) table1.getModel();
 		
@@ -119,13 +113,12 @@ public class ViewStockScreen extends JInternalFrame  {
 	
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
 	private JButton button1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	private void getProductListFromDB(ArrayList<Product> listOfProducts,DefaultTableModel model) throws ClassNotFoundException, SQLException {
 		
 		Connection con = null;
@@ -178,7 +171,7 @@ public class ViewStockScreen extends JInternalFrame  {
 			try {
 				ops.setSelected(true);
 			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 		}

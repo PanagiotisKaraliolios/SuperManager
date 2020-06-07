@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
-/*
- * Created by JFormDesigner on Thu May 14 18:04:36 EEST 2020
- */
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
+
 @SuppressWarnings("serial")
 public class CreateMemberCardScreen extends JInternalFrame {
 	public CreateMemberCardScreen() {
@@ -21,9 +17,8 @@ public class CreateMemberCardScreen extends JInternalFrame {
 		this.setLocation(50, 50);
 	}
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	private void initComponents() {			//Members Screen Components
+		
 		panel1 = new JPanel();
 		label1 = new JLabel();
 		textField1 = new JTextField();
@@ -35,8 +30,8 @@ public class CreateMemberCardScreen extends JInternalFrame {
 		label3 = new JLabel();
 		label4 = new JLabel();
 		label5 = new JLabel();
-		button1 = new JButton();
-		button2 = new JButton();
+		button1 = new JButton();			//this button adds new member
+		button2 = new JButton();			//this button deletes a selected member
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
 
@@ -139,9 +134,9 @@ public class CreateMemberCardScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(900, 500));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 		
-		//add buttonActionListeners
+		
+		
 		button1.addActionListener(new ActionListener()
 		{
 					
@@ -202,8 +197,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 		}
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JLabel label1;
 	private JTextField textField1; //Member/Card ID field
@@ -219,7 +213,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 	private JButton button2; //deleteMemberButton
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	
 	private void addMemberButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{

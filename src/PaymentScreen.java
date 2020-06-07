@@ -18,17 +18,15 @@ import javax.swing.table.*;
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
 @SuppressWarnings("serial")
 public class PaymentScreen extends JInternalFrame {
 	
-	private ArrayList<Integer> ids = new ArrayList<>();
-	private ArrayList<Integer> quantities = new ArrayList<>();/*those two arrayLists are used to store the data from
-																form the ScanProductScreen list to store them in 
-																mySQL table sales
-															   */
+	private ArrayList<Integer> ids = new ArrayList<>();			//these two arrayLists are used to store the data
+	private ArrayList<Integer> quantities = new ArrayList<>();	//form the ScanProductScreen list to store them in
+																//mySQL table sales
+														      
+															   
 	public PaymentScreen(ArrayList<Integer> productID,ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
 		initComponents();
 		fillTable(Names, Quantities,Prices);
@@ -37,12 +35,11 @@ public class PaymentScreen extends JInternalFrame {
 		totalCalculation(Quantities,Prices);
 		this.setLocation(100, 30);
 		showDate();
-		//this.addInternalFrameListener(new);
+		
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
 		
 	
 		panel1 = new JPanel();
@@ -195,13 +192,12 @@ public class PaymentScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(840, 540));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 		
 		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private Connection con;
 	private Statement stm;
 	private ResultSet rs;
@@ -227,7 +223,7 @@ public class PaymentScreen extends JInternalFrame {
 	private double discount = 0;
 	private double limit = 10;
 	private int points = -1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	
 	private void fillTable(ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices)
 	{
@@ -308,8 +304,8 @@ public class PaymentScreen extends JInternalFrame {
 	}
 	
 	                                                                           
-	private void finishButtonAction(ActionEvent e)//when the finish button is pushed this method sends the data 
-	{											 //about the products that the cashier scanned to mySQL table sales
+	private void finishButtonAction(ActionEvent e)	//when the finish button is pushed this method sends the data 
+	{											 	//about the products that the cashier scanned to mySQL table sales
 		if(hasThePaymentFinished==false) {
 			
 			try

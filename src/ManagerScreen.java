@@ -26,39 +26,40 @@ public class ManagerScreen extends JFrame {
 	private void ManagerScreenActionPerformed(java.awt.event.ActionEvent evt){
 		if(evt.getSource().equals(button1)) {
 			
-			if(isCLSopen==false) {
-				RUDCashierListScreen cls = new RUDCashierListScreen();
-				this.desktopPane1.add(cls);
-				cls.setVisible(true);
-				cls.toFront();
-				try {
-					cls.setSelected(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				cls.addInternalFrameListener(new InternalFrameAdapter() {
-					@Override
-					public void internalFrameClosing(InternalFrameEvent e) {
-						isCLSopen = false;
-					}
-
-				});
-				if(cls.isEnabled()) {
-					isCLSopen = true;
-					
-				}				
-			}
-			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(RUDCashierListScreen.class)) {
-				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {
-					if(i.getClass().equals(RUDCashierListScreen.class)) {
-						i.moveToFront();
-						try {
-							i.setSelected(true);
-						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+			if(isCLSopen==false) {																			//
+				RUDCashierListScreen cls = new RUDCashierListScreen();										//
+				this.desktopPane1.add(cls);																	//
+				cls.setVisible(true);																		//
+				cls.toFront();																				//
+				try {																						// Check if the internal window is open.
+					cls.setSelected(true);																	// If it is not create a new one.
+																											//
+				} catch (PropertyVetoException e1) {														//
+																											//
+					e1.printStackTrace();																	//
+				}																							//
+				cls.addInternalFrameListener(new InternalFrameAdapter() {									//
+					@Override																				//
+					public void internalFrameClosing(InternalFrameEvent e) {								//
+						isCLSopen = false;																	//
+					}																						//
+																											//
+				});																							//
+				if(cls.isEnabled()) {																		//
+					isCLSopen = true;																		//
+				}																							//
+			}																								//
+			else if(!this.desktopPane1.getSelectedFrame().getClass().equals(RUDCashierListScreen.class)) {	// If the desired window is already created and open,
+				for (JInternalFrame i : this.desktopPane1.getAllFrames()) {									// try to set it on the foreground.
+					if(i.getClass().equals(RUDCashierListScreen.class)) {									//
+						i.moveToFront();																	//
+						try {																				//
+							i.setSelected(true);															//
+																											//
+						} catch (PropertyVetoException e) {													//
+																											//
+							e.printStackTrace();															//
+						}																					//
 					}
 				}
 			}
@@ -69,12 +70,13 @@ public class ManagerScreen extends JFrame {
 			if(isPLSopen==false) {
 				RUDProductListScreen pls = new RUDProductListScreen();
 				this.desktopPane1.add(pls);
-				pls.setVisible(true);
-				pls.toFront();
-				try {
+				pls.setVisible(true);																	//
+				pls.toFront();																			//same as above
+				try {																					//
 					pls.setSelected(true);
+					
 				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				pls.addInternalFrameListener(new InternalFrameAdapter() {
@@ -95,8 +97,9 @@ public class ManagerScreen extends JFrame {
 						i.moveToFront();
 						try {
 							i.setSelected(true);
+							
 						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 					}
@@ -109,12 +112,12 @@ public class ManagerScreen extends JFrame {
 			if(isStatisticsScreenOpen==false) {
 				ViewStatisticsScreen vStat = new ViewStatisticsScreen();
 				this.desktopPane1.add(vStat);
-				vStat.setVisible(true);
+				vStat.setVisible(true);																	//same as above
 				vStat.toFront();
 				try {
 					vStat.setSelected(true);
 				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				vStat.addInternalFrameListener(new InternalFrameAdapter() {
@@ -136,7 +139,7 @@ public class ManagerScreen extends JFrame {
 						try {
 							i.setSelected(true);
 						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 					}
@@ -152,9 +155,9 @@ public class ManagerScreen extends JFrame {
 				vStock.setVisible(true);
 				vStock.toFront();
 				try {
-					vStock.setSelected(true);
+					vStock.setSelected(true);														//same as above
 				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				vStock.addInternalFrameListener(new InternalFrameAdapter() {
@@ -176,7 +179,7 @@ public class ManagerScreen extends JFrame {
 						try {
 							i.setSelected(true);
 						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 					}
@@ -187,9 +190,8 @@ public class ManagerScreen extends JFrame {
 	
 	
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	private void initComponents() {			//Manager Screen Components
+		
 		panel1 = new JPanel();
 		desktopPane1 = new JDesktopPane();
 		button1 = new JButton();
@@ -291,16 +293,15 @@ public class ManagerScreen extends JFrame {
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JDesktopPane desktopPane1;
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;
 	private JButton button4;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 }

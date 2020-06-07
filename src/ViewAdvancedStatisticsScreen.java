@@ -1,7 +1,5 @@
 import java.awt.*;
-
 import javax.swing.*;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -11,9 +9,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
 @SuppressWarnings("serial")
 public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 	
@@ -23,8 +19,7 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
 		panel1 = new JPanel();
 
 		//======== panel1 ========
@@ -38,7 +33,7 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 		    JFreeChart chart = ChartFactory.createLineChart(
 		        "Product Sales", // Chart title
 		        "Date", // X-Axis Label
-		        "Number of Visitor", // Y-Axis Label
+		        "Quantity Sold", // Y-Axis Label
 		        dataset
 		        );
 
@@ -61,13 +56,12 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(900, 500));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	
 	private DefaultCategoryDataset createDataset() {
 

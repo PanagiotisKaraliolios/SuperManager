@@ -33,7 +33,6 @@ public class CashierScreen extends JFrame {
 				try {
 					mcs.setSelected(true);
 				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				mcs.addInternalFrameListener(new InternalFrameAdapter() {
@@ -55,7 +54,6 @@ public class CashierScreen extends JFrame {
 						try {
 							i.setSelected(true);
 						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -88,7 +86,7 @@ public class CashierScreen extends JFrame {
 				try {
 					sps.setSelected(true);
 				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				sps.addInternalFrameListener(new InternalFrameAdapter() {
@@ -124,13 +122,12 @@ public class CashierScreen extends JFrame {
 	
 	
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	private void initComponents() {		//Cashier Screen components
+		
 		panel1 = new JPanel();
 		desktopPane1 = new JDesktopPane();
-		button1 = new JButton();
-		button2 = new JButton();
+		button1 = new JButton();			//This Button opens Members Screen
+		button2 = new JButton();			//This button opens Scan Products Screen
 
 		//======== this ========
 		setMinimumSize(new Dimension(1280, 720));
@@ -204,16 +201,15 @@ public class CashierScreen extends JFrame {
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JDesktopPane desktopPane1;
 	private JButton button1;
 	private JButton button2;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 }	
 
 

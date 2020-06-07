@@ -16,7 +16,7 @@ public class LoginScreen extends JFrame {
 	public static void main(String[] args)
 	{
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {				//set look and feel
 		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
 		            break;
@@ -31,7 +31,7 @@ public class LoginScreen extends JFrame {
 		
 	}
 	
-	public LoginScreen() {
+	public LoginScreen() {					//login screen constructor
 		initComponents(); 
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -43,7 +43,7 @@ public class LoginScreen extends JFrame {
 	private JButton LoginButton;
 	private JPasswordField passwordField1;
 	private JLabel label1;
-	private JTextField textField1;
+	private JTextField nameField;
 	private JLabel label2;
 	private JLabel label3;
 	private JLabel label4;
@@ -55,14 +55,14 @@ public class LoginScreen extends JFrame {
 	private ArrayList<Manager> listOfmanagers;
 	
 
-	private void initComponents() {
+	private void initComponents() {				//login screen components
 		
 		dialogPane = new JPanel();
 		contentPanel = new JPanel();
 		LoginButton = new JButton();
 		passwordField1 = new JPasswordField();
 		label1 = new JLabel();
-		textField1 = new JTextField();
+		nameField = new JTextField();			
 		label2 = new JLabel();
 		label3 = new JLabel();
 		label4 = new JLabel();
@@ -105,7 +105,7 @@ public class LoginScreen extends JFrame {
 
 				
 				label2.setText("Username/ID");
-				label2.setLabelFor(textField1);
+				label2.setLabelFor(nameField);
 
 				
 				label3.setText("Password");
@@ -135,7 +135,7 @@ public class LoginScreen extends JFrame {
 							.addGroup(contentPanelLayout.createParallelGroup()
 								.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 								.addComponent(LoginButton, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+								.addComponent(nameField, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 							.addGap(17, 17, 17))
 				);
 				contentPanelLayout.setVerticalGroup(
@@ -146,7 +146,7 @@ public class LoginScreen extends JFrame {
 								.addGroup(contentPanelLayout.createSequentialGroup()
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
 									.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(nameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(label2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 									.addGap(18, 18, 18)
 									.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -175,15 +175,15 @@ public class LoginScreen extends JFrame {
 		listOfmanagers = new ArrayList<Manager>();
 		
 		char[] comparepasswordfield = passwordField1.getPassword();
-		String compareusernamefield = textField1.getText();
+		String compareusernamefield = nameField.getText();
 		Cashier cashier ;
 		Manager manager;
 		boolean found=false;
 		
 		
-		Class.forName ("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection ("jdbc:mysql://localhost/sm", "root", "");
-		stm = con.createStatement () ;
+		Class.forName ("com.mysql.cj.jdbc.Driver");											//
+		con = DriverManager.getConnection ("jdbc:mysql://localhost/sm", "root", "");		//DB connection
+		stm = con.createStatement () ;														//
 		
 		ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
 		while (rs.next()) {

@@ -9,9 +9,7 @@ import java.sql.*;
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
 @SuppressWarnings("serial")
 public class RUDCashierListScreen extends JInternalFrame {
 	public RUDCashierListScreen() {
@@ -21,7 +19,7 @@ public class RUDCashierListScreen extends JInternalFrame {
 
 	
 	private void initComponents() {
-		//Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		
 		panel1 = new JPanel();
 		label2 = new JLabel();
 		textField2 = new JTextField();
@@ -211,8 +209,28 @@ public class RUDCashierListScreen extends JInternalFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 	}
+	
+	private JPanel panel1;
+	private JLabel label2;
+	private JTextField textField2;
+	private JTextField textField3;
+	private JTextField textField4;
+	private JTextField textField5;
+	private JLabel label3;
+	private JLabel label4;
+	private JLabel label5;
+	private JButton button1;
+	private JButton button2;
+	private JScrollPane scrollPane1;
+	private JTable table1;
+	private JButton button3;
+	private JLabel label6;
+	private JLabel label7;
+	private JTextField textField6;
+	private JTextField textField7;
+	private ArrayList<Cashier> listOfCashiers;
 	
 	
 	private void deleteCashier(ActionEvent e) throws ClassNotFoundException, SQLException {
@@ -394,26 +412,6 @@ public class RUDCashierListScreen extends JInternalFrame {
 	}
 	
 
-	//Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	private JPanel panel1;
-	private JLabel label2;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
-	private JTextField textField5;
-	private JLabel label3;
-	private JLabel label4;
-	private JLabel label5;
-	private JButton button1;
-	private JButton button2;
-	private JScrollPane scrollPane1;
-	private JTable table1;
-	private JButton button3;
-	private JLabel label6;
-	private JLabel label7;
-	private JTextField textField6;
-	private JTextField textField7;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
-	private ArrayList<Cashier> listOfCashiers;
+	
 }

@@ -9,15 +9,11 @@ import java.util.Calendar;
 
 import javax.swing.*;
 import javax.swing.table.*;
-/*
- * Created by JFormDesigner on Fri May 15 18:10:40 EEST 2020
- */
 
 
 
-/**
- * @author Panagiotis Karaliolios
- */
+
+
 @SuppressWarnings("serial")
 public class ScanProductsScreen extends JInternalFrame {
 	public ScanProductsScreen() {
@@ -27,8 +23,7 @@ public class ScanProductsScreen extends JInternalFrame {
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+		
 		panel1 = new JPanel();
 		textField1 = new JTextField();
 		textField2 = new JTextField();
@@ -213,13 +208,12 @@ public class ScanProductsScreen extends JInternalFrame {
 
 			panel1.setPreferredSize(new Dimension(905, 500));
 		}
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
 		
 		
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Panagiotis Karaliolios
+	
 	private JPanel panel1;
 	private JTextField textField1;  //ProductID field
 	private JTextField textField2;	//Price Tag
@@ -237,7 +231,7 @@ public class ScanProductsScreen extends JInternalFrame {
 	private JButton button2;	//removeProduct
 	private JButton button3;	//proceed to payment
 	private static  String DateFormat = "yyyy-MM-dd";
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	
 	
 	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
@@ -249,7 +243,7 @@ public class ScanProductsScreen extends JInternalFrame {
 		Statement stm = con.createStatement();
 		
 		ResultSet rs = stm.executeQuery("SELECT * FROM products WHERE id = '" + inputID + "'");
-		//loop probably not needed
+		//loop may not needed
 		while(rs.next())
 		{
 			chosenProduct.setProductsID(rs.getInt("id"));
