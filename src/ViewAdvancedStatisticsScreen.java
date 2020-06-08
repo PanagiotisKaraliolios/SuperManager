@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.sql.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -13,7 +16,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
 @SuppressWarnings("serial")
 public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 	
-	public ViewAdvancedStatisticsScreen() {
+	public ViewAdvancedStatisticsScreen(int ID, String FROM, String TO) {
+		try
+		{
+			retrieveSales(ID, FROM, TO);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 		initComponents();
 		this.setLocation(80, 30);
 	}
@@ -61,25 +72,83 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 
 	
 	private JPanel panel1;
+	ArrayList<Sale> sales = new ArrayList<>();
 	
 	
 	private DefaultCategoryDataset createDataset() {
 
-	    String series1 = "Coca Cola Light";
-
 	    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-	    dataset.addValue(200, series1, "2016-12-19");
-	    dataset.addValue(150, series1, "2016-12-20");
-	    dataset.addValue(100, series1, "2016-12-21");
-	    dataset.addValue(210, series1, "2016-12-22");
-	    dataset.addValue(240, series1, "2016-12-23");
-	    dataset.addValue(195, series1, "2016-12-24");
-	    dataset.addValue(245, series1, "2016-12-25");
-
-	    
+	    for(Sale sale : sales)
+	    {
+	    	dataset.addValue(sale.getQuantity(), sale.getProduct().getName(), sale.getDate());
+	    }	    
 
 	    return dataset;
 	  }
+	
+	private void retrieveSales(int ID, String FROM, String TO) throws SQLException, ClassNotFoundException
+	{
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+		Statement stm = con.createStatement();
+		ResultSet rs;
+		
+		
+		if(!FROM.equals("") && !TO.equals(""))
+		{
+			//Both dates given
+			rs = stm.executeQuery("SELECT sales.date, sales.quantity, products.name"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE sales.id = " + ID + " AND sales.date >= '" + FROM + "' AND sales.date <= '" + TO + "'");
+			
+			while(rs.next())
+			{
+				sales.add(new Sale(new Product(rs.getString("products.name"), 0, "", 0,  0, 0), rs.getInt("sales.quantity"), rs.getString("sales.date")));
+			}
+			
+			
+		}
+		else if(!FROM.equals("") && TO.equals(""))
+		{
+			//Only from given
+			rs = stm.executeQuery("SELECT sales.date, sales.quantity, products.name"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE sales.id = " + ID + " AND sales.date >= '" + FROM + "'");
+			
+			while(rs.next())
+			{
+				sales.add(new Sale(new Product(rs.getString("products.name"), 0, "", 0,  0, 0), rs.getInt("sales.quantity"), rs.getString("sales.date")));
+			}
+		}
+		else if(FROM.equals("") && !TO.equals(""))
+		{
+			//Only to given
+			rs = stm.executeQuery("SELECT sales.date, sales.quantity, products.name"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE sales.id = " + ID + " AND sales.date <= '" + TO + "'");
+			
+			while(rs.next())
+			{
+				sales.add(new Sale(new Product(rs.getString("products.name"), 0, "", 0,  0, 0), rs.getInt("sales.quantity"), rs.getString("sales.date")));
+			}
+		}
+		else if(FROM.equals("") && TO.equals(""))
+		{
+			//No dates given
+			rs = stm.executeQuery("SELECT sales.date, sales.quantity, products.name"
+					+ " FROM sales JOIN products ON sales.id = products.id "
+					+ "WHERE sales.id = " + ID);
+			
+			while(rs.next())
+			{
+				sales.add(new Sale(new Product(rs.getString("products.name"), 0, "", 0,  0, 0), rs.getInt("sales.quantity"), rs.getString("sales.date")));
+			}
+		}
+		
+		
+		
+		stm.close();
+		con.close();
+	}
 
 }

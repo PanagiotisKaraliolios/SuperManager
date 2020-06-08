@@ -3,11 +3,13 @@ public class Sale
 {
 	private Product product;
 	private int quantity;
+	private String date;
 	
-	public Sale(Product product, int quantity)
+	public Sale(Product product, int quantity, String date)
 	{
 		this.product = product;
 		this.quantity = quantity;
+		this.date = date;
 	}
 	
 	//get Methods
@@ -21,6 +23,11 @@ public class Sale
 		return this.quantity;
 	}
 	
+	public String getDate()
+	{
+		return  this.date;
+	}
+	
 	//set Methods
 	public void setProduct(Product product)
 	{
@@ -30,5 +37,10 @@ public class Sale
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
+	}
+	
+	public void setDate(String date)
+	{
+		this.date = date;
 	}
 }

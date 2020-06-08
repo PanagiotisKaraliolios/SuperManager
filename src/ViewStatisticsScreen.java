@@ -394,7 +394,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				}
 				else
 				{
-					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity));
+					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity, ""));
 				}
 			}
 			
@@ -422,7 +422,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			}
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", ""); 
 			Statement stm = con.createStatement();
 			
 			ResultSet rs = stm.executeQuery("SELECT products.id, products.name, sales.quantity"
@@ -452,7 +452,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				}
 				else
 				{
-					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity));
+					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity, ""));
 				}
 			}
 			
@@ -509,7 +509,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				}
 				else
 				{
-					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity));
+					sales.add(new Sale(new Product(inName, 0, "", inID, 0, 0), inQuantity, ""));
 				}
 			}
 			
@@ -537,7 +537,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	{
 		if(!this.textField1.getText().equals("") && this.table1.getRowCount() != 0) {
 			
-			ViewAdvancedStatisticsScreen vas = new ViewAdvancedStatisticsScreen();
+			ViewAdvancedStatisticsScreen vas = new ViewAdvancedStatisticsScreen(Integer.parseInt(textField1.getText()), datePicker1.getComponentDateTextField().getText(), datePicker2.getComponentDateTextField().getText());
 			this.getParent().add(vas);
 			vas.setVisible(true);
 			vas.toFront();		
