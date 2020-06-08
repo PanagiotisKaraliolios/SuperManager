@@ -9,9 +9,9 @@ import javax.swing.event.InternalFrameEvent;
 
 @SuppressWarnings("serial")
 public class CashierScreen extends JFrame {
-	private boolean isMCSopen = false;
-	private boolean isSPSopen = false;
-	public boolean isPSopen = false;
+	private boolean isMCSopen = false;	//flag  to check if the Member Card Screen is open
+	private boolean isSPSopen = false;	//flag  to check if the Scan Products Screen is open
+	public boolean isPSopen = false;	//flag  to check if the payment Screen is open
 
 	
 	

@@ -8,10 +8,10 @@ import java.beans.PropertyVetoException;
 
 @SuppressWarnings("serial")
 public class ManagerScreen extends JFrame {
-	private boolean isCLSopen = false;
-	private boolean isPLSopen = false;
-	private boolean isStatisticsScreenOpen = false;
-	private boolean isstockScreenOpen = false;
+	private boolean isCLSopen = false;				//flag  to check if the RUD Cashiers list Screen is open
+	private boolean isPLSopen = false;				//flag  to check if the RUD Products list Screen is open
+	private boolean isStatisticsScreenOpen = false;	//flag  to check if the Statistics Screen is open
+	private boolean isStockScreenOpen = false;		//flag  to check if the Stock Screen is open
 	
 	public ManagerScreen() {
 		initComponents();
@@ -149,7 +149,7 @@ public class ManagerScreen extends JFrame {
 		
 		else if(evt.getSource().equals(button4)) {
 
-			if(isstockScreenOpen==false) {
+			if(isStockScreenOpen==false) {
 				ViewStockScreen vStock = new ViewStockScreen();
 				this.desktopPane1.add(vStock);
 				vStock.setVisible(true);
@@ -163,12 +163,12 @@ public class ManagerScreen extends JFrame {
 				vStock.addInternalFrameListener(new InternalFrameAdapter() {
 					@Override
 					public void internalFrameClosing(InternalFrameEvent e) {
-						isstockScreenOpen = false;
+						isStockScreenOpen = false;
 					}
 
 				});
 				if(vStock.isEnabled()) {
-					isstockScreenOpen = true;
+					isStockScreenOpen = true;
 					
 				}				
 			}
