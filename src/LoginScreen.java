@@ -170,65 +170,69 @@ public class LoginScreen extends JFrame {
 	       
 	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException
 	{
-		
-		listOfcashiers = new ArrayList<Cashier>();
-		listOfmanagers = new ArrayList<Manager>();
-		
-		char[] comparepasswordfield = passwordField1.getPassword();
-		String compareusernamefield = nameField.getText();
-		Cashier cashier ;
-		Manager manager;
-		boolean found=false;
-		
-		
-		Class.forName ("com.mysql.cj.jdbc.Driver");											//
-		con = DriverManager.getConnection ("jdbc:mysql://localhost/sm", "root", "");		//DB connection
-		stm = con.createStatement () ;														//
-		
-		ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
-		while (rs.next()) {
-			cashier=new Cashier(rs.getString("username"), rs.getString("password"),rs.getString("name"),rs.getString("email"),rs.getString("phoneNumber"),rs.getString("address"));
-	        listOfcashiers.add(cashier);
-	    }
-		
-		rs=stm.executeQuery("SELECT * FROM manager");
-		while(rs.next()) {
-			manager=new Manager(rs.getString("username"), rs.getString("password"));
-			listOfmanagers.add(manager);
-		}
-		
-		
-		manager=listOfmanagers.get(0);
-		
-		char[] managerPass = new char[manager.getPassword().length()];
-		for (int i = 0; i < manager.getPassword().length(); i++){
-	        managerPass[i] = manager.getPassword().charAt(i);
-	    }
-		
-		for(Cashier c : listOfcashiers) {
+		try {
+
+			listOfcashiers = new ArrayList<Cashier>();
+			listOfmanagers = new ArrayList<Manager>();
 			
-			char[] cashierPass = new char[c.getPassword().length()];
-			for (int i = 0; i < c.getPassword().length(); i++){
-		        cashierPass[i] = c.getPassword().charAt(i);
+			char[] comparepasswordfield = passwordField1.getPassword();
+			String compareusernamefield = nameField.getText();
+			Cashier cashier ;
+			Manager manager;
+			boolean found=false;
+			
+			
+			Class.forName ("com.mysql.cj.jdbc.Driver");											//
+			con = DriverManager.getConnection ("jdbc:mysql://localhost/sm", "root", "");		//DB connection
+			stm = con.createStatement () ;														//
+			
+			ResultSet rs = stm.executeQuery("SELECT * FROM cashiers");
+			while (rs.next()) {
+				cashier=new Cashier(rs.getString("username"), rs.getString("password"),rs.getString("name"),rs.getString("email"),rs.getString("phoneNumber"),rs.getString("address"));
+		        listOfcashiers.add(cashier);
 		    }
 			
-			if(Arrays.equals(cashierPass, comparepasswordfield) && c.getUsername().equals(compareusernamefield)){
-				this.dispose();
-				new CashierScreen();
-				found=true;
+			rs=stm.executeQuery("SELECT * FROM manager");
+			while(rs.next()) {
+				manager=new Manager(rs.getString("username"), rs.getString("password"));
+				listOfmanagers.add(manager);
 			}
+			
+			
+			manager=listOfmanagers.get(0);
+			
+			char[] managerPass = new char[manager.getPassword().length()];
+			for (int i = 0; i < manager.getPassword().length(); i++){
+		        managerPass[i] = manager.getPassword().charAt(i);
+		    }
+			
+			for(Cashier c : listOfcashiers) {
 				
+				char[] cashierPass = new char[c.getPassword().length()];
+				for (int i = 0; i < c.getPassword().length(); i++){
+			        cashierPass[i] = c.getPassword().charAt(i);
+			    }
+				
+				if(Arrays.equals(cashierPass, comparepasswordfield) && c.getUsername().equals(compareusernamefield)){
+					this.dispose();
+					new CashierScreen();
+					found=true;
+				}
+					
+			}
+			
+			if(Arrays.equals(managerPass, comparepasswordfield) && manager.getUsername().equals(compareusernamefield)) {
+				this.dispose();
+				new ManagerScreen();
+				found=true;	
+			}
+			
+			if(found==false) JOptionPane.showMessageDialog(null, "User not found", "ERROR", 2);
+			stm.close () ;
+			con.close () ;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "There is no connection to Data Base", "ERROR", 2);
 		}
-		
-		if(Arrays.equals(managerPass, comparepasswordfield) && manager.getUsername().equals(compareusernamefield)) {
-			this.dispose();
-			new ManagerScreen();
-			found=true;	
-		}
-		
-		if(found==false) JOptionPane.showMessageDialog(null, "User not found", "ERROR", 2);
-		stm.close () ;
-		con.close () ;
 		
 	 }
 
