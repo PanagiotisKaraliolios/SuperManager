@@ -1,15 +1,18 @@
 import java.awt.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
 
 
 
@@ -29,9 +32,10 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 			e.printStackTrace();
 		}
 		initComponents();
-		this.setLocation(80, 30);
+		this.setLocation(200, 50);
 	}
 
+	@SuppressWarnings("static-access")
 	private void initComponents() {
 		
 		panel1 = new JPanel();
@@ -41,19 +45,27 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 			
 			panel1.setLayout(null);
 			
-			// Create dataset
-		    DefaultCategoryDataset dataset = createDataset();
-		    // Create chart
-		    JFreeChart chart = ChartFactory.createLineChart(
-		        "Product Sales " + sales.get(0).getDate() + " / " + sales.get(sales.size()-1).getDate(), // Chart title
-		        "Date", // X-Axis Label
-		        "Quantity Sold", // Y-Axis Label
-		        dataset
-		        );
-
+			//Create Chart
+		    DateAxis timeAxis = new DateAxis("Date");
+	        timeAxis.setUpperMargin(DateAxis.DEFAULT_UPPER_MARGIN /* * 2*/); // UPDATED
+	        timeAxis.setLowerMargin(DateAxis.DEFAULT_LOWER_MARGIN /* * 2*/); // UPDATED
+	        timeAxis.setDateFormatOverride(new SimpleDateFormat("YYYY-MM-dd"));
+	        NumberAxis numberAxis = new NumberAxis("Quantity");
+	        numberAxis.setAutoRangeIncludesZero(false);
+	        numberAxis.setStandardTickUnits(numberAxis.createIntegerTickUnits());
+	        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, false);
+	        XYPlot plot = new XYPlot(createDataset(), timeAxis, numberAxis, renderer);
+	        plot.setBackgroundPaint(Color.lightGray);
+	        plot.setDomainGridlinePaint(Color.white);
+	        plot.setRangeGridlinePaint(Color.white);
+	        JFreeChart lineChart = new JFreeChart("Product Sales " + sales.get(0).getDate() + " / " + sales.get(sales.size()-1).getDate(), plot);
+	        lineChart.setBackgroundPaint(Color.white);
+	        ChartPanel chartPanel = new ChartPanel(lineChart);
+	        //add(chartPanel);
 		    
-		    ChartPanel panel = new ChartPanel(chart);
-		    setContentPane(panel);
+		    
+		    //ChartPanel panel = new ChartPanel(chart1);
+		    setContentPane(chartPanel);
 
 			//======== this ========
 			{
@@ -78,34 +90,26 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 	ArrayList<Sale> sales = new ArrayList<>();
 	
 	
-	private DefaultCategoryDataset createDataset() {
+	
+	
+	private TimeSeriesCollection createDataset() {
 
-	    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-	    //if(sales.size()<9)
-	    //{
-	    	for(Sale sale : sales)
-	    	{
-	    		dataset.addValue(sale.getQuantity(), sale.getProduct().getName(), sale.getDate());
-	    	}
-	    //}
-	    //else
-	    //{
-	    	//for(int i = 0; i<sales.size(); i++)
-	    	//{
-	    		//if(i == 0 || i ==  (sales.size()-1)/2 || i ==  sales.size()-1)
-	    		//{
-	    			//dataset.addValue(sales.get(i).getQuantity(), sales.get(i).getProduct().getName(), sales.get(i).getDate());
-	    		//}
-	    		//else
-	    		//{
-	    			//dataset.addValue(sales.get(i).getQuantity(), sales.get(i).getProduct().getName(), "" + i);
-	    		
-	    		//}
-	    	//}
-	    //}
+        TimeSeries typeA = new TimeSeries(sales.get(0).getProduct().getName());
+        TimeSeriesCollection collection = new TimeSeriesCollection();
 
-	    return dataset;
-	  }
+        collection.addSeries(typeA);
+        for(Sale sale : sales) {
+        	typeA.add(Day.parseDay(sale.getDate()) , sale.getQuantity());
+        }
+        
+        return collection;
+    }
+        
+
+        
+   
+	
+	
 	
 	private void retrieveSales(int ID, String FROM, String TO) throws SQLException, ClassNotFoundException
 	{

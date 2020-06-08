@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import com.github.lgooddatepicker.components.*;
 public class ViewStatisticsScreen extends JInternalFrame {
 	public ViewStatisticsScreen() {
 		initComponents();
-		this.setLocation(80, 30);
+		this.setLocation(130, 50);
 	}
 
 	private void initComponents() {
@@ -540,10 +541,16 @@ public class ViewStatisticsScreen extends JInternalFrame {
 			ViewAdvancedStatisticsScreen vas = new ViewAdvancedStatisticsScreen(Integer.parseInt(textField1.getText()), datePicker1.getComponentDateTextField().getText(), datePicker2.getComponentDateTextField().getText());
 			this.getParent().add(vas);
 			vas.setVisible(true);
-			vas.toFront();		
+			vas.toFront();	
+			try {
+				vas.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				
+				e1.printStackTrace();
+			}
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Please first select one product ID and press Confirm", "WARNING", 2);
+			JOptionPane.showMessageDialog(null, "Please first select one product ID and press Confirm.\nThen press Advanced Statistics", "WARNING", 2);
 		}
 	}
 }
