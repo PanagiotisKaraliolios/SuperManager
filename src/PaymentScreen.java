@@ -244,10 +244,10 @@ public class PaymentScreen extends JInternalFrame {
 		rs = stm.executeQuery("SELECT points FROM members WHERE memberCardID = '" + inputID + "'");
 		
 		
-		while(rs.next())//ERROR
-			points = rs.getInt("points");
+		rs.next();
+		points = rs.getInt("points");
 		
-		if(points == -1)
+		if(points == -1)//Points used as flag here
 		{
 			JOptionPane.showMessageDialog(null, "Given member ID doesnt exist", "ERROR",2);
 		}
@@ -320,7 +320,6 @@ public class PaymentScreen extends JInternalFrame {
 		        PreparedStatement ps1 = con.prepareStatement(sql1);
 		        
 		        
-		        String DateFormat = "yyyy-MM-dd";
 				Calendar cal= Calendar.getInstance();
 			    SimpleDateFormat format = new SimpleDateFormat(DateFormat);
 	
@@ -328,7 +327,7 @@ public class PaymentScreen extends JInternalFrame {
 			   {
 				   
 				   
-				   if (checkExistanceOfRecord(ids.get(i),format,cal))//if the record already exists update only the quantity of that record
+				   if (checkExistanceOfRecordInSales(ids.get(i),format,cal))//if the record already exists update only the quantity of that record
 				   {
 					   ps2.setInt(1, quantities.get(i));
 					   ps2.setInt(2, ids.get(i));
@@ -520,7 +519,7 @@ public class PaymentScreen extends JInternalFrame {
 		return 0;
 	}
 	
-	private  boolean checkExistanceOfRecord(int id,SimpleDateFormat format,Calendar cal)
+	private  boolean checkExistanceOfRecordInSales(int id,SimpleDateFormat format,Calendar cal)
 	{
 		try 
 		{  
@@ -530,12 +529,16 @@ public class PaymentScreen extends JInternalFrame {
 	    	ps.setDate(2, java.sql.Date.valueOf(format.format(cal.getTime())));
 	    	ResultSet rs = ps.executeQuery();
 	    	
-	        return rs.next();
+	        boolean flag = rs.next();
+	        ps.close();
+	    	return flag;
+	        
 	    }
 		catch(Exception ex)
 		{
 			System.out.println(ex);
 		}
+		
 		
 		
 		return false;

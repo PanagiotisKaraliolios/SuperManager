@@ -3,7 +3,6 @@ public class Sale
 {
 	private Product product;
 	private int quantity;
-	//No date field, not needed for now
 	
 	public Sale(Product product, int quantity)
 	{

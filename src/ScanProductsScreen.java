@@ -243,27 +243,26 @@ public class ScanProductsScreen extends JInternalFrame {
 		Statement stm = con.createStatement();
 		
 		ResultSet rs = stm.executeQuery("SELECT * FROM products WHERE id = '" + inputID + "'");
-		//loop may not needed
-		while(rs.next())
-		{
-			chosenProduct.setProductsID(rs.getInt("id"));
-			chosenProduct.setName(rs.getString("name"));
-			chosenProduct.setPrice(rs.getDouble("price"));
-			chosenProduct.setStockType(rs.getString("stockType"));
-			chosenProduct.setSuppliersID(rs.getInt("supplierID"));
-			chosenProduct.setStock(rs.getInt("stock"));
-		}
 		
-		boolean flag = true;
+		rs.next();
+	
+		chosenProduct.setProductsID(rs.getInt("id"));
+		chosenProduct.setName(rs.getString("name"));
+		chosenProduct.setPrice(rs.getDouble("price"));
+		chosenProduct.setStockType(rs.getString("stockType"));
+		chosenProduct.setSuppliersID(rs.getInt("supplierID"));
+		chosenProduct.setStock(rs.getInt("stock"));
+		
+		boolean idExists = true;
 		
 		
 		if(chosenProduct.getProductsID() == 0)
 		{
 			JOptionPane.showMessageDialog(null, "Given ProductID doesnt exist", "ERROR", 2);
-			flag = false;
+			idExists= false;
 		}
 		
-		if(flag)
+		if(idExists)
 		{
 			textField2.setText("" + chosenProduct.getPrice());
 			textField3.setText(chosenProduct.getName());

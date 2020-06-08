@@ -84,7 +84,7 @@ public class CashierScreen extends JFrame {
 				sps.setVisible(true);
 				sps.toFront();
 				try {
-					sps.setSelected(true);
+					sps.setSelected(true);//Tries to make it the selected window
 				} catch (PropertyVetoException e1) {
 					
 					e1.printStackTrace();
