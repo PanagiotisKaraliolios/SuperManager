@@ -78,10 +78,27 @@ public class ViewAdvancedStatisticsScreen extends JInternalFrame {
 	private DefaultCategoryDataset createDataset() {
 
 	    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-	    for(Sale sale : sales)
+	    if(!(sales.size()>9))
 	    {
-	    	dataset.addValue(sale.getQuantity(), sale.getProduct().getName(), sale.getDate());
-	    }	    
+	    	for(Sale sale : sales)
+	    	{
+	    		dataset.addValue(sale.getQuantity(), sale.getProduct().getName(), sale.getDate());
+	    	}
+	    }
+	    else
+	    {
+	    	for(int i = 0; i<sales.size(); i++)
+	    	{
+	    		if(i == 0 || i == (Integer) sales.size()-1/2 || i ==  sales.size()-1)
+	    		{
+	    			dataset.addValue(sales.get(i).getQuantity(), sales.get(i).getProduct().getName(), sales.get(i).getDate());
+	    		}
+	    		else
+	    		{
+	    			dataset.addValue(sales.get(i).getQuantity(), sales.get(i).getProduct().getName(), "");
+	    		}
+	    	}
+	    }
 
 	    return dataset;
 	  }
