@@ -12,7 +12,8 @@ import javax.swing.table.*;
 
 @SuppressWarnings("serial")
 public class CreateMemberCardScreen extends JInternalFrame {
-	public CreateMemberCardScreen() {
+	
+	public CreateMemberCardScreen() {		//Members Screen Constructor
 		initComponents();
 		this.setLocation(50, 50);
 	}
@@ -20,18 +21,18 @@ public class CreateMemberCardScreen extends JInternalFrame {
 	private void initComponents() {			//Members Screen Components
 		
 		panel1 = new JPanel();
-		label1 = new JLabel();
-		textField1 = new JTextField();
-		label2 = new JLabel();
-		textField2 = new JTextField();
-		textField3 = new JTextField();
-		textField4 = new JTextField();
-		textField5 = new JTextField();
-		label3 = new JLabel();
-		label4 = new JLabel();
-		label5 = new JLabel();
-		button1 = new JButton();			//this button adds new member
-		button2 = new JButton();			//this button deletes a selected member
+		idLabel = new JLabel();
+		idTextField = new JTextField();
+		nameLabel = new JLabel();
+		nameTextField = new JTextField();
+		emailTextField = new JTextField();
+		phoneNumberTextField = new JTextField();
+		addressTextField = new JTextField();
+		emailLabel = new JLabel();
+		phoneNumberLabel = new JLabel();
+		addressLabel = new JLabel();
+		addMemberButton = new JButton();			//this button adds new member
+		deleteSelectedMemberButton = new JButton();			//this button deletes a selected member
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
 
@@ -54,54 +55,54 @@ public class CreateMemberCardScreen extends JInternalFrame {
 				contentPane.setLayout(null);
 
 				//---- label1 ----
-				label1.setText("Member/Card ID");
-				contentPane.add(label1);
-				label1.setBounds(20, 55, 105, label1.getPreferredSize().height);
+				idLabel.setText("Member/Card ID");
+				contentPane.add(idLabel);
+				idLabel.setBounds(20, 55, 105, idLabel.getPreferredSize().height);
 
 				//---- textField1 ----
-				textField1.setEditable(true);
-				contentPane.add(textField1);
-				textField1.setBounds(145, 50, 170, textField1.getPreferredSize().height);
+				idTextField.setEditable(true);
+				contentPane.add(idTextField);
+				idTextField.setBounds(145, 50, 170, idTextField.getPreferredSize().height);
 
 				//---- label2 ----
-				label2.setText("Name");
-				contentPane.add(label2);
-				label2.setBounds(20, 105, 70, label2.getPreferredSize().height);
-				contentPane.add(textField2);
-				textField2.setBounds(145, 100, 170, 28);
-				contentPane.add(textField3);
-				textField3.setBounds(145, 150, 170, 28);
-				contentPane.add(textField4);
-				textField4.setBounds(145, 200, 170, 28);
-				contentPane.add(textField5);
-				textField5.setBounds(145, 250, 170, 28);
+				nameLabel.setText("Name");
+				contentPane.add(nameLabel);
+				nameLabel.setBounds(20, 105, 70, nameLabel.getPreferredSize().height);
+				contentPane.add(nameTextField);
+				nameTextField.setBounds(145, 100, 170, 28);
+				contentPane.add(emailTextField);
+				emailTextField.setBounds(145, 150, 170, 28);
+				contentPane.add(phoneNumberTextField);
+				phoneNumberTextField.setBounds(145, 200, 170, 28);
+				contentPane.add(addressTextField);
+				addressTextField.setBounds(145, 250, 170, 28);
 
 				//---- label3 ----
-				label3.setText("Email");
-				contentPane.add(label3);
-				label3.setBounds(20, 155, 70, 16);
+				emailLabel.setText("Email");
+				contentPane.add(emailLabel);
+				emailLabel.setBounds(20, 155, 70, 16);
 
 				//---- label4 ----
-				label4.setText("Phone Number");
-				contentPane.add(label4);
-				label4.setBounds(20, 205, 100, 16);
+				phoneNumberLabel.setText("Phone Number");
+				contentPane.add(phoneNumberLabel);
+				phoneNumberLabel.setBounds(20, 205, 100, 16);
 
 				//---- label5 ----
-				label5.setText("Address");
-				contentPane.add(label5);
-				label5.setBounds(20, 255, 70, 16);
+				addressLabel.setText("Address");
+				contentPane.add(addressLabel);
+				addressLabel.setBounds(20, 255, 70, 16);
 
 				//---- button1 ----
-				button1.setText("Add Member");
-				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
-				contentPane.add(button1);
-				button1.setBounds(20, 310, 150, 40);
+				addMemberButton.setText("Add Member");
+				addMemberButton.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
+				contentPane.add(addMemberButton);
+				addMemberButton.setBounds(20, 310, 150, 40);
 
 				//---- button2 ----
-				button2.setText("Delete Member");
-				button2.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
-				contentPane.add(button2);
-				button2.setBounds(190, 310, 150, 40);
+				deleteSelectedMemberButton.setText("Delete Member");
+				deleteSelectedMemberButton.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
+				contentPane.add(deleteSelectedMemberButton);
+				deleteSelectedMemberButton.setBounds(190, 310, 150, 40);
 
 				//======== scrollPane1 ========
 				{
@@ -137,7 +138,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 		
 		
 		
-		button1.addActionListener(new ActionListener()
+		addMemberButton.addActionListener(new ActionListener()
 		{
 					
 			public void actionPerformed(ActionEvent e)
@@ -153,7 +154,7 @@ public class CreateMemberCardScreen extends JInternalFrame {
 			}
 				});
 		
-		button2.addActionListener(new ActionListener()
+		deleteSelectedMemberButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -199,33 +200,33 @@ public class CreateMemberCardScreen extends JInternalFrame {
 
 	
 	private JPanel panel1;
-	private JLabel label1;
-	private JTextField textField1; //Member/Card ID field
-	private JLabel label2;
-	private JTextField textField2; //Name field
-	private JTextField textField3; //Email field
-	private JTextField textField4; //phoneNum field
-	private JTextField textField5; //address field
-	private JLabel label3;
-	private JLabel label4;
-	private JLabel label5;
-	private JButton button1; //addMemberButton
-	private JButton button2; //deleteMemberButton
+	private JLabel idLabel;
+	private JTextField idTextField; //Member/Card ID field
+	private JLabel nameLabel;
+	private JTextField nameTextField; //Name field
+	private JTextField emailTextField; //Email field
+	private JTextField phoneNumberTextField; //phoneNum field
+	private JTextField addressTextField; //address field
+	private JLabel emailLabel;
+	private JLabel phoneNumberLabel;
+	private JLabel addressLabel;
+	private JButton addMemberButton; //addMemberButton
+	private JButton deleteSelectedMemberButton; //deleteMemberButton
 	private JScrollPane scrollPane1;
 	private JTable table1;
 	
 	
 	private void addMemberButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
-		if(!textField1.getText().equals("") || !textField2.getText().equals("") || !textField3.getText().equals("") || !textField4.getText().equals("") || !textField5.getText().equals("")) {
+		if(!idTextField.getText().equals("") || !nameTextField.getText().equals("") || !emailTextField.getText().equals("") || !phoneNumberTextField.getText().equals("") || !addressTextField.getText().equals("")) {
 			
 		
 			//retrieve input
-			String inputID = textField1.getText();
-			String inputName = textField2.getText();
-			String inputEmail = textField3.getText();
-			String inputNum = textField4.getText();
-			String inputAddress = textField5.getText();
+			String inputID = idTextField.getText();
+			String inputName = nameTextField.getText();
+			String inputEmail = emailTextField.getText();
+			String inputNum = phoneNumberTextField.getText();
+			String inputAddress = addressTextField.getText();
 			
 			//create connection and receive member list
 			Connection con = null;

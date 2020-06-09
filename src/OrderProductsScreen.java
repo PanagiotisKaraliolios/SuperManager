@@ -12,7 +12,8 @@ import javax.swing.table.*;
 
 @SuppressWarnings("serial")
 public class OrderProductsScreen extends JInternalFrame {
-	public OrderProductsScreen() {
+	
+	public OrderProductsScreen() {		//Order Products Screen Constructor
 		initComponents();
 		this.setLocation(200, 50);
 	}
@@ -20,15 +21,15 @@ public class OrderProductsScreen extends JInternalFrame {
 	private void initComponents() {
 		
 		panel1 = new JPanel();
-		textField1 = new JTextField();
-		label1 = new JLabel();
-		textField2 = new JTextField();
-		label2 = new JLabel();
+		productIDtextField = new JTextField();
+		productIDLabel = new JLabel();
+		quantityTextField = new JTextField();
+		quantityLabel = new JLabel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button1 = new JButton();
-		button2 = new JButton();
-		label3 = new JLabel();
+		addToOrderButton = new JButton();
+		sendOrderButton = new JButton();
+		iconLabel = new JLabel();
 
 		//======== panel1 ========
 		{
@@ -43,20 +44,20 @@ public class OrderProductsScreen extends JInternalFrame {
 				this.setTitle("Order Supplies");
 				var contentPane = this.getContentPane();
 				contentPane.setLayout(null);
-				contentPane.add(textField1);
-				textField1.setBounds(90, 125, 140, textField1.getPreferredSize().height);
+				contentPane.add(productIDtextField);
+				productIDtextField.setBounds(90, 125, 140, productIDtextField.getPreferredSize().height);
 
 				//---- label1 ----
-				label1.setText("Product ID");
-				contentPane.add(label1);
-				label1.setBounds(new Rectangle(new Point(20, 130), label1.getPreferredSize()));
-				contentPane.add(textField2);
-				textField2.setBounds(90, 170, 140, 28);
+				productIDLabel.setText("Product ID");
+				contentPane.add(productIDLabel);
+				productIDLabel.setBounds(new Rectangle(new Point(20, 130), productIDLabel.getPreferredSize()));
+				contentPane.add(quantityTextField);
+				quantityTextField.setBounds(90, 170, 140, 28);
 
 				//---- label2 ----
-				label2.setText("Quantity");
-				contentPane.add(label2);
-				label2.setBounds(new Rectangle(new Point(20, 175), label2.getPreferredSize()));
+				quantityLabel.setText("Quantity");
+				contentPane.add(quantityLabel);
+				quantityLabel.setBounds(new Rectangle(new Point(20, 175), quantityLabel.getPreferredSize()));
 
 				//======== scrollPane1 ========
 				{
@@ -91,11 +92,11 @@ public class OrderProductsScreen extends JInternalFrame {
 				scrollPane1.setBounds(245, 10, 325, 365);
 
 				//---- button1 ----
-				button1.setText("Add to order");
-				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
-				contentPane.add(button1);
-				button1.setBounds(105, 225, 120, 40);
-				button1.addActionListener(new ActionListener()
+				addToOrderButton.setText("Add to order");
+				addToOrderButton.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
+				contentPane.add(addToOrderButton);
+				addToOrderButton.setBounds(105, 225, 120, 40);
+				addToOrderButton.addActionListener(new ActionListener()
 						{
 							public void actionPerformed(ActionEvent e)
 							{
@@ -113,11 +114,11 @@ public class OrderProductsScreen extends JInternalFrame {
 				
 
 				//---- button2 ----
-				button2.setText("Send order");
-				button2.setIcon(new ImageIcon(getClass().getResource("/order.png")));
-				contentPane.add(button2);
-				button2.setBounds(90, 320, 130, 40);
-				button2.addActionListener(new ActionListener()
+				sendOrderButton.setText("Send order");
+				sendOrderButton.setIcon(new ImageIcon(getClass().getResource("/order.png")));
+				contentPane.add(sendOrderButton);
+				sendOrderButton.setBounds(90, 320, 130, 40);
+				sendOrderButton.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -126,9 +127,9 @@ public class OrderProductsScreen extends JInternalFrame {
 				});
 
 				//---- label3 ----
-				label3.setIcon(new ImageIcon(getClass().getResource("/order (2).png")));
-				contentPane.add(label3);
-				label3.setBounds(75, 5, 110, 85);
+				iconLabel.setIcon(new ImageIcon(getClass().getResource("/order (2).png")));
+				contentPane.add(iconLabel);
+				iconLabel.setBounds(75, 5, 110, 85);
 			}
 			panel1.add(this);
 			this.setBounds(0, 0, 590, 415);
@@ -140,21 +141,21 @@ public class OrderProductsScreen extends JInternalFrame {
 
 	
 	private JPanel panel1;
-	private JTextField textField1; //productID field
-	private JLabel label1;
-	private JTextField textField2; //quantity field
-	private JLabel label2;
+	private JTextField productIDtextField; //productID field
+	private JLabel productIDLabel;
+	private JTextField quantityTextField; //quantity field
+	private JLabel quantityLabel;
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button1; //addOrderButton
-	private JButton button2; //sendOrderButton
-	private JLabel label3;
+	private JButton addToOrderButton; //addOrderButton
+	private JButton sendOrderButton; //sendOrderButton
+	private JLabel iconLabel;
 	
 	
 	private void addOrderButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
-		String ID = textField1.getText();
-		String Q = textField2.getText();
+		String ID = productIDtextField.getText();
+		String Q = quantityTextField.getText();
 		
 		if(ID.equals("") || Q.equals(""))
 			JOptionPane.showMessageDialog(null, "Missing input ID/Quantity", "ERROR", 2);

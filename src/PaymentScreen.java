@@ -27,7 +27,7 @@ public class PaymentScreen extends JInternalFrame {
 																//mySQL table sales
 														      
 															   
-	public PaymentScreen(ArrayList<Integer> productID,ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
+	public PaymentScreen(ArrayList<Integer> productID,ArrayList<String> Names, ArrayList<Integer> Quantities, ArrayList<Double> Prices) {		//Payment Screen Constructor
 		initComponents();
 		fillTable(Names, Quantities,Prices);
 		ids = productID;
@@ -45,10 +45,11 @@ public class PaymentScreen extends JInternalFrame {
 		panel1 = new JPanel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		label1 = new JLabel();
-		textField1 = new JTextField();
-		button1 = new JButton(); //check points button
-		button1.addActionListener(new ActionListener() {
+		memberIDlabel = new JLabel();
+		idTextField = new JTextField();
+		checkPointsButton = new JButton(); //check points button
+		
+		checkPointsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				try
@@ -61,32 +62,36 @@ public class PaymentScreen extends JInternalFrame {
 				}
 			}
 		});
-		button2 = new JButton(); //print button
-		button2.addActionListener(new ActionListener() {
+		
+		printButton = new JButton(); //print button
+		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				printButtonAction(e);
 			}
 		});
-		textField2 = new JTextField();
-		button3 = new JButton(); //apply discount button
-		button3.addActionListener(new ActionListener() {
+		
+		discountTextField = new JTextField();
+		applyDiscountButton = new JButton(); //apply discount button
+		applyDiscountButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				applyDiscountButtonAction(e);
 			}
 		});
-		button4 = new JButton();
-		button4.addActionListener(new ActionListener() {
+		
+		finishButton = new JButton();
+		finishButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				finishButtonAction(e);
 			}
 		});
-		label2 = new JLabel();
-		textField3 = new JTextField();
-		label5 = new JLabel();
-		textField5 = new JTextField();
+		
+		totalLabel = new JLabel();
+		totalTextField = new JTextField();
+		dateLabel = new JLabel();
+		dateTextField = new JTextField();
 
 		//======== panel1 ========
 		{
@@ -133,59 +138,59 @@ public class PaymentScreen extends JInternalFrame {
 				scrollPane1.setBounds(305, 5, 520, 500);
 
 				//---- label1 ----
-				label1.setText("Member/Card ID");
-				contentPane.add(label1);
-				label1.setBounds(20, 100, 100, label1.getPreferredSize().height);
-				contentPane.add(textField1);
-				textField1.setBounds(130, 95, 160, 30);
+				memberIDlabel.setText("Member/Card ID");
+				contentPane.add(memberIDlabel);
+				memberIDlabel.setBounds(20, 100, 100, memberIDlabel.getPreferredSize().height);
+				contentPane.add(idTextField);
+				idTextField.setBounds(130, 95, 160, 30);
 
 				//---- button1 ----
-				button1.setText("Check points");
-				button1.setIcon(new ImageIcon(getClass().getResource("/search.png")));
-				contentPane.add(button1);
-				button1.setBounds(140, 135, 140, 40);
+				checkPointsButton.setText("Check points");
+				checkPointsButton.setIcon(new ImageIcon(getClass().getResource("/search.png")));
+				contentPane.add(checkPointsButton);
+				checkPointsButton.setBounds(140, 135, 140, 40);
 
 				//---- button2 ----
-				button2.setText("Print");
-				button2.setIcon(new ImageIcon(getClass().getResource("/print.png")));
-				contentPane.add(button2);
-				button2.setBounds(new Rectangle(new Point(105, 460), button2.getPreferredSize()));
-				contentPane.add(textField2);
-				textField2.setBounds(10, 185, 280, 30);
-				textField2.setEditable(false);
+				printButton.setText("Print");
+				printButton.setIcon(new ImageIcon(getClass().getResource("/print.png")));
+				contentPane.add(printButton);
+				printButton.setBounds(new Rectangle(new Point(105, 460), printButton.getPreferredSize()));
+				contentPane.add(discountTextField);
+				discountTextField.setBounds(10, 185, 280, 30);
+				discountTextField.setEditable(false);
 
 				//---- button3 ----
-				button3.setText("Apply Discount");
-				button3.setIcon(new ImageIcon(getClass().getResource("/checkMark.png")));
-				contentPane.add(button3);
-				button3.setBounds(140, 220, 140, 40);
+				applyDiscountButton.setText("Apply Discount");
+				applyDiscountButton.setIcon(new ImageIcon(getClass().getResource("/checkMark.png")));
+				contentPane.add(applyDiscountButton);
+				applyDiscountButton.setBounds(140, 220, 140, 40);
 
 				//---- button4 ----
-				button4.setText("Finish");
-				button4.setIcon(new ImageIcon(getClass().getResource("/checkMark2.png")));
-				contentPane.add(button4);
-				button4.setBounds(95, 400, 110, 45);
+				finishButton.setText("Finish");
+				finishButton.setIcon(new ImageIcon(getClass().getResource("/checkMark2.png")));
+				contentPane.add(finishButton);
+				finishButton.setBounds(95, 400, 110, 45);
 
 				//---- label2 ----
-				label2.setText("Total");
-				label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 4f));
-				contentPane.add(label2);
-				label2.setBounds(new Rectangle(new Point(140, 355), label2.getPreferredSize()));
-				contentPane.add(textField3);
-				textField3.setBounds(185, 350, 100, 30);
-				textField3.setEditable(false);
+				totalLabel.setText("Total");
+				totalLabel.setFont(totalLabel.getFont().deriveFont(totalLabel.getFont().getSize() + 4f));
+				contentPane.add(totalLabel);
+				totalLabel.setBounds(new Rectangle(new Point(140, 355), totalLabel.getPreferredSize()));
+				contentPane.add(totalTextField);
+				totalTextField.setBounds(185, 350, 100, 30);
+				totalTextField.setEditable(false);
 				//do sum of cost
 
 				//---- label5 ----
-				label5.setText("Date");
-				label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 2f));
-				contentPane.add(label5);
-				label5.setBounds(70, 20, 50, 16);
+				dateLabel.setText("Date");
+				dateLabel.setFont(dateLabel.getFont().deriveFont(dateLabel.getFont().getSize() + 2f));
+				contentPane.add(dateLabel);
+				dateLabel.setBounds(70, 20, 50, 16);
 
 				//---- textField5 ----
-				textField5.setEditable(false);
-				contentPane.add(textField5);
-				textField5.setBounds(130, 15, 150, 28);
+				dateTextField.setEditable(false);
+				contentPane.add(dateTextField);
+				dateTextField.setBounds(130, 15, 150, 28);
 			}
 			panel1.add(this);
 			this.setBounds(0, 0, 840, 540);
@@ -205,17 +210,17 @@ public class PaymentScreen extends JInternalFrame {
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JLabel label1;
-	private JTextField textField1; //ID field
-	private JButton button1;
-	private JButton button2;
-	private JTextField textField2; //Apply Discount Field
-	private JButton button3;
-	private JButton button4;
-	private JLabel label2;
-	private JTextField textField3; //Total field
-	private JLabel label5;
-	private JTextField textField5;
+	private JLabel memberIDlabel;
+	private JTextField idTextField; //ID field
+	private JButton checkPointsButton;
+	private JButton printButton;
+	private JTextField discountTextField; //Apply Discount Field
+	private JButton applyDiscountButton;
+	private JButton finishButton;
+	private JLabel totalLabel;
+	private JTextField totalTextField; //Total field
+	private JLabel dateLabel;
+	private JTextField dateTextField;
 	private static  String DateFormat = "yyyy-MM-dd";
 	private boolean hasThePaymentFinished = false;
 	private boolean hasDiscountAlreadyApplied = false;
@@ -235,7 +240,7 @@ public class PaymentScreen extends JInternalFrame {
 	private void checkPointsButtonAction(ActionEvent e) throws SQLException,ClassNotFoundException
 	{
 		//get input id
-		String inputID = textField1.getText();
+		String inputID = idTextField.getText();
 		//connection
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/sm", "root", "");
@@ -257,12 +262,12 @@ public class PaymentScreen extends JInternalFrame {
 			if(points>=200)
 			{
 				discount = 6;
-				textField2.setText("Applicable discount of " + discount + "€");
+				discountTextField.setText("Applicable discount of " + discount + "€");
 			}
 			else				
 			{
 				JOptionPane.showMessageDialog(null, "No potential discount!", "Notification", 1);
-				textField2.setText("");
+				discountTextField.setText("");
 			}
 		}
 		
@@ -278,12 +283,12 @@ public class PaymentScreen extends JInternalFrame {
 			//get discount
 			if(hasDiscountAlreadyApplied==false) {
 				
-				if(!textField2.getText().equals("") && total > limit) 
+				if(!discountTextField.getText().equals("") && total > limit) 
 				{
 					
 					total = total - discount;
 					
-					textField3.setText("" + total + "€");
+					totalTextField.setText("" + total + "€");
 					
 					decresePointsInDB();
 					hasDiscountAlreadyApplied = true;
@@ -370,7 +375,7 @@ public class PaymentScreen extends JInternalFrame {
 	
 	private void addPointsInDB()
 	{
-		String inputID = textField1.getText();
+		String inputID = idTextField.getText();
 		
 		if(inputID != "")
 		{
@@ -403,7 +408,7 @@ public class PaymentScreen extends JInternalFrame {
 	
 	private void decresePointsInDB()
 	{
-		String inputID = textField1.getText();
+		String inputID = idTextField.getText();
 		
 		if(inputID != "")
 		{
@@ -566,7 +571,7 @@ public class PaymentScreen extends JInternalFrame {
     {
       Calendar cal= Calendar.getInstance();
       SimpleDateFormat format = new SimpleDateFormat(DateFormat);
-      textField5.setText(format.format(cal.getTime()));        
+      dateTextField.setText(format.format(cal.getTime()));        
     }
 	
 	private void totalCalculation(ArrayList<Integer> Quantities, ArrayList<Double> Prices) {
@@ -578,7 +583,7 @@ public class PaymentScreen extends JInternalFrame {
 
 		total = (double)Math.round(total* 1000) / 1000;
 		
-		textField3.setText(Double.toString(total) + " €");
+		totalTextField.setText(Double.toString(total) + " €");
 	}
 	
 	

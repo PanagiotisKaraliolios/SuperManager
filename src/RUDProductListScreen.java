@@ -25,23 +25,23 @@ import javax.swing.table.*;
 		private void initComponents() {
 		
 		panel1 = new JPanel();
-		label1 = new JLabel();
-		label2 = new JLabel();
-		label3 = new JLabel();
-		label4 = new JLabel();
-		label5 = new JLabel();
-		label6 = new JLabel();
-		textField1 = new JTextField();
-		textField2 = new JTextField();
-		textField3 = new JTextField();
-		textField4 = new JTextField();
-		textField5 = new JTextField();
-		textField6 = new JTextField();
+		idLabel = new JLabel();
+		productNameLabel = new JLabel();
+		stockTypelabel = new JLabel();
+		stockLabel = new JLabel();
+		priceLabel = new JLabel();
+		supplierIDlabel = new JLabel();
+		productIDtextField = new JTextField();
+		productNameTextField = new JTextField();
+		stockTypeTextField = new JTextField();
+		stockTextField = new JTextField();
+		priceTextField = new JTextField();
+		supplierIDtextField = new JTextField();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button1 = new JButton();
-		button2 = new JButton();
-		button3 = new JButton();
+		addProductButton = new JButton();
+		updateProductButton = new JButton();
+		deleteProductButton = new JButton();
 
 		//======== panel1 ========
 		{
@@ -60,46 +60,46 @@ import javax.swing.table.*;
 				contentPane.setLayout(null);
 
 				//---- label1 ----
-				label1.setText("Product ID");
-				contentPane.add(label1);
-				label1.setBounds(30, 35, 70, label1.getPreferredSize().height);
+				idLabel.setText("Product ID");
+				contentPane.add(idLabel);
+				idLabel.setBounds(30, 35, 70, idLabel.getPreferredSize().height);
 
 				//---- label2 ----
-				label2.setText("Name");
-				contentPane.add(label2);
-				label2.setBounds(30, 85, 70, 16);
+				productNameLabel.setText("Name");
+				contentPane.add(productNameLabel);
+				productNameLabel.setBounds(30, 85, 70, 16);
 
 				//---- label3 ----
-				label3.setText("Stock Type");
-				contentPane.add(label3);
-				label3.setBounds(30, 135, 70, 16);
+				stockTypelabel.setText("Stock Type");
+				contentPane.add(stockTypelabel);
+				stockTypelabel.setBounds(30, 135, 70, 16);
 
 				//---- label4 ----
-				label4.setText("Stock");
-				contentPane.add(label4);
-				label4.setBounds(30, 185, 70, 16);
+				stockLabel.setText("Stock");
+				contentPane.add(stockLabel);
+				stockLabel.setBounds(30, 185, 70, 16);
 
 				//---- label5 ----
-				label5.setText("Price");
-				contentPane.add(label5);
-				label5.setBounds(30, 235, 70, 16);
+				priceLabel.setText("Price");
+				contentPane.add(priceLabel);
+				priceLabel.setBounds(30, 235, 70, 16);
 
 				//---- label6 ----
-				label6.setText("Supplier ID");
-				contentPane.add(label6);
-				label6.setBounds(25, 285, 70, 16);
-				contentPane.add(textField1);
-				textField1.setBounds(120, 30, 150, textField1.getPreferredSize().height);
-				contentPane.add(textField2);
-				textField2.setBounds(120, 80, 150, 28);
-				contentPane.add(textField3);
-				textField3.setBounds(120, 130, 150, 28);
-				contentPane.add(textField4);
-				textField4.setBounds(120, 180, 150, 28);
-				contentPane.add(textField5);
-				textField5.setBounds(120, 230, 150, 28);
-				contentPane.add(textField6);
-				textField6.setBounds(120, 280, 150, 28);
+				supplierIDlabel.setText("Supplier ID");
+				contentPane.add(supplierIDlabel);
+				supplierIDlabel.setBounds(25, 285, 70, 16);
+				contentPane.add(productIDtextField);
+				productIDtextField.setBounds(120, 30, 150, productIDtextField.getPreferredSize().height);
+				contentPane.add(productNameTextField);
+				productNameTextField.setBounds(120, 80, 150, 28);
+				contentPane.add(stockTypeTextField);
+				stockTypeTextField.setBounds(120, 130, 150, 28);
+				contentPane.add(stockTextField);
+				stockTextField.setBounds(120, 180, 150, 28);
+				contentPane.add(priceTextField);
+				priceTextField.setBounds(120, 230, 150, 28);
+				contentPane.add(supplierIDtextField);
+				supplierIDtextField.setBounds(120, 280, 150, 28);
 
 				//======== scrollPane1 ========
 				{
@@ -145,11 +145,11 @@ import javax.swing.table.*;
 				scrollPane1.setBounds(350, 15, 625, 440);
 
 				//---- button1 ----
-				button1.setText("Add Product");
-				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign2.png")));
-				contentPane.add(button1);
-				button1.setBounds(20, 330, 150, 40);
-				button1.addActionListener(new ActionListener() {
+				addProductButton.setText("Add Product");
+				addProductButton.setIcon(new ImageIcon(getClass().getResource("/plusSign2.png")));
+				contentPane.add(addProductButton);
+				addProductButton.setBounds(20, 330, 150, 40);
+				addProductButton.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {
 					
@@ -165,11 +165,11 @@ import javax.swing.table.*;
 				});
 
 				//---- button2 ----
-				button2.setText("Update Product");
-				button2.setIcon(new ImageIcon(getClass().getResource("/update.png")));
-				contentPane.add(button2);
-				button2.setBounds(190, 330, 150, 40);
-				button2.addActionListener(new ActionListener() {
+				updateProductButton.setText("Update Product");
+				updateProductButton.setIcon(new ImageIcon(getClass().getResource("/update.png")));
+				contentPane.add(updateProductButton);
+				updateProductButton.setBounds(190, 330, 150, 40);
+				updateProductButton.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
 					
@@ -185,11 +185,11 @@ import javax.swing.table.*;
 				});
 
 				//---- button3 ----
-				button3.setText("Delete Product");
-				button3.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
-				contentPane.add(button3);
-				button3.setBounds(20, 385, 150, 40);
-				button3.addActionListener(new ActionListener() {
+				deleteProductButton.setText("Delete Product");
+				deleteProductButton.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
+				contentPane.add(deleteProductButton);
+				deleteProductButton.setBounds(20, 385, 150, 40);
+				deleteProductButton.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
 					
@@ -225,23 +225,23 @@ import javax.swing.table.*;
 	
 		
 	private JPanel panel1;
-	private JLabel label1;
-	private JLabel label2;
-	private JLabel label3;
-	private JLabel label4;
-	private JLabel label5;
-	private JLabel label6;
-	private JTextField textField1;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
-	private JTextField textField5;
-	private JTextField textField6;
+	private JLabel idLabel;
+	private JLabel productNameLabel;
+	private JLabel stockTypelabel;
+	private JLabel stockLabel;
+	private JLabel priceLabel;
+	private JLabel supplierIDlabel;
+	private JTextField productIDtextField;
+	private JTextField productNameTextField;
+	private JTextField stockTypeTextField;
+	private JTextField stockTextField;
+	private JTextField priceTextField;
+	private JTextField supplierIDtextField;
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
+	private JButton addProductButton;
+	private JButton updateProductButton;
+	private JButton deleteProductButton;
 	private ArrayList<Product> listOfProducts;
 		
 		
@@ -288,12 +288,12 @@ import javax.swing.table.*;
 		}
 		
 		if(row!=-1) {
-			textField1.setText(String.valueOf(prod.getProductsID()));
-			textField2.setText(prod.getName());
-		    textField3.setText(prod.getStockType());
-		    textField4.setText(String.valueOf(prod.getStock()));
-		    textField5.setText(String.valueOf(prod.getPrice()));
-		    textField6.setText(String.valueOf(prod.getSuppliersID()));
+			productIDtextField.setText(String.valueOf(prod.getProductsID()));
+			productNameTextField.setText(prod.getName());
+		    stockTypeTextField.setText(prod.getStockType());
+		    stockTextField.setText(String.valueOf(prod.getStock()));
+		    priceTextField.setText(String.valueOf(prod.getPrice()));
+		    supplierIDtextField.setText(String.valueOf(prod.getSuppliersID()));
 		}
 		stm.close();
 		con.close();
@@ -302,12 +302,12 @@ import javax.swing.table.*;
 	
 	private void addProduct(ActionEvent e) throws ClassNotFoundException, SQLException {
 		/*retrieve input*/
-		String inputID = textField1.getText();
-		String inputName = textField2.getText();
-		String inputStockType = textField3.getText();
-		String inputStock = textField4.getText();
-		String inputPrice = textField5.getText();
-		String inputSupplierID = textField6.getText();
+		String inputID = productIDtextField.getText();
+		String inputName = productNameTextField.getText();
+		String inputStockType = stockTypeTextField.getText();
+		String inputStock = stockTextField.getText();
+		String inputPrice = priceTextField.getText();
+		String inputSupplierID = supplierIDtextField.getText();
 		
 		Connection con = null;
 		Statement  stm = null;
@@ -406,19 +406,19 @@ import javax.swing.table.*;
 		else {
 			
 			/*table update*/
-			if(!textField2.getText().trim().isEmpty()) model.setValueAt(textField2.getText(), row, 1);
-			if(!textField3.getText().trim().isEmpty()) model.setValueAt(textField3.getText(), row, 2);
-			if(!textField4.getText().trim().isEmpty()) model.setValueAt(textField4.getText(), row, 3);
-			if(!textField5.getText().trim().isEmpty()) model.setValueAt(textField5.getText(), row, 4);
-			if(!textField6.getText().trim().isEmpty()) model.setValueAt(textField6.getText(), row, 5);
+			if(!productNameTextField.getText().trim().isEmpty()) model.setValueAt(productNameTextField.getText(), row, 1);
+			if(!stockTypeTextField.getText().trim().isEmpty()) model.setValueAt(stockTypeTextField.getText(), row, 2);
+			if(!stockTextField.getText().trim().isEmpty()) model.setValueAt(stockTextField.getText(), row, 3);
+			if(!priceTextField.getText().trim().isEmpty()) model.setValueAt(priceTextField.getText(), row, 4);
+			if(!supplierIDtextField.getText().trim().isEmpty()) model.setValueAt(supplierIDtextField.getText(), row, 5);
 			
 			/*db update*/
 			//id can't be updated
-			if(!textField2.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET name = '" + textField2.getText() + "'" + " WHERE id = '" + selectedID + "'");
-			if(!textField3.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stockType = '" + textField3.getText() + "'" + " WHERE id = '" + selectedID + "'");;
-			if(!textField4.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stock = '" + textField4.getText() + "'" + " WHERE id = '" + selectedID + "'");
-			if(!textField5.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET price = '" + textField5.getText() + "'" + " WHERE id = '" + selectedID + "'");
-			if(!textField6.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET supplierID = '" + textField6.getText() + "'" + " WHERE id = '" + selectedID + "'");
+			if(!productNameTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET name = '" + productNameTextField.getText() + "'" + " WHERE id = '" + selectedID + "'");
+			if(!stockTypeTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stockType = '" + stockTypeTextField.getText() + "'" + " WHERE id = '" + selectedID + "'");;
+			if(!stockTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET stock = '" + stockTextField.getText() + "'" + " WHERE id = '" + selectedID + "'");
+			if(!priceTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET price = '" + priceTextField.getText() + "'" + " WHERE id = '" + selectedID + "'");
+			if(!supplierIDtextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE products SET supplierID = '" + supplierIDtextField.getText() + "'" + " WHERE id = '" + selectedID + "'");
 		}
 		stm.close();
 		con.close();

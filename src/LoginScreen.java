@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
@@ -41,7 +44,7 @@ public class LoginScreen extends JFrame {
 	private JPanel dialogPane;
 	private JPanel contentPanel;
 	private JButton LoginButton;
-	private JPasswordField passwordField1;
+	private JPasswordField passwordField;
 	private JLabel label1;
 	private JTextField nameField;
 	private JLabel label2;
@@ -60,7 +63,7 @@ public class LoginScreen extends JFrame {
 		dialogPane = new JPanel();
 		contentPanel = new JPanel();
 		LoginButton = new JButton();
-		passwordField1 = new JPasswordField();
+		passwordField = new JPasswordField();
 		label1 = new JLabel();
 		nameField = new JTextField();			
 		label2 = new JLabel();
@@ -84,8 +87,8 @@ public class LoginScreen extends JFrame {
 
 				
 				LoginButton.setText("Login");
-				LoginButton.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
+				LoginButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
 						try {
 							LoginButtonActionPerformed(evt);
 						} catch (Exception e) {
@@ -109,7 +112,7 @@ public class LoginScreen extends JFrame {
 
 				
 				label3.setText("Password");
-				label3.setLabelFor(passwordField1);
+				label3.setLabelFor(passwordField);
 
 				
 				label4.setIcon(new ImageIcon(getClass().getResource("/logo.png")));
@@ -133,7 +136,7 @@ public class LoginScreen extends JFrame {
 										.addComponent(label3, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
 							.addGroup(contentPanelLayout.createParallelGroup()
-								.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 								.addComponent(LoginButton, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
 								.addComponent(nameField, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 							.addGap(17, 17, 17))
@@ -150,7 +153,7 @@ public class LoginScreen extends JFrame {
 										.addComponent(label2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 									.addGap(18, 18, 18)
 									.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(label3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 									.addGap(14, 14, 14)
 									.addComponent(LoginButton)
@@ -168,14 +171,14 @@ public class LoginScreen extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	       
-	private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException
+	private void LoginButtonActionPerformed(ActionEvent evt) throws SQLException, ClassNotFoundException
 	{
 		try {
 
 			listOfcashiers = new ArrayList<Cashier>();
 			listOfmanagers = new ArrayList<Manager>();
 			
-			char[] comparepasswordfield = passwordField1.getPassword();
+			char[] comparepasswordfield = passwordField.getPassword();
 			String compareusernamefield = nameField.getText();
 			Cashier cashier ;
 			Manager manager;
@@ -227,7 +230,7 @@ public class LoginScreen extends JFrame {
 				found=true;	
 			}
 			
-			if(found==false) JOptionPane.showMessageDialog(null, "User not found", "ERROR", 2);
+			if(found==false) JOptionPane.showMessageDialog(null, "Wrong Username and/or Password!", "ERROR", 2);
 			stm.close () ;
 			con.close () ;
 		} catch (Exception e) {

@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
@@ -8,12 +10,12 @@ import java.beans.PropertyVetoException;
 
 @SuppressWarnings("serial")
 public class ManagerScreen extends JFrame {
-	private boolean isCLSopen = false;				//flag  to check if the RUD Cashiers list Screen is open
-	private boolean isPLSopen = false;				//flag  to check if the RUD Products list Screen is open
-	private boolean isStatisticsScreenOpen = false;	//flag  to check if the Statistics Screen is open
-	private boolean isStockScreenOpen = false;		//flag  to check if the Stock Screen is open
+	private boolean isCLSopen = false;				//flag to check if the RUD Cashiers list Screen is open
+	private boolean isPLSopen = false;				//flag to check if the RUD Products list Screen is open
+	private boolean isStatisticsScreenOpen = false;	//flag to check if the Statistics Screen is open
+	private boolean isStockScreenOpen = false;		//flag to check if the Stock Screen is open
 	
-	public ManagerScreen() {
+	public ManagerScreen() {		//Manager Screen Constructor
 		initComponents();
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -23,8 +25,8 @@ public class ManagerScreen extends JFrame {
 	
 	
 	
-	private void ManagerScreenActionPerformed(java.awt.event.ActionEvent evt){
-		if(evt.getSource().equals(button1)) {
+	private void ManagerScreenActionPerformed(ActionEvent evt){
+		if(evt.getSource().equals(cashierListScreenButton)) {
 			
 			if(isCLSopen==false) {																			//
 				RUDCashierListScreen cls = new RUDCashierListScreen();										//
@@ -65,7 +67,7 @@ public class ManagerScreen extends JFrame {
 			}
 		}
 		
-		else if(evt.getSource().equals(button2)) {
+		else if(evt.getSource().equals(productListButton)) {
 			
 			if(isPLSopen==false) {
 				RUDProductListScreen pls = new RUDProductListScreen();
@@ -107,7 +109,7 @@ public class ManagerScreen extends JFrame {
 			}
 		}
 		
-		else if(evt.getSource().equals(button3)) {
+		else if(evt.getSource().equals(viewStatisticsScreenButton)) {
 			
 			if(isStatisticsScreenOpen==false) {
 				ViewStatisticsScreen vStat = new ViewStatisticsScreen();
@@ -147,7 +149,7 @@ public class ManagerScreen extends JFrame {
 			}
 		}
 		
-		else if(evt.getSource().equals(button4)) {
+		else if(evt.getSource().equals(viewStockScreenButton)) {
 
 			if(isStockScreenOpen==false) {
 				ViewStockScreen vStock = new ViewStockScreen();
@@ -194,10 +196,10 @@ public class ManagerScreen extends JFrame {
 		
 		panel1 = new JPanel();
 		desktopPane1 = new JDesktopPane();
-		button1 = new JButton();
-		button2 = new JButton();
-		button3 = new JButton();
-		button4 = new JButton();
+		cashierListScreenButton = new JButton();
+		productListButton = new JButton();
+		viewStatisticsScreenButton = new JButton();
+		viewStockScreenButton = new JButton();
 
 		//======== this ========
 		setMinimumSize(new Dimension(1280, 720));
@@ -220,45 +222,45 @@ public class ManagerScreen extends JFrame {
 			desktopPane1.setBounds(0, 65, 1280, 623);
 
 			//---- button1 ----
-			button1.setText("RUD Cashiers List");
-			button1.setSelectedIcon(null);
-			button1.setIcon(new ImageIcon(getClass().getResource("/addCashier.png")));
-			panel1.add(button1);
-			button1.setBounds(200, 15, 160, 40);
-			button1.addActionListener(new java.awt.event.ActionListener() {
+			cashierListScreenButton.setText("RUD Cashiers List");
+			cashierListScreenButton.setSelectedIcon(null);
+			cashierListScreenButton.setIcon(new ImageIcon(getClass().getResource("/addCashier.png")));
+			panel1.add(cashierListScreenButton);
+			cashierListScreenButton.setBounds(200, 15, 160, 40);
+			cashierListScreenButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					ManagerScreenActionPerformed(evt);
 				}
 			});
 
 			//---- button2 ----
-			button2.setText("RUD Products List");
-			button2.setIcon(new ImageIcon(getClass().getResource("/package.png")));
-			panel1.add(button2);
-			button2.setBounds(420, 15, 160, 40);
-			button2.addActionListener(new java.awt.event.ActionListener() {
+			productListButton.setText("RUD Products List");
+			productListButton.setIcon(new ImageIcon(getClass().getResource("/package.png")));
+			panel1.add(productListButton);
+			productListButton.setBounds(420, 15, 160, 40);
+			productListButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					ManagerScreenActionPerformed(evt);
 				}
 			});
 
 			//---- button3 ----
-			button3.setText("View Statistics");
-			button3.setIcon(new ImageIcon(getClass().getResource("/stats.png")));
-			panel1.add(button3);
-			button3.setBounds(640, 15, 160, 40);
-			button3.addActionListener(new java.awt.event.ActionListener() {
+			viewStatisticsScreenButton.setText("View Statistics");
+			viewStatisticsScreenButton.setIcon(new ImageIcon(getClass().getResource("/stats.png")));
+			panel1.add(viewStatisticsScreenButton);
+			viewStatisticsScreenButton.setBounds(640, 15, 160, 40);
+			viewStatisticsScreenButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					ManagerScreenActionPerformed(evt);
 				}
 			});
 
 			//---- button4 ----
-			button4.setText("View Stock");
-			button4.setIcon(new ImageIcon(getClass().getResource("/stock.png")));
-			panel1.add(button4);
-			button4.setBounds(860, 15, 160, 40);
-			button4.addActionListener(new java.awt.event.ActionListener() {
+			viewStockScreenButton.setText("View Stock");
+			viewStockScreenButton.setIcon(new ImageIcon(getClass().getResource("/stock.png")));
+			panel1.add(viewStockScreenButton);
+			viewStockScreenButton.setBounds(860, 15, 160, 40);
+			viewStockScreenButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					ManagerScreenActionPerformed(evt);
 				}
@@ -299,9 +301,9 @@ public class ManagerScreen extends JFrame {
 	
 	private JPanel panel1;
 	private JDesktopPane desktopPane1;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
-	private JButton button4;
+	private JButton cashierListScreenButton;
+	private JButton productListButton;
+	private JButton viewStatisticsScreenButton;
+	private JButton viewStockScreenButton;
 	
 }

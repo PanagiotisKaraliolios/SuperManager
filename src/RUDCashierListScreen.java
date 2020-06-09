@@ -21,23 +21,23 @@ public class RUDCashierListScreen extends JInternalFrame {
 	private void initComponents() {
 		
 		panel1 = new JPanel();
-		label2 = new JLabel();
-		textField2 = new JTextField();
-		textField3 = new JTextField();
-		textField4 = new JTextField();
-		textField5 = new JTextField();
-		label3 = new JLabel();
-		label4 = new JLabel();
-		label5 = new JLabel();
-		button1 = new JButton();
-		button2 = new JButton();
+		nameLabel = new JLabel();
+		nameTextField = new JTextField();
+		emailTextField = new JTextField();
+		phoneNumberTextField = new JTextField();
+		addressTextField = new JTextField();
+		emailLabel = new JLabel();
+		phoneNumberLabel = new JLabel();
+		addressLabel = new JLabel();
+		addCashierButton = new JButton();
+		deleteCashierButton = new JButton();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button3 = new JButton();
-		label6 = new JLabel();
-		label7 = new JLabel();
-		textField6 = new JTextField();
-		textField7 = new JTextField();
+		updateCashierButton = new JButton();
+		usernameLabel = new JLabel();
+		passwordLabel = new JLabel();
+		usernameTextField = new JTextField();
+		passwordTextField = new JTextField();
 
 		//======== panel1 ========
 		{
@@ -57,37 +57,37 @@ public class RUDCashierListScreen extends JInternalFrame {
 				contentPane.setLayout(null);
 
 				//---- label2 ----
-				label2.setText("Name");
-				contentPane.add(label2);
-				label2.setBounds(20, 120, 70, label2.getPreferredSize().height);
-				contentPane.add(textField2);
-				textField2.setBounds(145, 115, 170, 28);
-				contentPane.add(textField3);
-				textField3.setBounds(145, 165, 170, 28);
-				contentPane.add(textField4);
-				textField4.setBounds(145, 215, 170, 28);
-				contentPane.add(textField5);
-				textField5.setBounds(145, 265, 170, 28);
+				nameLabel.setText("Name");
+				contentPane.add(nameLabel);
+				nameLabel.setBounds(20, 120, 70, nameLabel.getPreferredSize().height);
+				contentPane.add(nameTextField);
+				nameTextField.setBounds(145, 115, 170, 28);
+				contentPane.add(emailTextField);
+				emailTextField.setBounds(145, 165, 170, 28);
+				contentPane.add(phoneNumberTextField);
+				phoneNumberTextField.setBounds(145, 215, 170, 28);
+				contentPane.add(addressTextField);
+				addressTextField.setBounds(145, 265, 170, 28);
 
 				//---- label3 ----
-				label3.setText("Email");
-				contentPane.add(label3);
-				label3.setBounds(20, 170, 70, 16);
+				emailLabel.setText("Email");
+				contentPane.add(emailLabel);
+				emailLabel.setBounds(20, 170, 70, 16);
 
 				//---- label4 ----
-				label4.setText("Phone Number");
-				contentPane.add(label4);
-				label4.setBounds(20, 220, 100, 16);
+				phoneNumberLabel.setText("Phone Number");
+				contentPane.add(phoneNumberLabel);
+				phoneNumberLabel.setBounds(20, 220, 100, 16);
 
 				//---- label5 ----
-				label5.setText("Address");
-				contentPane.add(label5);
-				label5.setBounds(20, 270, 70, 16);
+				addressLabel.setText("Address");
+				contentPane.add(addressLabel);
+				addressLabel.setBounds(20, 270, 70, 16);
 
 				//---- button1 ----
-				button1.setText("Add Cashier");
-				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
-				button1.addActionListener(new ActionListener() {
+				addCashierButton.setText("Add Cashier");
+				addCashierButton.setIcon(new ImageIcon(getClass().getResource("/plusSign1.png")));
+				addCashierButton.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e)
 					{
@@ -101,13 +101,13 @@ public class RUDCashierListScreen extends JInternalFrame {
 						}
 					}
 				});
-				contentPane.add(button1);
-				button1.setBounds(15, 315, 145, 40);
+				contentPane.add(addCashierButton);
+				addCashierButton.setBounds(15, 315, 145, 40);
 
 				//---- button2 ----
-				button2.setText("Delete Cashier");
-				button2.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
-				button2.addActionListener(new ActionListener() {
+				deleteCashierButton.setText("Delete Cashier");
+				deleteCashierButton.setIcon(new ImageIcon(getClass().getResource("/delete.png")));
+				deleteCashierButton.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {
 					
@@ -121,8 +121,8 @@ public class RUDCashierListScreen extends JInternalFrame {
 						}
 					}
 				});
-				contentPane.add(button2);
-				button2.setBounds(15, 375, 145, 40);
+				contentPane.add(deleteCashierButton);
+				deleteCashierButton.setBounds(15, 375, 145, 40);
 
 				//======== scrollPane1 ========
 				{
@@ -160,9 +160,9 @@ public class RUDCashierListScreen extends JInternalFrame {
 				scrollPane1.setBounds(340, 10, 506, scrollPane1.getPreferredSize().height);
 
 				//---- button3 ----
-				button3.setText("Update Cashier");
-				button3.setIcon(new ImageIcon(getClass().getResource("/update.png")));
-				button3.addActionListener(new ActionListener() {
+				updateCashierButton.setText("Update Cashier");
+				updateCashierButton.setIcon(new ImageIcon(getClass().getResource("/update.png")));
+				updateCashierButton.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {
 					
@@ -176,22 +176,22 @@ public class RUDCashierListScreen extends JInternalFrame {
 						}
 					}
 				});
-				contentPane.add(button3);
-				button3.setBounds(170, 315, 145, 40);
+				contentPane.add(updateCashierButton);
+				updateCashierButton.setBounds(170, 315, 145, 40);
 
 				//---- label6 ----
-				label6.setText("Username");
-				contentPane.add(label6);
-				label6.setBounds(20, 20, 70, 16);
+				usernameLabel.setText("Username");
+				contentPane.add(usernameLabel);
+				usernameLabel.setBounds(20, 20, 70, 16);
 
 				//---- label7 ----
-				label7.setText("Password");
-				contentPane.add(label7);
-				label7.setBounds(20, 70, 70, 16);
-				contentPane.add(textField6);
-				textField6.setBounds(145, 15, 170, 28);
-				contentPane.add(textField7);
-				textField7.setBounds(145, 65, 170, 28);
+				passwordLabel.setText("Password");
+				contentPane.add(passwordLabel);
+				passwordLabel.setBounds(20, 70, 70, 16);
+				contentPane.add(usernameTextField);
+				usernameTextField.setBounds(145, 15, 170, 28);
+				contentPane.add(passwordTextField);
+				passwordTextField.setBounds(145, 65, 170, 28);
 			}
 			panel1.add(this);
 			this.setBounds(0, 0, 865, 475);
@@ -213,23 +213,24 @@ public class RUDCashierListScreen extends JInternalFrame {
 	}
 	
 	private JPanel panel1;
-	private JLabel label2;
-	private JTextField textField2;
-	private JTextField textField3;
-	private JTextField textField4;
-	private JTextField textField5;
-	private JLabel label3;
-	private JLabel label4;
-	private JLabel label5;
-	private JButton button1;
-	private JButton button2;
+	private JLabel nameLabel;
+	private JTextField nameTextField;
+	private JTextField emailTextField;
+	private JTextField phoneNumberTextField;
+	private JTextField addressTextField;
+	private JTextField usernameTextField;
+	private JTextField passwordTextField;
+	private JLabel emailLabel;
+	private JLabel phoneNumberLabel;
+	private JLabel addressLabel;
+	private JButton addCashierButton;
+	private JButton deleteCashierButton;
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button3;
-	private JLabel label6;
-	private JLabel label7;
-	private JTextField textField6;
-	private JTextField textField7;
+	private JButton updateCashierButton;
+	private JLabel usernameLabel;
+	private JLabel passwordLabel;
+	
 	private ArrayList<Cashier> listOfCashiers;
 	
 	
@@ -273,12 +274,12 @@ public class RUDCashierListScreen extends JInternalFrame {
 	
 	private void addCashier(ActionEvent e) throws ClassNotFoundException, SQLException {
 		/*retrieve input*/
-		String inputUsername = textField6.getText();
-		String inputPassword = textField7.getText();
-		String inputName = textField2.getText();
-		String inputEmail = textField3.getText();
-		String inputNum = textField4.getText();
-		String inputAddress = textField5.getText();
+		String inputUsername = usernameTextField.getText();
+		String inputPassword = passwordTextField.getText();
+		String inputName = nameTextField.getText();
+		String inputEmail = emailTextField.getText();
+		String inputNum = phoneNumberTextField.getText();
+		String inputAddress = addressTextField.getText();
 		
 		Connection con = null;
 		Statement  stm = null;
@@ -338,18 +339,18 @@ public class RUDCashierListScreen extends JInternalFrame {
 		else {
 			
 			/*table update*/
-			if(!textField2.getText().trim().isEmpty()) model.setValueAt(textField2.getText(), row, 0);
-			if(!textField3.getText().trim().isEmpty()) model.setValueAt(textField3.getText(), row, 1);
-			if(!textField4.getText().trim().isEmpty()) model.setValueAt(textField4.getText(), row, 2);
-			if(!textField5.getText().trim().isEmpty()) model.setValueAt(textField5.getText(), row, 3);
+			if(!nameTextField.getText().trim().isEmpty()) model.setValueAt(nameTextField.getText(), row, 0);
+			if(!emailTextField.getText().trim().isEmpty()) model.setValueAt(emailTextField.getText(), row, 1);
+			if(!phoneNumberTextField.getText().trim().isEmpty()) model.setValueAt(phoneNumberTextField.getText(), row, 2);
+			if(!addressTextField.getText().trim().isEmpty()) model.setValueAt(addressTextField.getText(), row, 3);
 			
 			/*db update*/
 			//username can't be updated
-			if(!textField7.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET password = '" + textField7.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
-			if(!textField2.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET name = '" + textField2.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
-			if(!textField3.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET email = '" + textField3.getText() + "'" + " WHERE username = '" + selectedUsername + "'");;
-			if(!textField4.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET phoneNumber = '" + textField4.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
-			if(!textField5.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET address = '" + textField5.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!passwordTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET password = '" + passwordTextField.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!nameTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET name = '" + nameTextField.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!emailTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET email = '" + emailTextField.getText() + "'" + " WHERE username = '" + selectedUsername + "'");;
+			if(!phoneNumberTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET phoneNumber = '" + phoneNumberTextField.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
+			if(!addressTextField.getText().trim().isEmpty()) stm.executeUpdate("UPDATE cashiers SET address = '" + addressTextField.getText() + "'" + " WHERE username = '" + selectedUsername + "'");
 			
 		}
 		stm.close();
@@ -400,12 +401,12 @@ public class RUDCashierListScreen extends JInternalFrame {
 		}
 		
 		if(row!=-1) {
-			textField6.setText(cash.getUsername());
-			textField7.setText(cash.getPassword());
-		    textField2.setText(cash.getName());
-		    textField3.setText(cash.getEmail());
-		    textField4.setText(cash.getPhoneNumber());
-		    textField5.setText(cash.getAddress());
+			usernameTextField.setText(cash.getUsername());
+			passwordTextField.setText(cash.getPassword());
+		    nameTextField.setText(cash.getName());
+		    emailTextField.setText(cash.getEmail());
+		    phoneNumberTextField.setText(cash.getPhoneNumber());
+		    addressTextField.setText(cash.getAddress());
 		}
 		stm.close();
 		con.close();

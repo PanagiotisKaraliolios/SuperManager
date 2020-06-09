@@ -24,14 +24,13 @@ public class ViewStatisticsScreen extends JInternalFrame {
 		panel1 = new JPanel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button1 = new JButton();
-		button2 = new JButton();
-		datePicker1 = new DatePicker();
-		datePicker2 = new DatePicker();
-		label2 = new JLabel();
-		label1 = new JLabel();
-		label3 = new JLabel();
-		label4 = new JLabel();
+		confirmButton = new JButton();
+		advancedStatisticsButton = new JButton();
+		datePickerFrom = new DatePicker();
+		datePickerTo = new DatePicker();
+		fromLabel = new JLabel();
+		toLabel = new JLabel();
+		productIDlabel = new JLabel();
 		textField1 = new JTextField();
 		datePickerSettings1 = new DatePickerSettings();
 		datePickerSettings2 = new DatePickerSettings();
@@ -85,11 +84,11 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				scrollPane1.setBounds(270, 5, 461, scrollPane1.getPreferredSize().height);
 
 				//---- button1 ----
-				button1.setText("Confirm");
-				button1.setIcon(new ImageIcon(getClass().getResource("/checkMark.png")));
-				contentPane.add(button1);
-				button1.setBounds(new Rectangle(new Point(140, 200), button1.getPreferredSize()));
-				button1.addActionListener(new ActionListener() {
+				confirmButton.setText("Confirm");
+				confirmButton.setIcon(new ImageIcon(getClass().getResource("/checkMark.png")));
+				contentPane.add(confirmButton);
+				confirmButton.setBounds(new Rectangle(new Point(140, 200), confirmButton.getPreferredSize()));
+				confirmButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e)
 					{
 						try
@@ -104,11 +103,11 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				});
 
 				//---- button2 ----
-				button2.setText("Advanced Statistics");
-				button2.setIcon(new ImageIcon(getClass().getResource("/stats.png")));
-				contentPane.add(button2);
-				button2.setBounds(new Rectangle(new Point(75, 305), button2.getPreferredSize()));
-				button2.addActionListener(new ActionListener() {
+				advancedStatisticsButton.setText("Advanced Statistics");
+				advancedStatisticsButton.setIcon(new ImageIcon(getClass().getResource("/stats.png")));
+				contentPane.add(advancedStatisticsButton);
+				advancedStatisticsButton.setBounds(new Rectangle(new Point(75, 305), advancedStatisticsButton.getPreferredSize()));
+				advancedStatisticsButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e)
 					{
 						advancedStatisticsButtonAction(e);
@@ -122,41 +121,36 @@ public class ViewStatisticsScreen extends JInternalFrame {
 				datePickerSettings1.setFormatForDatesCommonEra(formatter);
 				datePickerSettings1.setFormatForDatesBeforeCommonEra(formatter);
 				datePickerSettings1.setFormatForTodayButton(formatter);
-				datePicker1.setSettings(datePickerSettings1);
-				contentPane.add(datePicker1);
-				datePicker1.setBounds(90, 100, 170, datePicker1.getPreferredSize().height);
+				datePickerFrom.setSettings(datePickerSettings1);
+				contentPane.add(datePickerFrom);
+				datePickerFrom.setBounds(90, 100, 170, datePickerFrom.getPreferredSize().height);
 
 				//---- datePicker2 ----
 				datePickerSettings2.getFormatsForParsing().add(formatter);
 				datePickerSettings2.setFormatForDatesCommonEra(formatter);
 				datePickerSettings2.setFormatForDatesBeforeCommonEra(formatter);
 				datePickerSettings2.setFormatForTodayButton(formatter);
-				datePicker2.setSettings(datePickerSettings2);
-				contentPane.add(datePicker2);
-				datePicker2.setBounds(90, 150, 170, 30);
+				datePickerTo.setSettings(datePickerSettings2);
+				contentPane.add(datePickerTo);
+				datePickerTo.setBounds(90, 150, 170, 30);
+				
+				//---- label1 ----
+				fromLabel.setText("From :");
+				fromLabel.setFont(fromLabel.getFont().deriveFont(fromLabel.getFont().getSize() + 5f));
+				contentPane.add(fromLabel);
+				fromLabel.setBounds(new Rectangle(new Point(35, 100), fromLabel.getPreferredSize()));
 
 				//---- label2 ----
-				label2.setText("From :");
-				contentPane.add(label2);
-				label2.setBounds(0, 443, 35, 16);
-
-				//---- label1 ----
-				label1.setText("From :");
-				label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 5f));
-				contentPane.add(label1);
-				label1.setBounds(new Rectangle(new Point(35, 100), label1.getPreferredSize()));
+				toLabel.setText("To :");
+				toLabel.setFont(toLabel.getFont().deriveFont(toLabel.getFont().getSize() + 5f));
+				contentPane.add(toLabel);
+				toLabel.setBounds(55, 150, 30, 23);
 
 				//---- label3 ----
-				label3.setText("To :");
-				label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 5f));
-				contentPane.add(label3);
-				label3.setBounds(55, 150, 30, 23);
-
-				//---- label4 ----
-				label4.setText("Product ID :");
-				label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 3f));
-				contentPane.add(label4);
-				label4.setBounds(new Rectangle(new Point(10, 45), label4.getPreferredSize()));
+				productIDlabel.setText("Product ID :");
+				productIDlabel.setFont(productIDlabel.getFont().deriveFont(productIDlabel.getFont().getSize() + 3f));
+				contentPane.add(productIDlabel);
+				productIDlabel.setBounds(new Rectangle(new Point(10, 45), productIDlabel.getPreferredSize()));
 				contentPane.add(textField1);
 				textField1.setBounds(90, 40, 125, 30);
 			}
@@ -173,14 +167,13 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button1; //confirm button
-	private JButton button2; //advanced statistics button
-	private DatePicker datePicker1; //from Field
-	private DatePicker datePicker2; //to Field
-	private JLabel label2;
-	private JLabel label1;
-	private JLabel label3;
-	private JLabel label4;
+	private JButton confirmButton; //confirm button
+	private JButton advancedStatisticsButton; //advanced statistics button
+	private DatePicker datePickerFrom; //from Field
+	private DatePicker datePickerTo; //to Field
+	private JLabel fromLabel;
+	private JLabel toLabel;
+	private JLabel productIDlabel;
 	private JTextField textField1;
 	private DatePickerSettings datePickerSettings1;
 	private DatePickerSettings datePickerSettings2;
@@ -188,8 +181,8 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	
 	private void confirmButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
-		String from = datePicker1.getComponentDateTextField().getText();
-		String to = datePicker2.getComponentDateTextField().getText();
+		String from = datePickerFrom.getComponentDateTextField().getText();
+		String to = datePickerTo.getComponentDateTextField().getText();
 		String ID = textField1.getText();
 		
 		if(!ID.equals("") && from.equals("") && to.equals(""))
@@ -538,7 +531,7 @@ public class ViewStatisticsScreen extends JInternalFrame {
 	{
 		if(!this.textField1.getText().equals("") && this.table1.getRowCount() != 0) {
 			
-			ViewAdvancedStatisticsScreen vas = new ViewAdvancedStatisticsScreen(Integer.parseInt(textField1.getText()), datePicker1.getComponentDateTextField().getText(), datePicker2.getComponentDateTextField().getText());
+			ViewAdvancedStatisticsScreen vas = new ViewAdvancedStatisticsScreen(Integer.parseInt(textField1.getText()), datePickerFrom.getComponentDateTextField().getText(), datePickerTo.getComponentDateTextField().getText());
 			this.getParent().add(vas);
 			vas.setVisible(true);
 			vas.toFront();	

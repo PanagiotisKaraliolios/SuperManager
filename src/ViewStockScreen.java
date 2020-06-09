@@ -31,7 +31,7 @@ public class ViewStockScreen extends JInternalFrame  {
 		panel1 = new JPanel();
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button1 = new JButton();
+		orderProductsScreenButton = new JButton();
 
 		//======== panel1 ========
 		{
@@ -84,11 +84,11 @@ public class ViewStockScreen extends JInternalFrame  {
 				scrollPane1.setBounds(10, 5, 470, 490);
 
 				//---- button1 ----
-				button1.setText("Order Products");
-				button1.setIcon(new ImageIcon(getClass().getResource("/order.png")));
-				contentPane.add(button1);
-				button1.setBounds(new Rectangle(new Point(170, 505), button1.getPreferredSize()));
-				button1.addActionListener(new java.awt.event.ActionListener() {
+				orderProductsScreenButton.setText("Order Products");
+				orderProductsScreenButton.setIcon(new ImageIcon(getClass().getResource("/order.png")));
+				contentPane.add(orderProductsScreenButton);
+				orderProductsScreenButton.setBounds(new Rectangle(new Point(170, 505), orderProductsScreenButton.getPreferredSize()));
+				orderProductsScreenButton.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent evt) {
 						StockScreenActionPerformed(evt);
 					}
@@ -117,7 +117,7 @@ public class ViewStockScreen extends JInternalFrame  {
 	private JPanel panel1;
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button1;
+	private JButton orderProductsScreenButton;
 	
 	private void getProductListFromDB(ArrayList<Product> listOfProducts,DefaultTableModel model) throws ClassNotFoundException, SQLException {
 		

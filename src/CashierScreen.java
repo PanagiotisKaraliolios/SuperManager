@@ -1,6 +1,8 @@
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ public class CashierScreen extends JFrame {
 	
 	
 
-	public CashierScreen() {
+	public CashierScreen() {			//Cashier Screen Constructor
 		initComponents();
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -24,7 +26,7 @@ public class CashierScreen extends JFrame {
 	}
 	
 	private void CashierScreenActionPerformed(java.awt.event.ActionEvent evt){
-		if(evt.getSource().equals(button1)) {
+		if(evt.getSource().equals(CreateMemberCardScreenButton)) {
 			if(isMCSopen==false) {
 				CreateMemberCardScreen mcs = new CreateMemberCardScreen();
 				this.desktopPane1.add(mcs);
@@ -61,7 +63,7 @@ public class CashierScreen extends JFrame {
 			}
 			
 		}
-		else if(evt.getSource().equals(button2)) {
+		else if(evt.getSource().equals(scanProductsScreenButton)) {
 			
 			for(JInternalFrame i : this.desktopPane1.getAllFrames()) {
 				if(i.getClass().equals(PaymentScreen.class)) {
@@ -84,7 +86,7 @@ public class CashierScreen extends JFrame {
 				sps.setVisible(true);
 				sps.toFront();
 				try {
-					sps.setSelected(true);//Tries to make it the selected window
+					sps.setSelected(true);				//Tries to make it the selected window
 				} catch (PropertyVetoException e1) {
 					
 					e1.printStackTrace();
@@ -108,13 +110,12 @@ public class CashierScreen extends JFrame {
 						try {
 							i.setSelected(true);
 						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 					}
 				}
-			}
-			
+			}		
 		}
 	}
 	
@@ -126,8 +127,8 @@ public class CashierScreen extends JFrame {
 		
 		panel1 = new JPanel();
 		desktopPane1 = new JDesktopPane();
-		button1 = new JButton();			//This Button opens Members Screen
-		button2 = new JButton();			//This button opens Scan Products Screen
+		CreateMemberCardScreenButton = new JButton();			//This Button opens Members Screen
+		scanProductsScreenButton = new JButton();			//This button opens Scan Products Screen
 
 		//======== this ========
 		setMinimumSize(new Dimension(1280, 720));
@@ -143,31 +144,31 @@ public class CashierScreen extends JFrame {
 			panel1.setLayout(null);
 
 			//======== desktopPane1 ========
-			{
-				desktopPane1.setBorder(null);
-			}
+			
+			desktopPane1.setBorder(null);
+			
 			panel1.add(desktopPane1);
 			desktopPane1.setBounds(0, 65, 1280, 623);
 
 			//---- button1 ----
-			button1.setText("Create Member Card");
-			button1.setSelectedIcon(null);
-			button1.setIcon(new ImageIcon(getClass().getResource("/memberCard2.png")));
-			panel1.add(button1);
-			button1.setBounds(400, 15, 180, 40);
-			button1.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
+			CreateMemberCardScreenButton.setText("Create Member Card");
+			CreateMemberCardScreenButton.setSelectedIcon(null);
+			CreateMemberCardScreenButton.setIcon(new ImageIcon(getClass().getResource("/memberCard2.png")));
+			panel1.add(CreateMemberCardScreenButton);
+			CreateMemberCardScreenButton.setBounds(400, 15, 180, 40);
+			CreateMemberCardScreenButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
 					CashierScreenActionPerformed(evt);
 				}
 			});
 
 			//---- button2 ----
-			button2.setText("Scan Products");
-			button2.setIcon(new ImageIcon(getClass().getResource("/transaction.png")));
-			panel1.add(button2);
-			button2.setBounds(700, 15, 160, 40);
-			button2.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
+			scanProductsScreenButton.setText("Scan Products");
+			scanProductsScreenButton.setIcon(new ImageIcon(getClass().getResource("/transaction.png")));
+			panel1.add(scanProductsScreenButton);
+			scanProductsScreenButton.setBounds(700, 15, 160, 40);
+			scanProductsScreenButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
 					CashierScreenActionPerformed(evt);
 				}
 			});
@@ -207,8 +208,8 @@ public class CashierScreen extends JFrame {
 	
 	private JPanel panel1;
 	private JDesktopPane desktopPane1;
-	private JButton button1;
-	private JButton button2;
+	private JButton CreateMemberCardScreenButton;
+	private JButton scanProductsScreenButton;
 	
 }	
 

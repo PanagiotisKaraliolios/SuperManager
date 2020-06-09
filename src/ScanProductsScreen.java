@@ -25,20 +25,23 @@ public class ScanProductsScreen extends JInternalFrame {
 	private void initComponents() {
 		
 		panel1 = new JPanel();
-		textField1 = new JTextField();
-		textField2 = new JTextField();
-		textField3 = new JTextField();
-		textField4 = new JTextField();
-		label1 = new JLabel();
-		label2 = new JLabel();
-		label3 = new JLabel();
-		label4 = new JLabel();
-		label5 = new JLabel();
-		textField5 = new JTextField(); //date field
+		productIDtextField = new JTextField();
+		priceTextField = new JTextField();
+		nameTextField = new JTextField();
+		quantityTextField = new JTextField();
+		productIDlabel = new JLabel();
+		nameLabel = new JLabel();
+		priceLabel = new JLabel();
+		quantityLabel = new JLabel();
+		dateLabel = new JLabel();
+		dateTextField = new JTextField(); //date field
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
-		button1 = new JButton(); //addProductButton
-		button1.addActionListener(new ActionListener()
+		addProductButton = new JButton(); //addProductButton
+		removeProductButton = new JButton(); //remove Product button
+		proceedToPaymentButton = new JButton();
+		
+		addProductButton.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -49,11 +52,12 @@ public class ScanProductsScreen extends JInternalFrame {
 						catch (Exception e1)
 						{
 							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Given ProductID doesnt exist", "ERROR", 2);
 						}
 					}
 				});
-		button2 = new JButton(); //remove Product button
-		button2.addActionListener(new ActionListener()
+		
+		removeProductButton.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -67,8 +71,8 @@ public class ScanProductsScreen extends JInternalFrame {
 						}
 					}
 				});
-		button3 = new JButton();
-		button3.addActionListener(new ActionListener()
+		
+		proceedToPaymentButton.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -100,55 +104,55 @@ public class ScanProductsScreen extends JInternalFrame {
 				this.setResizable(true);
 				var contentPane = this.getContentPane();
 				contentPane.setLayout(null);
-				contentPane.add(textField1);
-				textField1.setBounds(110, 50, 150, textField1.getPreferredSize().height);
+				contentPane.add(productIDtextField);
+				productIDtextField.setBounds(110, 50, 150, productIDtextField.getPreferredSize().height);
 
 				//---- textField2 ----
-				textField2.setEditable(false);
-				contentPane.add(textField2);
-				textField2.setBounds(110, 170, 150, 28);
+				priceTextField.setEditable(false);
+				contentPane.add(priceTextField);
+				priceTextField.setBounds(110, 170, 150, 28);
 
 				//---- textField3 ----
-				textField3.setColumns(2);
-				textField3.setEditable(false);
-				contentPane.add(textField3);
-				textField3.setBounds(110, 110, 150, 28);
+				nameTextField.setColumns(2);
+				nameTextField.setEditable(false);
+				contentPane.add(nameTextField);
+				nameTextField.setBounds(110, 110, 150, 28);
 
 				//---- textField4 ----
-				textField4.setText("1");
-				contentPane.add(textField4);
-				textField4.setBounds(110, 230, 70, 28);
+				quantityTextField.setText("1");
+				contentPane.add(quantityTextField);
+				quantityTextField.setBounds(110, 230, 70, 28);
 
 				//---- label1 ----
-				label1.setText("Product ID");
-				contentPane.add(label1);
-				label1.setBounds(new Rectangle(new Point(30, 55), label1.getPreferredSize()));
+				productIDlabel.setText("Product ID");
+				contentPane.add(productIDlabel);
+				productIDlabel.setBounds(new Rectangle(new Point(30, 55), productIDlabel.getPreferredSize()));
 
 				//---- label2 ----
-				label2.setText("Name");
-				contentPane.add(label2);
-				label2.setBounds(30, 115, 57, 16);
+				nameLabel.setText("Name");
+				contentPane.add(nameLabel);
+				nameLabel.setBounds(30, 115, 57, 16);
 
 				//---- label3 ----
-				label3.setText("Price");
-				contentPane.add(label3);
-				label3.setBounds(30, 175, 57, 16);
+				priceLabel.setText("Price");
+				contentPane.add(priceLabel);
+				priceLabel.setBounds(30, 175, 57, 16);
 
 				//---- label4 ----
-				label4.setText("Quantity");
-				contentPane.add(label4);
-				label4.setBounds(30, 235, 57, 16);
+				quantityLabel.setText("Quantity");
+				contentPane.add(quantityLabel);
+				quantityLabel.setBounds(30, 235, 57, 16);
 
 				//---- label5 ----
-				label5.setText("Date");
-				label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 2f));
-				contentPane.add(label5);
-				label5.setBounds(465, 15, 57, 16);
+				dateLabel.setText("Date");
+				dateLabel.setFont(dateLabel.getFont().deriveFont(dateLabel.getFont().getSize() + 2f));
+				contentPane.add(dateLabel);
+				dateLabel.setBounds(465, 15, 57, 16);
 
 				//---- textField5 ----
-				textField5.setEditable(false);
-				contentPane.add(textField5);
-				textField5.setBounds(545, 10, 150, 28);
+				dateTextField.setEditable(false);
+				contentPane.add(dateTextField);
+				dateTextField.setBounds(545, 10, 150, 28);
 
 				//======== scrollPane1 ========
 				{
@@ -186,22 +190,22 @@ public class ScanProductsScreen extends JInternalFrame {
 				scrollPane1.setBounds(355, 50, 520, 400);
 
 				//---- button1 ----
-				button1.setText("Add Product");
-				button1.setIcon(new ImageIcon(getClass().getResource("/plusSign3.png")));
-				contentPane.add(button1);
-				button1.setBounds(20, 290, 150, 40);
+				addProductButton.setText("Add Product");
+				addProductButton.setIcon(new ImageIcon(getClass().getResource("/plusSign3.png")));
+				contentPane.add(addProductButton);
+				addProductButton.setBounds(20, 290, 150, 40);
 
 				//---- button2 ----
-				button2.setText("Remove Product");
-				button2.setIcon(new ImageIcon(getClass().getResource("/minusSign.png")));
-				contentPane.add(button2);
-				button2.setBounds(185, 290, 150, 40);
+				removeProductButton.setText("Remove Product");
+				removeProductButton.setIcon(new ImageIcon(getClass().getResource("/minusSign.png")));
+				contentPane.add(removeProductButton);
+				removeProductButton.setBounds(185, 290, 150, 40);
 
 				//---- button3 ----
-				button3.setText("Proceed to Payment");
-				button3.setIcon(new ImageIcon(getClass().getResource("/payment1.png")));
-				contentPane.add(button3);
-				button3.setBounds(80, 375, 195, 40);
+				proceedToPaymentButton.setText("Proceed to Payment");
+				proceedToPaymentButton.setIcon(new ImageIcon(getClass().getResource("/payment1.png")));
+				contentPane.add(proceedToPaymentButton);
+				proceedToPaymentButton.setBounds(80, 375, 195, 40);
 			}
 			panel1.add(this);
 			this.setBounds(0, 0, 905, 500);
@@ -215,27 +219,27 @@ public class ScanProductsScreen extends JInternalFrame {
 
 	
 	private JPanel panel1;
-	private JTextField textField1;  //ProductID field
-	private JTextField textField2;	//Price Tag
-	private JTextField textField3;	//Name field
-	private JTextField textField4;	//Quantity field
-	private JLabel label1;
-	private JLabel label2;
-	private JLabel label3;
-	private JLabel label4;
-	private JLabel label5;
-	private JTextField textField5;	//Date field
+	private JTextField productIDtextField;  //ProductID field
+	private JTextField priceTextField;	//Price Tag
+	private JTextField nameTextField;	//Name field
+	private JTextField quantityTextField;	//Quantity field
+	private JLabel productIDlabel;
+	private JLabel nameLabel;
+	private JLabel priceLabel;
+	private JLabel quantityLabel;
+	private JLabel dateLabel;
+	private JTextField dateTextField;	//Date field
 	private JScrollPane scrollPane1;
 	private JTable table1;
-	private JButton button1;	//addProduct
-	private JButton button2;	//removeProduct
-	private JButton button3;	//proceed to payment
+	private JButton addProductButton;	//addProduct
+	private JButton removeProductButton;	//removeProduct
+	private JButton proceedToPaymentButton;	//proceed to payment
 	private static  String DateFormat = "yyyy-MM-dd";
 	
 	
 	private void addProductButtonAction(ActionEvent e) throws SQLException, ClassNotFoundException
 	{
-		String inputID = textField1.getText();
+		String inputID = productIDtextField.getText();
 		Product chosenProduct = new Product("",0 , "units", 0, 0, 0);
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -258,21 +262,20 @@ public class ScanProductsScreen extends JInternalFrame {
 		
 		if(chosenProduct.getProductsID() == 0)
 		{
-			JOptionPane.showMessageDialog(null, "Given ProductID doesnt exist", "ERROR", 2);
 			idExists= false;
 		}
 		
 		if(idExists)
 		{
-			textField2.setText("" + chosenProduct.getPrice());
-			textField3.setText(chosenProduct.getName());
+			priceTextField.setText("" + chosenProduct.getPrice());
+			nameTextField.setText(chosenProduct.getName());
 			
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
-			if(textField4.getText().contains("-") || textField4.getText().equals("0") || textField4.getText().equals("")) {//Checks product quantity >0
+			if(quantityTextField.getText().contains("-") || quantityTextField.getText().equals("0") || quantityTextField.getText().equals("")) {//Checks product quantity >0
 				JOptionPane.showMessageDialog(null, "Please select a valid quantity", "WARNING", 2);
 			}
 			else {
-				model.addRow(new Object[] {chosenProduct.getProductsID(), chosenProduct.getName(), chosenProduct.getPrice(), textField4.getText()});
+				model.addRow(new Object[] {chosenProduct.getProductsID(), chosenProduct.getName(), chosenProduct.getPrice(), quantityTextField.getText()});
 			}	
 		}
 		stm.close();
@@ -282,9 +285,10 @@ public class ScanProductsScreen extends JInternalFrame {
 	private void removeProductButtonAction(ActionEvent e)
 	{
 		int index = table1.getSelectedRow();
-		if(index!=-1)
-		{DefaultTableModel model = (DefaultTableModel) table1.getModel();
-		model.removeRow(index);}
+		if(index!=-1) {
+			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			model.removeRow(index);
+		}
 	}
 	
 	private void proceedToPaymentButtonAction(ActionEvent e)
@@ -327,6 +331,6 @@ public class ScanProductsScreen extends JInternalFrame {
     {
       Calendar cal= Calendar.getInstance();
       SimpleDateFormat format = new SimpleDateFormat(DateFormat);
-      textField5.setText(format.format(cal.getTime()));        
+      dateTextField.setText(format.format(cal.getTime()));        
     }
 }
