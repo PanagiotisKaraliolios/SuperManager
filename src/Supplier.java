@@ -13,32 +13,34 @@ public class Supplier {
 		  email = text4;	
 	}
 
+	//get methods
 	public String getId() {
 		return id;
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
 	public String getName() {
 		return name;
+	}
+	
+	public String getPhoneNumber() {
+		return PhoneNumber;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	//set methods
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getPhoneNumber() {
-		return PhoneNumber;
-	}
-
 	public void setPhoneNumber(String phoneNumber) {
 		PhoneNumber = phoneNumber;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public void setEmail(String email) {
