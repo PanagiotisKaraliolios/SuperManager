@@ -12,3 +12,6 @@ Then you need to import the SQL file provided in the release section. Feel free 
 The provided one has already some registrations for you to understand how it works.
 
 Default manager credentials in the database are username:admin, password:admin
+
+In the release section you can also find a compiled jar file. First you should make sure you have properly installed 
+java(JDK or JRE) on your machine. 
