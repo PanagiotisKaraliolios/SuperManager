@@ -15,3 +15,13 @@ Default manager credentials in the database are username:admin, password:admin
 
 In the release section you can also find a compiled jar file. First, you should make sure that you have properly installed 
 java(JDK or JRE) on your machine. 
+
+Contributors: 
+https://github.com/Tkoukoutzelas
+https://github.com/TheofilosKiapidis
+https://github.com/KonsB
+https://github.com/JimDal00
+https://github.com/iraklisangeloudis
+https://github.com/ioslas00
+https://github.com/G-Krou
+https://github.com/DhmhtrhsKrl
