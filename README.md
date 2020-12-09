@@ -17,7 +17,7 @@ In the release section you can also find a compiled jar file. First, you should 
 java(JDK or JRE) on your machine. 
 
 Contributors: 
-https://github.com/Tkoukoutzelas
+[Themis Koukoutzelas](https://github.com/Tkoukoutzelas "Tkoukoutzelas")
 https://github.com/TheofilosKiapidis
 https://github.com/KonsB
 https://github.com/JimDal00
