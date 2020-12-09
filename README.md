@@ -1,4 +1,4 @@
-# 'SuperManager'
+# `SuperManager`
 Super Market Manager
 
 This project was being developed during the course of software engineering
