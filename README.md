@@ -1,6 +1,5 @@
 # `SuperManager`
 
-![plot](https://github.com/PanagiotisKaraliolios/SuperManager/blob/master/src/logo.png "logo")
 Super Market Manager
 
 This project was being developed during the course of software engineering
