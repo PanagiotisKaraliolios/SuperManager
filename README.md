@@ -19,6 +19,7 @@ java(JDK or JRE) on your machine.
 Contributors:
 
 [Themis Koukoutzelas](https://github.com/Tkoukoutzelas "Tkoukoutzelas")
+
 [Theofilos Kiapidis](https://github.com/TheofilosKiapidis "TheofilosKiapidis")
 
 [Kostas Vasou](https://github.com/KonsB "KonsB")
