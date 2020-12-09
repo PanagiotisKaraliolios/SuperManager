@@ -18,10 +18,17 @@ java(JDK or JRE) on your machine.
 
 Contributors: 
 [Themis Koukoutzelas](https://github.com/Tkoukoutzelas "Tkoukoutzelas")
-https://github.com/TheofilosKiapidis
-https://github.com/KonsB
-https://github.com/JimDal00
-https://github.com/iraklisangeloudis
-https://github.com/ioslas00
-https://github.com/G-Krou
-https://github.com/DhmhtrhsKrl
+
+[Theofilos Kiapidis](https://github.com/TheofilosKiapidis "TheofilosKiapidis")
+
+[Kostas Vasou](https://github.com/KonsB "KonsB")
+
+[Dimitris Dalas](https://github.com/JimDal00 "JimDal00")
+
+[Iraklis Angeloudis](https://github.com/iraklisangeloudis "iraklisangeloudis")
+
+[Iosif Vlasakidis](https://github.com/ioslas00 "ioslas00")
+
+[George Kroustalakidis](https://github.com/G-Krou "G-Krou")
+
+[Dimitris Karaliolios](https://github.com/DhmhtrhsKrl "DhmhtrhsKrl")
