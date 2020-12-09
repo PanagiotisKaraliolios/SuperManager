@@ -1,8 +1,6 @@
 # `SuperManager`
 Super Market Manager
 
-[](https://camo.githubusercontent.com/22013447d5258304a28adb30990a503d4e7a5ffad54d3d92a951a6fc81b3a8da/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6973737565732f7075656d6f732f686c732d646f776e6c6f616465722d7765622d657874656e73696f6e)
-
 This project was being developed during the course of software engineering
 in the 4th semester at the University of Macedonia which is based in Thessaloniki, Greece. 
 
