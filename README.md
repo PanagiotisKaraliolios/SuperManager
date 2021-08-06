@@ -1,4 +1,9 @@
-# `SuperManager`
+<p>
+<img alt="GitHub" src="https://img.shields.io/github/license/PanagiotisKaraliolios/SuperManager?color=blue">
+<img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/PanagiotisKaraliolios/SuperManager">
+</p>
+
+  # `SuperManager`
 
 Super Market Manager
 
